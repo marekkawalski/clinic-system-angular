@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clinic-system-angular-deploy
+  namespace: clinic-system
+  labels:
+    app: clinic-system-angular
+spec:
+  selector:
+    matchLabels:
+      app: clinic-system-angular
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: clinic-system-angular
+    spec:
+      containers:
+        - name: clinic-system-angular
+          image: clinic-system-angular:0.0.1
+          resources:
+            requests:
+              cpu: '1'
+              memory: 256Mi
+            limits:
+              cpu: '1'
+              memory: 512Mi
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clinic-system-angular
+  namespace: clinic-system
+  labels:
+    name: clinic-system-angular-deploy
+spec:
+  selector:
+    app: clinic-system-angular
+  type: ClusterIP
+  ports:
+    - port: 4200
+      protocol: TCP
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+      name: clinic-system-angular-ingress
+  name: clinic-system-angular-ingress
+  namespace: clinic-system
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "angular.clinic.system.com"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: clinic-system-angular
+                port:
+                  number: 4200
