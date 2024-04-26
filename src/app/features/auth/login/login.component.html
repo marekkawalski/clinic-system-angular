@@ -1,0 +1,72 @@
+<div class="login-component">
+  <div class="headlines-wrapper">
+    <h1>Clinic system</h1>
+  </div>
+  <div class="login-card-wrapper">
+    <div class="login-card-child">
+      <mat-card class="login-card">
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-content>
+          <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+            <p>
+              <mat-form-field>
+                <mat-label>email</mat-label>
+                <input
+                  formControlName="email"
+                  matInput
+                  placeholder="email"
+                  type="text"
+                />
+              </mat-form-field>
+            </p>
+
+            <p>
+              <mat-form-field>
+                <mat-label>password</mat-label>
+                <mat-hint align="end" id="forget-password">
+                  <button
+                    (click)="this.router.navigate(['/reset-password/send'])"
+                    type="button"
+                  >
+                    Forgot password?
+                  </button>
+                </mat-hint>
+                <input
+                  [type]="hide ? 'password' : 'text'"
+                  formControlName="password"
+                  matInput
+                  placeholder="Password"
+                />
+                <button
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                  mat-icon-button
+                  matSuffix
+                  type="button"
+                >
+                  <mat-icon
+                    >{{ hide ? 'visibility_off' : 'visibility' }}
+                  </mat-icon>
+                </button>
+              </mat-form-field>
+            </p>
+            <p *ngIf="error" class="error">Login failed</p>
+
+            <div class="container">
+              <div class="button-container">
+                <button class="button" type="submit">Login</button>
+              </div>
+            </div>
+            <div
+              (click)="this.router.navigate(['/registration'])"
+              class="sign-up"
+            >
+              <button>Don't have an account? Sign up</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
