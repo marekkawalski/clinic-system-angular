@@ -1,28 +1,13 @@
 @use "styles/abstracts/colors" as *;
 
-.login-component {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.236), rgba(0, 0, 0, 0.485)),
-  url("../../../../assets/images/clinic.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  gap: 50px;
-}
-
-.login-card-wrapper {
+.form-card-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.login-card-child {
+.form-card-child {
   display: flex;
   flex-direction: column;
   width: min(400px, 80%);
@@ -48,40 +33,11 @@ mat-card-content {
   padding: 2px;
 }
 
-h1 {
-  font-size: 2.5rem;
-  letter-spacing: 0.07rem;
-  color: $my-white;
-  padding-bottom: 30px;
-}
 
 h2 {
   color: $my-white;
 }
 
-.headlines-wrapper {
-  margin-top: 60px;
-}
-
-#forget-password {
-  :hover {
-    cursor: pointer;
-  }
-}
-
-.sign-up {
-  :hover {
-    cursor: pointer;
-  }
-
-  padding-top: 100px;
-
-  span {
-    padding: 10px;
-  }
-
-  display: block;
-}
 
 $white: #fff;
 $border-rounded: 6px;

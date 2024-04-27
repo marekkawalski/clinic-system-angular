@@ -1,0 +1,24 @@
+@use "styles/form/form-page" as *;
+@use "styles/form/form" as *;
+
+
+.sign-up {
+  :hover {
+    cursor: pointer;
+  }
+
+  padding-top: 100px;
+
+  span {
+    padding: 10px;
+  }
+
+  display: block;
+}
+
+#forget-password {
+  :hover {
+    cursor: pointer;
+  }
+}
+

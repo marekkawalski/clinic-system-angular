@@ -7,14 +7,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../core/authentication/auth.service';
+import { AuthService } from '../../../../core/authentication/auth.service';
 import { first } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { NgIf } from '@angular/common';
+
 import { MatInput } from '@angular/material/input';
 import { MatIconButton } from '@angular/material/button';
+import { PathConstants } from '../../../../core/constants/path.constants';
 
 @Component({
   selector: 'app-login',
@@ -25,10 +26,9 @@ import { MatIconButton } from '@angular/material/button';
     MatCardModule,
     MatFormFieldModule,
     MatIconModule,
-    NgIf,
     MatInput,
-    MatIconButton,
-  ],
+    MatIconButton
+],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -48,11 +48,7 @@ export class LoginComponent implements OnInit {
     private readonly authenticationService: AuthService,
   ) {}
 
-  ngOnInit(): void {
-    if (this.authenticationService.authData) {
-      this.router.navigate(['/']);
-    }
-  }
+  ngOnInit(): void {}
 
   get formControl() {
     return this.loginForm?.controls;
@@ -71,7 +67,11 @@ export class LoginComponent implements OnInit {
       )
       .pipe(first())
       .subscribe({
-        next: () => this.router.navigate(['']),
+        next: () => {
+          this.router.navigate([PathConstants.HOME_PATH]).then(() => {
+            console.log('Login successful');
+          });
+        },
         error: error => {
           this.error = error;
           this.loading = false;
@@ -83,4 +83,6 @@ export class LoginComponent implements OnInit {
   public get router(): Router {
     return this._router;
   }
+
+  protected readonly PathConstants = PathConstants;
 }

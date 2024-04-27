@@ -1,0 +1,222 @@
+<div class="form-card-wrapper">
+  <div class="form-card-child">
+    <mat-card class="login-card">
+      <mat-card-title>Register</mat-card-title>
+      <mat-card-content>
+        <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
+          <div class="form-grid">
+            <!-- Basic Data -->
+            <div formGroupName="basicData">
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input formControlName="name" matInput />
+
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.basicData.controls.name?.invalid && submitted
+                    "
+                  >
+                    {{ getErrorMessage('basicData', 'name') }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Surname</mat-label>
+                <input formControlName="surname" matInput />
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.basicData.controls.surname?.invalid &&
+                      submitted
+                    "
+                  >
+                    {{ getErrorMessage('basicData', 'surname') }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput />
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.basicData.controls.email?.invalid && submitted
+                    "
+                  >
+                    {{ getErrorMessage('basicData', 'email') }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Phone</mat-label>
+                <input formControlName="phoneNumber" matInput />
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.basicData.controls.phoneNumber?.invalid &&
+                      submitted
+                    "
+                  >
+                    {{ getErrorMessage('basicData', 'phoneNumber') }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>PESEL</mat-label>
+                <input formControlName="pesel" matInput />
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.basicData.controls.pesel?.invalid && submitted
+                    "
+                  >
+                    {{ getErrorMessage('basicData', 'pesel') }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput type="password" />
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.basicData.controls.password?.invalid &&
+                      submitted
+                    "
+                  >
+                    {{ getPasswordErrorMessage() }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Confirm password</mat-label>
+                <input
+                  formControlName="confirmPassword"
+                  matInput
+                  type="password"
+                />
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.basicData.controls.confirmPassword?.invalid &&
+                      submitted
+                    "
+                  >
+                    {{ getErrorMessage('basicData', 'confirmPassword') }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Address -->
+            <div formGroupName="address">
+              <mat-form-field appearance="outline">
+                <mat-label>Country</mat-label>
+                <input formControlName="country" matInput />
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.address.controls.country?.invalid && submitted
+                    "
+                  >
+                    {{ getErrorMessage('address', 'country') }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>City</mat-label>
+                <input formControlName="city" matInput />
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.address.controls.city?.invalid && submitted
+                    "
+                  >
+                    {{ getErrorMessage('address', 'city') }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Street</mat-label>
+                <input formControlName="street" matInput />
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.address.controls.street?.invalid && submitted
+                    "
+                  >
+                    {{ getErrorMessage('address', 'street') }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Postal Code</mat-label>
+                <input formControlName="postalCode" matInput />
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.address.controls.postalCode?.invalid &&
+                      submitted
+                    "
+                  >
+                    {{ getErrorMessage('address', 'postalCode') }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>House Number</mat-label>
+                <input formControlName="houseNumber" matInput />
+                <mat-error>
+                  <span
+                    *ngIf="
+                      formControl.address.controls.houseNumber?.invalid &&
+                      submitted
+                    "
+                  >
+                    {{ getErrorMessage('address', 'houseNumber') }}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Apartment Number</mat-label>
+                <input formControlName="apartmentNumber" matInput />
+              </mat-form-field>
+            </div>
+
+            <ng-container
+              *ngIf="!router.url.includes(PathConstants.REGISTER_PATH)"
+            >
+              <!-- Admin Managed Data -->
+              <div formGroupName="adminManagedData">
+                <mat-checkbox formControlName="enabled">Enabled</mat-checkbox>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Role</mat-label>
+                  <mat-select formControlName="role">
+                    <mat-option value="patient">Patient</mat-option>
+                    <!-- ...more options... -->
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </ng-container>
+          </div>
+
+          <!-- Submit Button -->
+          <button mat-raised-button type="submit">Submit</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

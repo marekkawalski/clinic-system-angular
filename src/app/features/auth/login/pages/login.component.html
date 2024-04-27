@@ -1,9 +1,9 @@
-<div class="login-component">
+<div class="form-page">
   <div class="headlines-wrapper">
     <h1>Clinic system</h1>
   </div>
-  <div class="login-card-wrapper">
-    <div class="login-card-child">
+  <div class="form-card-wrapper">
+    <div class="form-card-child">
       <mat-card class="login-card">
         <mat-card-title>Login</mat-card-title>
         <mat-card-content>
@@ -25,7 +25,7 @@
                 <mat-label>password</mat-label>
                 <mat-hint align="end" id="forget-password">
                   <button
-                    (click)="this.router.navigate(['/reset-password/send'])"
+                    (click)="this.router.navigate([PathConstants.FORGOT_PASSWORD_PATH])"
                     type="button"
                   >
                     Forgot password?
@@ -46,23 +46,23 @@
                   type="button"
                 >
                   <mat-icon
-                    >{{ hide ? 'visibility_off' : 'visibility' }}
+                  >{{ hide ? 'visibility_off' : 'visibility' }}
                   </mat-icon>
                 </button>
               </mat-form-field>
             </p>
-            <p *ngIf="error" class="error">Login failed</p>
 
             <div class="container">
               <div class="button-container">
                 <button class="button" type="submit">Login</button>
               </div>
             </div>
-            <div
-              (click)="this.router.navigate(['/registration'])"
-              class="sign-up"
-            >
-              <button>Don't have an account? Sign up</button>
+            <div class="sign-up">
+              <button
+                (click)="this.router.navigate([PathConstants.REGISTER_PATH])"
+              >
+                Don't have an account? Sign up
+              </button>
             </div>
           </form>
         </mat-card-content>
