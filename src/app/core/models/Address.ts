@@ -4,5 +4,5 @@ export interface Address {
   street: string;
   postalCode: string;
   houseNumber: string;
-  apartmentNumber: string;
+  apartmentNumber?: string;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserRole } from '../../../core/enums/UserRole';
 import { Registration_Validation_Messages } from './validation/validation-messages';
@@ -14,6 +14,13 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
 import { NgForOf, NgIf } from '@angular/common';
 import { PathConstants } from '../../../core/constants/path.constants';
+import { AuthService } from '../../../core/authentication/auth.service';
+import { RegistrationService } from '../../../core/authentication/registration.service';
+import { Address } from '../../../core/models/Address';
+import { DoctorDetails } from '../../../core/models/DoctorDetails';
+import { User } from '../../../core/models/user/User';
+import { UserToAddOrUpdate } from '../../../core/models/user/UserToAddOrUpdate';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user-form',
@@ -37,6 +44,8 @@ import { PathConstants } from '../../../core/constants/path.constants';
   styleUrl: './user-form.component.scss',
 })
 export class UserFormComponent {
+  @Input() userId?: string;
+
   registrationValidationMessages = Registration_Validation_Messages;
 
   registrationForm = this.formBuilder.group(
@@ -132,6 +141,11 @@ export class UserFormComponent {
           validators: [],
         }),
       }),
+      doctorDetails: this.formBuilder.group({
+        specialization: this.formBuilder.control('', {}),
+        education: this.formBuilder.control('', {}),
+        description: this.formBuilder.control('', {}),
+      }),
     },
     {
       validators: [
@@ -140,11 +154,16 @@ export class UserFormComponent {
     },
   );
   submitted: boolean = false;
+  loading: boolean = false;
   protected readonly PathConstants = PathConstants;
+  protected readonly UserRole = UserRole;
 
   constructor(
     private readonly formBuilder: FormBuilder,
     protected readonly router: Router,
+    protected readonly authenticationService: AuthService,
+    protected readonly registrationService: RegistrationService,
+    protected readonly userService: UserService,
   ) {}
 
   get formControl() {
@@ -153,6 +172,72 @@ export class UserFormComponent {
 
   onSubmit() {
     this.submitted = true;
+
+    if (
+      !this.formControl.adminManagedData.valid ||
+      !this.formControl.basicData.valid ||
+      !this.formControl.address.valid
+    ) {
+      return;
+    }
+
+    this.loading = true;
+
+    const address: Address = {
+      country: this.formControl.address.controls.country.value,
+      city: this.formControl.address.controls.city.value,
+      street: this.formControl.address.controls.street.value,
+      postalCode: this.formControl.address.controls.postalCode.value,
+      houseNumber: this.formControl.address.controls.houseNumber.value,
+    };
+    if (this.formControl.address.controls.apartmentNumber.value) {
+      address.apartmentNumber =
+        this.formControl.address.controls.apartmentNumber.value;
+    }
+
+    const doctorDetails: DoctorDetails = {};
+    if (this.formControl.doctorDetails.controls.specialization.value) {
+      doctorDetails.specialization =
+        this.formControl.doctorDetails.controls.specialization.value;
+    }
+    if (this.formControl.doctorDetails.controls.education.value) {
+      doctorDetails.education =
+        this.formControl.doctorDetails.controls.education.value;
+    }
+    if (this.formControl.doctorDetails.controls.description.value) {
+      doctorDetails.description =
+        this.formControl.doctorDetails.controls.description.value;
+    }
+
+    const user: UserToAddOrUpdate = {
+      name: this.formControl.basicData.controls.name.value,
+      surname: this.formControl.basicData.controls.surname.value,
+      email: this.formControl.basicData.controls.email.value,
+      pesel: this.formControl.basicData.controls.pesel.value,
+      phoneNumber: this.formControl.basicData.controls.phoneNumber.value,
+      address: address,
+      role: this.formControl.adminManagedData.controls.role.value,
+    };
+
+    if (!Object.is(doctorDetails, {})) {
+      user.doctorDetails = doctorDetails;
+    }
+
+    if (this.formControl.basicData.controls.password.value) {
+      user.password = this.formControl.basicData.controls.password.value;
+    }
+
+    if (!this.userId) {
+      this.registrationService.register(user).subscribe((user: User) => {
+        this.loading = false;
+        console.log(`User ${user.email} has been registered`);
+      });
+    } else {
+      this.userService.updateUser(user, this.userId).subscribe((user: User) => {
+        this.loading = false;
+        console.log(`User ${user.email} has been updated`);
+      });
+    }
   }
 
   getErrorMessage(controlGroup: string, fieldName: string) {
@@ -186,7 +271,7 @@ export class UserFormComponent {
     // check for other errors
     const foundError = Object.keys(passwordControl.errors)
       .map(key => {
-        return this.registrationValidationMessages['password'].find(
+        return this.registrationValidationMessages['password']?.find(
           item => item.type === key,
         );
       })

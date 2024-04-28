@@ -3,7 +3,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment.development';
-import { User } from '../models/User';
+import { User } from '../models/user/User';
 
 interface AuthData {
   email: string;

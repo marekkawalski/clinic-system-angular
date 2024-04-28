@@ -6,7 +6,6 @@
 
 .form-grid {
   display: grid;
-  //at least thwo columns but can be three
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
   gap: 20px;

@@ -195,22 +195,52 @@
               </mat-form-field>
             </div>
 
-            <ng-container
-              *ngIf="!router.url.includes(PathConstants.REGISTER_PATH)"
-            >
+            <div *ngIf="!router.url.includes(PathConstants.REGISTER_PATH)">
               <!-- Admin Managed Data -->
-              <div formGroupName="adminManagedData">
+              <ng-container formGroupName="adminManagedData">
                 <mat-checkbox formControlName="enabled">Enabled</mat-checkbox>
 
                 <mat-form-field appearance="outline">
                   <mat-label>Role</mat-label>
                   <mat-select formControlName="role">
-                    <mat-option value="patient">Patient</mat-option>
-                    <!-- ...more options... -->
+                    <mat-option [value]="UserRole.PATIENT"
+                      >{{ UserRole.PATIENT }}
+                    </mat-option>
+                    <mat-option [value]="UserRole.DOCTOR"
+                      >{{ UserRole.DOCTOR }}
+                    </mat-option>
+                    <mat-option [value]="UserRole.ADMIN"
+                      >{{ UserRole.ADMIN }}
+                    </mat-option>
+                    <mat-option [value]="UserRole.REGISTRAR"
+                      >{{ UserRole.REGISTRAR }}
+                    </mat-option>
                   </mat-select>
                 </mat-form-field>
-              </div>
-            </ng-container>
+              </ng-container>
+
+              <!-- Doctor Managed Data -->
+              <ng-container
+                *ngIf="
+                  formControl.adminManagedData.controls.role.value ===
+                  UserRole.DOCTOR
+                "
+                formGroupName="doctorDetails"
+              >
+                <mat-form-field appearance="outline">
+                  <mat-label>Specialization</mat-label>
+                  <input formControlName="specialization" matInput />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Education</mat-label>
+                  <input formControlName="education" matInput />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Description</mat-label>
+                  <input formControlName="description" matInput />
+                </mat-form-field>
+              </ng-container>
+            </div>
           </div>
 
           <!-- Submit Button -->
