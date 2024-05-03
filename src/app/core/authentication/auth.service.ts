@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment.development';
 import { User } from '../models/user/User';
 
-interface AuthData {
-  email: string;
+interface AuthData extends User {
   password: string;
 }
 
@@ -44,7 +43,7 @@ export class AuthService {
       })
       .pipe(
         map((userData: User) => {
-          const authData = { email: email, password: password };
+          const authData = { ...userData, password };
           sessionStorage.setItem(AUTH_DATA_KEY, JSON.stringify(authData));
           this.authDataSubject.next(authData);
           return userData;

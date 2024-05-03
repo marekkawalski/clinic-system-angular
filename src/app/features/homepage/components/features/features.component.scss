@@ -1,0 +1,40 @@
+.features-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 4em;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 200;
+  padding-top: 30px;
+  //padding-bottom: 20px;
+  word-spacing: 7px;
+  text-align: left;
+  line-height: normal;
+  min-height: 3em;
+
+}
+
+.feature {
+  p {
+    padding-top: 2em;
+  }
+}
+
+.border {
+  content: ""; /* This is necessary for the pseudo element to work. */
+  display: flex; /* This will put the pseudo element on its own line. */
+  margin: 0 auto; /* This will center the border. */
+  width: 50%; /* Change this to whatever width you want. */
+  padding-top: 20px; /* This creates some space between the element and the border. */
+  border-bottom: 1px solid blue; /* This creates the border. Replace black with whatever color you want. */
+  translate: -50%;
+}
+
+.mat-icon {
+  color: blue;
+  font-size: 2rem;
+  height: 2rem;
+  width: 2rem;
+}

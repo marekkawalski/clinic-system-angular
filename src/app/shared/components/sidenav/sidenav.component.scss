@@ -1,0 +1,91 @@
+@use "styles/abstracts" as *;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 0;
+}
+
+.sidenav {
+  justify-content: center;
+}
+
+mat-nav-list {
+  width: 100vw;
+
+  justify-content: center;
+
+  a {
+    display: flex;
+    justify-content: center;
+  }
+
+  @include mq(medium) {
+    width: 250px;
+  }
+}
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+
+  div {
+    display: flex;
+    align-items: center;
+
+    a {
+      display: none;
+
+      @include mq(small) {
+        display: block;
+      }
+    }
+  }
+
+  .name-container {
+    display: none;
+    @include mq(very-small) {
+      display: flex;
+      margin-right: 10px;
+    }
+  }
+}
+
+.active {
+  color: $primary;
+  background-color: rgba(103, 58, 183, 0.15) !important;
+}
+
+mat-drawer {
+  position: fixed;
+  position: -webkit-sticky;
+  left: 0;
+  top: 64px;
+  z-index: 100;
+}
+
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+  padding: 0;
+}
+
+mat-accordion {
+  a {
+    span {
+      margin-left: 20px;
+    }
+  }
+}
+
+.transparent-toolbar {
+  justify-content: flex-end;
+  background-color: transparent;
+  color: white;
+}
+

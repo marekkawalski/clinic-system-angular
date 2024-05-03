@@ -1,0 +1,47 @@
+<mat-toolbar>
+  <div>
+    <button
+      (click)="drawer.toggle()"
+      aria-label="Example icon-button with menu icon"
+      class="example-icon"
+      mat-icon-button
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a [routerLink]="PathConstants.HOME_PATH">Clinic System</a>
+  </div>
+
+  <div *ngIf="authService.authData | async as authData; else noAuthData">
+    <div class="name-container">
+      Hello, {{ authData.name }} {{ authData.surname }}
+    </div>
+    <button (click)="logout()" mat-raised-button>Logout</button>
+  </div>
+</mat-toolbar>
+
+<ng-template #noAuthData>
+  <div>
+    <div class="name-container">Hello,Guest</div>
+    <button [routerLink]="PathConstants.LOGIN_PATH" mat-raised-button>
+      Login
+    </button>
+  </div>
+</ng-template>
+
+<mat-drawer-container autosize class="container">
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <mat-nav-list>
+      <a
+        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="PathConstants.HOME_PATH"
+        mat-list-item
+        routerLinkActive="active"
+      >
+        Home
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+  <div class="sidenav-content">
+    <ng-content></ng-content>
+  </div>
+</mat-drawer-container>

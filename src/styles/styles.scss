@@ -1,10 +1,105 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
-  height: 100%;
+* {
+  margin: 0;
+  padding: 0;
 }
 
+html {
+  font-weight: 300;
+  font-size: 20px;
+  text-rendering: optimizeLegibility;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
 body {
-  margin: 0;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+section, .page-wrapper {
+  padding: 70px 2em 2em 2em;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+.green-snackbar {
+  background: rgb(4, 165, 66);
+  color: white;
+}
+
+.green-snackbar button {
+  background: rgb(4, 165, 66);
+  color: white;
+  border: none;
+}
+
+.red-snackbar {
+  background: #F44336;
+  color: white;
+}
+
+.red-snackbar button {
+  background-color: #F44336;
+  color: white !important;
+  border: none;
 }
 
