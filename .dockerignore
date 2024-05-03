@@ -1,0 +1,8 @@
+build
+.vscode
+bin
+.idea/
+*.iws
+target/
+.sonar/
+.sonarlint/
