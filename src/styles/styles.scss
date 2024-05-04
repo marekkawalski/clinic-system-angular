@@ -75,7 +75,7 @@ select {
 }
 
 section, .page-wrapper {
-  padding: 70px 2em 2em 2em;
+  padding: 70px 3em 3em 3em;
 }
 
 a {
@@ -115,5 +115,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

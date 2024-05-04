@@ -1,0 +1,62 @@
+@use 'styles/abstracts/colors' as *;
+
+
+.footer {
+  background-color: $primary;
+  color: white;
+  padding: 1em;
+  text-align: center;
+
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    padding-bottom: 2em;
+    padding-top: 1em;
+  }
+
+  .mat-icon {
+    font-size: 2rem;
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .page-info {
+    padding: 4em 2em 2em 2em;
+  }
+
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .contact-info {
+      display: grid;
+      width: 70%;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2em;
+
+      .contact-info-item {
+        background-color: gray;
+        padding: 2.5em;
+      }
+
+      .social-media {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 1em;
+      }
+    }
+
+    .doctor-img {
+      width: auto;
+      height: 600px;
+    }
+  }
+}
+
+
+
+
+
