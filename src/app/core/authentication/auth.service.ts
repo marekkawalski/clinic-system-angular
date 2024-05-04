@@ -4,10 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment.development';
 import { User } from '../models/user/User';
-
-interface AuthData extends User {
-  password: string;
-}
+import { AuthData } from '../models/AuthData';
+import { PathConstants } from '../constants/path.constants';
 
 const AUTH_DATA_KEY = 'authData';
 
@@ -15,6 +13,7 @@ const AUTH_DATA_KEY = 'authData';
   providedIn: 'root',
 })
 export class AuthService {
+  redirectUrl: string | null = null;
   private authDataSubject: BehaviorSubject<AuthData | null> =
     new BehaviorSubject<AuthData | null>(null);
   public authData: Observable<AuthData | null> =
@@ -26,10 +25,15 @@ export class AuthService {
   ) {
     const authData = sessionStorage.getItem(AUTH_DATA_KEY);
     if (authData) {
-      this.authDataSubject = new BehaviorSubject<AuthData | null>(
-        JSON.parse(authData),
-      );
+      const authDataObj: AuthData = JSON.parse(authData);
+      if (authDataObj) {
+        this.authDataSubject.next(JSON.parse(authData));
+      }
     }
+  }
+
+  get authDataValue(): AuthData | null {
+    return this.authDataSubject.value;
   }
 
   login(email: string, password: string): Observable<User> {
@@ -54,7 +58,7 @@ export class AuthService {
   logout(): void {
     sessionStorage.clear();
     this.authDataSubject.next(null);
-    this.router.navigate(['/login']).then(() => {
+    this.router.navigate([PathConstants.LOGIN_PATH]).then(() => {
       console.log('You have been logged out.');
     });
   }

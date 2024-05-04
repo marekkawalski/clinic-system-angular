@@ -40,6 +40,16 @@
         Home
       </a>
     </mat-nav-list>
+    <mat-nav-list>
+      <a
+        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="PathConstants.MANAGE_USERS_PATH"
+        mat-list-item
+        routerLinkActive="active"
+      >
+        Manage users
+      </a>
+    </mat-nav-list>
   </mat-drawer>
   <div class="sidenav-content">
     <ng-content></ng-content>

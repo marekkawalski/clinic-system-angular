@@ -20,7 +20,7 @@ import { Address } from '../../../core/models/Address';
 import { DoctorDetails } from '../../../core/models/DoctorDetails';
 import { User } from '../../../core/models/user/User';
 import { UserToAddOrUpdate } from '../../../core/models/user/UserToAddOrUpdate';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-user-form',
