@@ -26,3 +26,13 @@ h1 {
   height: 100vh;
   gap: 50px;
 }
+
+mat-hint,
+.sign-up {
+  button {
+    margin-top: 10px;
+    background-color: transparent;
+    border: none;
+    color: $my-black;
+  }
+}

@@ -1,13 +1,17 @@
 @use "styles/form/form" as *;
 
-.form-card-child {
+.popup-form {
+  width: 100%;
+}
+
+.whole-page-form {
   width: 80%;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-
+  grid-template-rows: auto;
   gap: 20px;
   padding: 20px;
 }

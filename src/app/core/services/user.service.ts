@@ -25,6 +25,10 @@ export class UserService {
     return this.http.put<any>(`${environment.apiUrl}/users/${userId}`, user);
   }
 
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/users/${userId}`);
+  }
+
   getPagedUsers(
     params?: UserPageRequestParams,
   ): Observable<PageRequestResponseData<User>> {

@@ -1,7 +1,7 @@
 <div class="form-card-wrapper">
-  <div class="form-card-child">
+  <div [ngClass]="class">
     <mat-card class="login-card">
-      <mat-card-title>Register</mat-card-title>
+      <mat-card-title>{{ action }}</mat-card-title>
       <mat-card-content>
         <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
           <div class="form-grid">
@@ -243,8 +243,17 @@
             </div>
           </div>
 
-          <!-- Submit Button -->
-          <button mat-raised-button type="submit">Submit</button>
+          <ng-container [ngSwitch]="formType">
+            <ng-container *ngSwitchCase="FormType.WholePageForm">
+              <button mat-raised-button type="submit">Submit</button>
+            </ng-container>
+            <ng-container *ngSwitchCase="FormType.PopupForm">
+              <ng-content></ng-content>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <button mat-raised-button type="submit">Submit</button>
+            </ng-container>
+          </ng-container>
         </form>
       </mat-card-content>
     </mat-card>

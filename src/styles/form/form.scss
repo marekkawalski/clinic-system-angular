@@ -39,7 +39,6 @@ h2 {
 }
 
 
-$white: #fff;
 $border-rounded: 6px;
 
 .container {
@@ -49,6 +48,7 @@ $border-rounded: 6px;
   align-content: center;
   padding: 6%;
   margin: 0;
+
 }
 
 .button-container {
@@ -60,17 +60,17 @@ $border-rounded: 6px;
     font-weight: 500;
     font-size: 1em;
     text-transform: uppercase;
-    color: $white;
+    color: $my-white;
     border-radius: $border-rounded;
     margin: 10px;
     padding: 1em 3em;
     background-size: 200% auto;
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
     background-image: linear-gradient(
-        to right,
-        #673ab7 0%,
-        #7c4dff 50%,
-        #673ab7 100%
+                    to right,
+                    #673ab7 0%,
+                    #7c4dff 50%,
+                    #673ab7 100%
     );
     transition: 0.5s;
 
@@ -78,15 +78,5 @@ $border-rounded: 6px;
       background-position: right center;
       cursor: pointer;
     }
-  }
-}
-
-mat-hint,
-.sign-up {
-  button {
-    margin-top: 10px;
-    background-color: transparent;
-    border: none;
-    color: $my-black;
   }
 }

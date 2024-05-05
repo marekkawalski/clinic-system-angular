@@ -1,0 +1,13 @@
+<mat-dialog-content>
+  <app-user-form
+    [action]="'Edit User'"
+    [dialogRef]="dialogRef"
+    [formType]="FormType.PopupForm"
+    [userId]="data.user.id"
+  >
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button type="submit">Save</button>
+    </mat-dialog-actions>
+  </app-user-form>
+</mat-dialog-content>

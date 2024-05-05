@@ -105,25 +105,6 @@ a {
   border: none;
 }
 
-
-html, body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-html, body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
 h2 {
   text-transform: capitalize;
   font-size: 2rem !important;
@@ -132,3 +113,11 @@ h2 {
   padding: 1em;
 }
 
+.mdc-dialog__content {
+  overflow: unset !important;
+}
+
+.mat-mdc-dialog-content {
+  padding: 0 !important;
+  margin: 0 !important;
+}

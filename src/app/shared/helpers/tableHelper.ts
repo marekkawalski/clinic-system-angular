@@ -1,5 +1,50 @@
+import { PageRequestResponseData } from '../models/PageRequestResponseData';
+
 export class TableHelper {
-  getFlatKeys(
+  private _allColumnNames: string[] = [];
+
+  get allColumnNames(): string[] {
+    return this._allColumnNames;
+  }
+
+  set allColumnNames(value: string[]) {
+    this._allColumnNames = value;
+  }
+
+  private _baseColumnNames: string[] = [];
+
+  get baseColumnNames(): string[] {
+    return this._baseColumnNames;
+  }
+
+  set baseColumnNames(value: string[]) {
+    this._baseColumnNames = value;
+  }
+
+  nestedPropertyAccessor(item: any, path: string): unknown {
+    return path
+      .split('.')
+      .reduce(
+        (obj, key) => (obj && obj[key] !== 'undefined' ? obj[key] : undefined),
+        item,
+      );
+  }
+
+  setBaseColumnNames(
+    requestResponseData: PageRequestResponseData<any>,
+    excludeColumns: string[] = [],
+  ): void {
+    this._baseColumnNames = this.getFlatKeys(
+      requestResponseData.content[0],
+      excludeColumns,
+    );
+  }
+
+  setAllColumnNames(additionalColumns: string[]): void {
+    this.allColumnNames = [...this._baseColumnNames, ...additionalColumns];
+  }
+
+  private getFlatKeys(
     obj: { [key: string]: any },
     excludeList: string[] = [],
   ): string[] {
@@ -24,14 +69,5 @@ export class TableHelper {
       }
       return acc;
     }, []);
-  }
-
-  nestedPropertyAccessor(item: any, path: string): unknown {
-    return path
-      .split('.')
-      .reduce(
-        (obj, key) => (obj && obj[key] !== 'undefined' ? obj[key] : undefined),
-        item,
-      );
   }
 }

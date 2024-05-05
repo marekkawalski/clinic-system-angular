@@ -24,6 +24,11 @@ import { PaginatorComponent } from '../../../../shared/components/paginator/pagi
 import { SnackbarService } from '../../../../shared/services/snackbar.service';
 import { UserPageRequestParams } from '../../../../core/models/UserPageRequestParams';
 import { DatePipe } from '../../../../shared/pipes/date.pipe';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
+import { AuthService } from '../../../../core/authentication/auth.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { EditUserComponent } from '../../components/edit-user/edit-user.component';
 
 @Component({
   selector: 'app-manage-users-page',
@@ -46,13 +51,14 @@ import { DatePipe } from '../../../../shared/pipes/date.pipe';
     LastPropertyPipe,
     PaginatorComponent,
     DatePipe,
+    MatIcon,
+    MatIconButton,
   ],
   templateUrl: './manage-users-page.component.html',
   styleUrl: './manage-users-page.component.scss',
 })
 export class ManageUsersPageComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  displayedColumns: string[] = [];
   dataSource: MatTableDataSource<User> = new MatTableDataSource<User>();
   pageUserResponseData?: PageRequestResponseData<User>;
   tableHelper = new TableHelper();
@@ -61,6 +67,8 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
   constructor(
     private readonly userService: UserService,
     private readonly toast: SnackbarService,
+    private readonly authService: AuthService,
+    private readonly dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -72,7 +80,6 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
   }
 
   getPagedUsers(params: UserPageRequestParams) {
-    console.log('params', JSON.stringify(params));
     this.userService
       .getPagedUsers(params)
       .subscribe((requestResponseData: PageRequestResponseData<User>) => {
@@ -84,14 +91,28 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
         }
         this.dataSource = new MatTableDataSource(requestResponseData.content);
         this.pageUserResponseData = requestResponseData;
-
-        // Specify the keys you want to exclude
-        const excludeColumns: string[] = ['description'];
-
-        this.displayedColumns = this.tableHelper.getFlatKeys(
-          requestResponseData.content[0],
-          excludeColumns,
-        );
+        this.tableHelper.setBaseColumnNames(this.pageUserResponseData, [
+          'description',
+        ]);
+        this.tableHelper.setAllColumnNames(['edit']);
       });
+  }
+
+  openEditUserDialog(user: User) {
+    const dialogRef: MatDialogRef<EditUserComponent> = this.dialog.open(
+      EditUserComponent,
+      {
+        width: '1400px',
+        height: '800px',
+        data: {
+          user: user,
+        },
+      },
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getPagedUsers(this.requestParams);
+      }
+    });
   }
 }

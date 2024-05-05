@@ -12,6 +12,7 @@ export interface User {
   pesel: string;
   address: Address;
   doctorDetails: DoctorDetails;
+  isEnabled: boolean;
   createdAt: Date;
   updatedAt?: Date;
   lastLogin?: Date;

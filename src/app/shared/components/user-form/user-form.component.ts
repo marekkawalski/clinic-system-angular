@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserRole } from '../../../core/enums/UserRole';
 import { Registration_Validation_Messages } from './validation/validation-messages';
@@ -12,7 +12,14 @@ import { MatInput } from '@angular/material/input';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
-import { NgForOf, NgIf } from '@angular/common';
+import {
+  NgClass,
+  NgForOf,
+  NgIf,
+  NgSwitch,
+  NgSwitchCase,
+  NgSwitchDefault,
+} from '@angular/common';
 import { PathConstants } from '../../../core/constants/path.constants';
 import { AuthService } from '../../../core/authentication/auth.service';
 import { RegistrationService } from '../../../core/authentication/registration.service';
@@ -21,6 +28,10 @@ import { DoctorDetails } from '../../../core/models/DoctorDetails';
 import { User } from '../../../core/models/user/User';
 import { UserToAddOrUpdate } from '../../../core/models/user/UserToAddOrUpdate';
 import { UserService } from '../../../core/services/user.service';
+import { SnackbarService } from '../../services/snackbar.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { EditUserComponent } from '../../../features/manage-users/components/edit-user/edit-user.component';
+import { FormType } from '../../enums/FormType';
 
 @Component({
   selector: 'app-user-form',
@@ -39,12 +50,19 @@ import { UserService } from '../../../core/services/user.service';
     MatCard,
     NgIf,
     NgForOf,
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
+    NgClass,
   ],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.scss',
 })
-export class UserFormComponent {
+export class UserFormComponent implements OnInit {
   @Input() userId?: string;
+  @Input() dialogRef?: MatDialogRef<EditUserComponent>;
+  @Input() action: string = 'Register';
+  @Input() formType?: FormType = FormType.WholePageForm;
 
   registrationValidationMessages = Registration_Validation_Messages;
 
@@ -155,8 +173,10 @@ export class UserFormComponent {
   );
   submitted: boolean = false;
   loading: boolean = false;
+  class?: string;
   protected readonly PathConstants = PathConstants;
   protected readonly UserRole = UserRole;
+  protected readonly FormType = FormType;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -164,10 +184,16 @@ export class UserFormComponent {
     protected readonly authenticationService: AuthService,
     protected readonly registrationService: RegistrationService,
     protected readonly userService: UserService,
+    private readonly toast: SnackbarService,
   ) {}
 
   get formControl() {
     return this.registrationForm.controls;
+  }
+
+  ngOnInit(): void {
+    this.initFormData();
+    this.establishCssClass();
   }
 
   onSubmit() {
@@ -235,7 +261,10 @@ export class UserFormComponent {
     } else {
       this.userService.updateUser(user, this.userId).subscribe((user: User) => {
         this.loading = false;
-        console.log(`User ${user.email} has been updated`);
+        this.toast.openSuccessSnackBar({
+          message: `User ${user.name} ${user.surname} has been updated`,
+        });
+        this.dialogRef?.close(true);
       });
     }
   }
@@ -278,5 +307,51 @@ export class UserFormComponent {
       .find(v => v);
 
     return foundError ? foundError.message : null;
+  }
+
+  private establishCssClass(): void {
+    if (this.formType === FormType.WholePageForm) {
+      this.class = 'whole-page-form';
+    } else if (this.formType === FormType.PopupForm) {
+      this.class = 'popup-form';
+    }
+  }
+
+  private initFormData() {
+    if (!this.userId) return;
+
+    this.userService.getUserById(this.userId).subscribe((user: User) => {
+      if (!user) {
+        this.toast.openFailureSnackBar({ message: 'User not found' });
+        return;
+      }
+
+      this.registrationForm.patchValue({
+        adminManagedData: {
+          role: user.role,
+          enabled: user.isEnabled,
+        },
+        address: {
+          country: user.address.country,
+          city: user.address.city,
+          street: user.address.street,
+          postalCode: user.address.postalCode,
+          houseNumber: user.address.houseNumber,
+          apartmentNumber: user.address.apartmentNumber,
+        },
+        basicData: {
+          name: user.name,
+          surname: user.surname,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          pesel: user.pesel,
+        },
+        doctorDetails: {
+          specialization: user.doctorDetails?.specialization,
+          education: user.doctorDetails?.education,
+          description: user.doctorDetails?.description,
+        },
+      });
+    });
   }
 }
