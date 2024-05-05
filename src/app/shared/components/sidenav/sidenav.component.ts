@@ -8,6 +8,7 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 import { AuthService } from '../../../core/authentication/auth.service';
 import { PathConstants } from '../../../core/constants/path.constants';
+import { UserRole } from '../../../core/enums/UserRole';
 
 @Component({
   selector: 'app-sidenav',
@@ -30,6 +31,7 @@ import { PathConstants } from '../../../core/constants/path.constants';
 })
 export class SidenavComponent {
   protected readonly PathConstants = PathConstants;
+  protected readonly UserRole = UserRole;
 
   constructor(protected readonly authService: AuthService) {}
 

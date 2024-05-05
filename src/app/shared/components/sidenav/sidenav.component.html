@@ -40,7 +40,7 @@
         Home
       </a>
     </mat-nav-list>
-    <mat-nav-list>
+    <mat-nav-list *ngIf="authService.checkAccess([UserRole.ADMIN])">
       <a
         [routerLinkActiveOptions]="{ exact: true }"
         [routerLink]="PathConstants.MANAGE_USERS_PATH"

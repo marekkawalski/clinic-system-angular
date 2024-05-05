@@ -1,3 +1,30 @@
 <section>
-  <p>manage-users-page works!</p>
+  <h2>Manage Users</h2>
+  <div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      <table *ngIf="dataSource" [dataSource]="dataSource" mat-table>
+        <ng-container
+          *ngFor="let column of displayedColumns; let i = index"
+          [matColumnDef]="column"
+        >
+          <th *matHeaderCellDef mat-header-cell>
+            {{ column | lastProperty | capitalizeSpaceBetween }}
+          </th>
+
+          <td *matCellDef="let element" mat-cell>
+            {{ tableHelper.nestedPropertyAccessor(element, column) | date }}
+          </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+      </table>
+    </div>
+  </div>
+  <app-paginator
+    (load)="getPagedUsers($event)"
+    [data]="pageUserResponseData"
+    [requestParams]="requestParams"
+  >
+  </app-paginator>
 </section>

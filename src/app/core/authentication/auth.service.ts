@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment.development';
 import { User } from '../models/user/User';
 import { AuthData } from '../models/AuthData';
 import { PathConstants } from '../constants/path.constants';
+import { UserRole } from '../enums/UserRole';
 
 const AUTH_DATA_KEY = 'authData';
 
@@ -61,5 +62,13 @@ export class AuthService {
     this.router.navigate([PathConstants.LOGIN_PATH]).then(() => {
       console.log('You have been logged out.');
     });
+  }
+
+  checkAccess(allowedRoles: UserRole[]): boolean {
+    const authData = this.authDataValue;
+    if (authData) {
+      return allowedRoles.includes(authData.role);
+    }
+    return false;
   }
 }
