@@ -1,5 +1,23 @@
 <section>
   <h2>Manage Users</h2>
+  <div class="actions-section">
+    <button
+      (click)="openAddUserDialog()"
+      color="primary"
+      mat-button
+      mat-raised-button
+    >
+      <mat-icon>add</mat-icon>
+      Add user
+    </button>
+    <mat-checkbox
+      (click)="toggleDisabled()"
+      [checked]="showDisabled"
+      color="primary"
+      >Show disabled users
+    </mat-checkbox>
+  </div>
+
   <div class="table-wrapper">
     <div class="mat-elevation-z8">
       <table *ngIf="dataSource" [dataSource]="dataSource" mat-table>

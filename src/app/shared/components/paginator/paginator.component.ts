@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { PageRequestResponseData } from '../../models/PageRequestResponseData';
 import { NgIf } from '@angular/common';
 import { PageRequestParams } from '../../models/PageRequestParams';
 
@@ -12,11 +11,11 @@ import { PageRequestParams } from '../../models/PageRequestParams';
   styleUrl: './paginator.component.scss',
 })
 export class PaginatorComponent {
-  @Input() data?: PageRequestResponseData<any>;
+  @Input() data?: any;
   @Input() requestParams?: PageRequestParams;
   @Output() load: EventEmitter<PageRequestParams> =
     new EventEmitter<PageRequestParams>();
-  pageSizeOptions: number[] | readonly number[] = [5, 10, 15];
+  pageSizeOptions: number[] = [5, 10, 15, 50, 100, 1000];
 
   onPageChange(event: PageEvent): void {
     if (!this.requestParams) return;

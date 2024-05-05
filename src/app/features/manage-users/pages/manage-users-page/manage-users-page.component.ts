@@ -25,10 +25,12 @@ import { SnackbarService } from '../../../../shared/services/snackbar.service';
 import { UserPageRequestParams } from '../../../../core/models/UserPageRequestParams';
 import { DatePipe } from '../../../../shared/pipes/date.pipe';
 import { MatIcon } from '@angular/material/icon';
-import { MatIconButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { AuthService } from '../../../../core/authentication/auth.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EditUserComponent } from '../../components/edit-user/edit-user.component';
+import { AddUserComponent } from '../../components/add-user/add-user.component';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-manage-users-page',
@@ -53,6 +55,8 @@ import { EditUserComponent } from '../../components/edit-user/edit-user.componen
     DatePipe,
     MatIcon,
     MatIconButton,
+    MatButton,
+    MatCheckbox,
   ],
   templateUrl: './manage-users-page.component.html',
   styleUrl: './manage-users-page.component.scss',
@@ -63,6 +67,7 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
   pageUserResponseData?: PageRequestResponseData<User>;
   tableHelper = new TableHelper();
   requestParams: UserPageRequestParams = {};
+  showDisabled?: boolean = false;
 
   constructor(
     private readonly userService: UserService,
@@ -72,6 +77,12 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    const showDisabled = localStorage.getItem('show-disabled');
+    if (showDisabled) {
+      this.showDisabled = showDisabled === 'true';
+    }
+    this.requestParams['show-disabled'] = this.showDisabled;
+
     this.getPagedUsers(this.requestParams);
   }
 
@@ -114,5 +125,27 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
         this.getPagedUsers(this.requestParams);
       }
     });
+  }
+
+  openAddUserDialog() {
+    const dialogRef: MatDialogRef<AddUserComponent> = this.dialog.open(
+      AddUserComponent,
+      {
+        width: '1400px',
+        height: '800px',
+      },
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getPagedUsers(this.requestParams);
+      }
+    });
+  }
+
+  toggleDisabled() {
+    this.showDisabled = !this.showDisabled;
+    localStorage.setItem('show-disabled', String(this.showDisabled));
+    this.requestParams['show-disabled'] = this.showDisabled;
+    this.getPagedUsers(this.requestParams);
   }
 }

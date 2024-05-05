@@ -3,4 +3,5 @@ import { UserRole } from '../enums/UserRole';
 
 export interface UserPageRequestParams extends PageRequestParams {
   ['roles']?: UserRole[];
+  ['show-disabled']?: boolean;
 }

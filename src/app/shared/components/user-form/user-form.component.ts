@@ -30,7 +30,6 @@ import { UserToAddOrUpdate } from '../../../core/models/user/UserToAddOrUpdate';
 import { UserService } from '../../../core/services/user.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { MatDialogRef } from '@angular/material/dialog';
-import { EditUserComponent } from '../../../features/manage-users/components/edit-user/edit-user.component';
 import { FormType } from '../../enums/FormType';
 
 @Component({
@@ -60,7 +59,7 @@ import { FormType } from '../../enums/FormType';
 })
 export class UserFormComponent implements OnInit {
   @Input() userId?: string;
-  @Input() dialogRef?: MatDialogRef<EditUserComponent>;
+  @Input() dialogRef?: MatDialogRef<any>;
   @Input() action: string = 'Register';
   @Input() formType?: FormType = FormType.WholePageForm;
 
@@ -107,33 +106,8 @@ export class UserFormComponent implements OnInit {
             Validators.maxLength(UserFormValidationConstants.PESEL_LENGTH),
           ],
         }),
-        password: this.formBuilder.nonNullable.control('', {
-          validators: this.router.url.includes(PathConstants.MANAGE_USERS_PATH)
-            ? [
-                PasswordStrengthValidator,
-                Validators.minLength(
-                  UserFormValidationConstants.MIN_PASSWORD_LENGTH,
-                ),
-                Validators.maxLength(
-                  UserFormValidationConstants.MAX_PASSWORD_LENGTH,
-                ),
-              ]
-            : [
-                Validators.required,
-                PasswordStrengthValidator,
-                Validators.minLength(
-                  UserFormValidationConstants.MIN_PASSWORD_LENGTH,
-                ),
-                Validators.maxLength(
-                  UserFormValidationConstants.MAX_PASSWORD_LENGTH,
-                ),
-              ],
-        }),
-        confirmPassword: this.formBuilder.nonNullable.control('', {
-          validators: this.router.url.includes(PathConstants.MANAGE_USERS_PATH)
-            ? []
-            : [Validators.required],
-        }),
+        password: this.formBuilder.control(undefined),
+        confirmPassword: this.formBuilder.control(undefined),
       }),
       adminManagedData: this.formBuilder.group({
         enabled: this.formBuilder.nonNullable.control(true),
@@ -194,6 +168,7 @@ export class UserFormComponent implements OnInit {
   ngOnInit(): void {
     this.initFormData();
     this.establishCssClass();
+    this.initValidators();
   }
 
   onSubmit() {
@@ -243,6 +218,7 @@ export class UserFormComponent implements OnInit {
       phoneNumber: this.formControl.basicData.controls.phoneNumber.value,
       address: address,
       role: this.formControl.adminManagedData.controls.role.value,
+      isEnabled: this.formControl.adminManagedData.controls.enabled.value,
     };
 
     if (!Object.is(doctorDetails, {})) {
@@ -256,7 +232,9 @@ export class UserFormComponent implements OnInit {
     if (!this.userId) {
       this.registrationService.register(user).subscribe((user: User) => {
         this.loading = false;
-        console.log(`User ${user.email} has been registered`);
+        this.toast.openSuccessSnackBar({
+          message: `User ${user.name} ${user.surname} has been registered`,
+        });
       });
     } else {
       this.userService.updateUser(user, this.userId).subscribe((user: User) => {
@@ -264,8 +242,10 @@ export class UserFormComponent implements OnInit {
         this.toast.openSuccessSnackBar({
           message: `User ${user.name} ${user.surname} has been updated`,
         });
-        this.dialogRef?.close(true);
       });
+    }
+    if (this.formType === FormType.PopupForm) {
+      this.dialogRef?.close(true);
     }
   }
 
@@ -353,5 +333,34 @@ export class UserFormComponent implements OnInit {
         },
       });
     });
+  }
+
+  private initValidators() {
+    this.formControl.basicData.controls.password.addValidators(
+      this.userId
+        ? [
+            PasswordStrengthValidator,
+            Validators.minLength(
+              UserFormValidationConstants.MIN_PASSWORD_LENGTH,
+            ),
+            Validators.maxLength(
+              UserFormValidationConstants.MAX_PASSWORD_LENGTH,
+            ),
+          ]
+        : [
+            Validators.required,
+            PasswordStrengthValidator,
+            Validators.minLength(
+              UserFormValidationConstants.MIN_PASSWORD_LENGTH,
+            ),
+            Validators.maxLength(
+              UserFormValidationConstants.MAX_PASSWORD_LENGTH,
+            ),
+          ],
+    );
+
+    this.formControl.basicData.controls.confirmPassword.addValidators(
+      this.userId ? [] : [Validators.required],
+    );
   }
 }

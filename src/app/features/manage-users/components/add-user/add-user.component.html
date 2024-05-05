@@ -1,0 +1,12 @@
+<mat-dialog-content>
+  <app-user-form
+    [action]="'Create User'"
+    [dialogRef]="dialogRef"
+    [formType]="FormType.PopupForm"
+  >
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button type="submit">Save</button>
+    </mat-dialog-actions>
+  </app-user-form>
+</mat-dialog-content>

@@ -12,4 +12,5 @@ export interface UserToAddOrUpdate {
   address: Address;
   doctorDetails?: DoctorDetails;
   password?: string;
+  isEnabled?: boolean;
 }
