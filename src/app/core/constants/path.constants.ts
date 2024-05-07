@@ -4,4 +4,5 @@ export const PathConstants = {
   REGISTER_PATH: 'register',
   FORGOT_PASSWORD_PATH: 'forgot-password',
   MANAGE_USERS_PATH: 'manage-users',
+  DOCTORS_PATH: 'doctors',
 };

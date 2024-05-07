@@ -40,6 +40,17 @@
         Home
       </a>
     </mat-nav-list>
+    <mat-nav-list>
+      <a
+        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="PathConstants.DOCTORS_PATH"
+        mat-list-item
+        routerLinkActive="active"
+      >
+        Doctors
+      </a>
+    </mat-nav-list>
+
     <mat-nav-list *ngIf="authService.checkAccess([UserRole.ADMIN])">
       <a
         [routerLinkActiveOptions]="{ exact: true }"

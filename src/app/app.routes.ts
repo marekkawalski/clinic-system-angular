@@ -6,11 +6,13 @@ import { RegistrationComponent } from './features/auth/registration/pages/regist
 import { ManageUsersPageComponent } from './features/manage-users/pages/manage-users-page/manage-users-page.component';
 import { authGuard } from './core/authentication/auth.guard';
 import { UserRole } from './core/enums/UserRole';
+import { DoctorsComponent } from './features/doctors/pages/doctors.component';
 
 export const routes: Routes = [
   { path: PathConstants.HOME_PATH, component: HomepageComponent },
   { path: PathConstants.LOGIN_PATH, component: LoginComponent },
   { path: PathConstants.REGISTER_PATH, component: RegistrationComponent },
+  { path: PathConstants.DOCTORS_PATH, component: DoctorsComponent },
 
   //Admin routes
   {

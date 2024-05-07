@@ -1,0 +1,45 @@
+<section>
+  <h2>Meet our doctors</h2>
+  <ng-container *ngIf="doctors | async as doctors">
+    <div class="doctors">
+      <app-paginator
+        (load)="getPagedDoctors($event)"
+        [data]="doctors"
+        [requestParams]="userRequestParams"
+      >
+      </app-paginator>
+      <div *ngFor="let doctor of doctors.content" class="doctor">
+        <div class="doctor-image">
+          <img alt="doctor.name" src="assets/images/female-doctor.jpg" />
+        </div>
+        <div class="doctor-info">
+          <h3>{{ doctor.name }} {{ doctor.surname }}</h3>
+          <p *ngIf="doctor.doctorDetails?.specialization">
+            <span class="material-symbols-outlined"> stethoscope_check </span>
+            {{ doctor.doctorDetails?.specialization }}
+          </p>
+          <p>
+            <mat-icon>place</mat-icon>
+            Wijttenbachstraat 36, 1093 JC Amsterdam
+          </p>
+          <p *ngIf="doctor.doctorDetails?.education">
+            <mat-icon>school</mat-icon>
+            {{ doctor.doctorDetails?.education }}
+          </p>
+          <p *ngIf="doctor.doctorDetails?.description" class="description">
+            {{ doctor.doctorDetails?.description }}
+          </p>
+        </div>
+        <div class="schedule-appointment">
+          <button mat-raised-button>Schedule Appointment</button>
+        </div>
+      </div>
+      <app-paginator
+        (load)="getPagedDoctors($event)"
+        [data]="doctors"
+        [requestParams]="userRequestParams"
+      >
+      </app-paginator>
+    </div>
+  </ng-container>
+</section>

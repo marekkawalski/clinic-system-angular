@@ -19,7 +19,6 @@ export const requestInterceptor: HttpInterceptorFn = (
   const toastService: SnackbarService = inject(SnackbarService);
 
   if (!authService.authDataValue) {
-    authService.logout();
     return next(req);
   }
 
