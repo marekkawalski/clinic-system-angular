@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { UserPageRequestParams } from '../../../core/models/UserPageRequestParams';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { PageRequestResponseData } from '../../../shared/models/PageRequestResponseData';
 import { HttpParamsHelper } from '../../../shared/helpers/httpParamsHelper';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.development';
 import { Doctor } from '../../../core/models/Doctor';
+import { DailySchedule } from '../../../core/models/user/Schedule';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +27,24 @@ export class DoctorService {
         params: this.httpParamsHelper.setupHttpParams(params),
       },
     );
+  }
+
+  getDoctorByEmail(email: string): Observable<Doctor> {
+    return this.http
+      .get<Doctor>(`${environment.apiUrl}/doctors/email/${email}`)
+      .pipe(
+        map(d => {
+          if (d.doctorDetails?.schedule?.dailySchedules) {
+            const entries: [string, DailySchedule][] = Object.entries(
+              d.doctorDetails.schedule.dailySchedules,
+            );
+            d.doctorDetails.schedule.dailySchedules = new Map<
+              string,
+              DailySchedule
+            >(entries);
+          }
+          return d;
+        }),
+      );
   }
 }

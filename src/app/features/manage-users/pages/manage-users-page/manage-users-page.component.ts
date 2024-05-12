@@ -26,7 +26,6 @@ import { UserPageRequestParams } from '../../../../core/models/UserPageRequestPa
 import { DatePipe } from '../../../../shared/pipes/date.pipe';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';
-import { AuthService } from '../../../../core/authentication/auth.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EditUserComponent } from '../../components/edit-user/edit-user.component';
 import { AddUserComponent } from '../../components/add-user/add-user.component';
@@ -72,7 +71,6 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
   constructor(
     private readonly userService: UserService,
     private readonly toast: SnackbarService,
-    private readonly authService: AuthService,
     private readonly dialog: MatDialog,
   ) {}
 
@@ -102,9 +100,10 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
         }
         this.dataSource = new MatTableDataSource(requestResponseData.content);
         this.pageUserResponseData = requestResponseData;
-        this.tableHelper.setBaseColumnNames(this.pageUserResponseData, [
-          'description',
-        ]);
+        this.tableHelper.setBaseColumnNamesFromRequestData(
+          this.pageUserResponseData,
+          ['description'],
+        );
         this.tableHelper.setAllColumnNames(['edit']);
       });
   }

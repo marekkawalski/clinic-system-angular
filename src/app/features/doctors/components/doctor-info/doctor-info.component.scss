@@ -1,0 +1,38 @@
+p {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.6em;
+  flex-direction: column;
+
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4em
+  }
+}
+
+.description {
+  padding-top: 3em;
+  grid-area: description
+}
+
+.doctor-info {
+  padding-top: 2em;
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+              "basic-info basic-info contact-info contact-info"
+              "description description description .";
+}
+
+.contact-info {
+  grid-area: contact-info;
+
+}
+
+.basic-info {
+  grid-area: basic-info;
+}
+

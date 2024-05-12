@@ -1,0 +1,26 @@
+<section>
+  <ng-container *ngIf="doctor$ | async as doctor">
+    <div class="doctors">
+      <div class="doctor">
+        <div class="doctor-image">
+          <img alt="doctor.name" src="assets/images/female-doctor.jpg" />
+        </div>
+        <h3 class="name">{{ doctor.name }} {{ doctor.surname }}</h3>
+        <mat-tab-group class="tab-group">
+          <mat-tab label="Info">
+            <app-doctor-info [doctor]="doctor"></app-doctor-info>
+          </mat-tab>
+          <mat-tab label="Examinations">
+            <app-examinations [doctor]="doctor"></app-examinations>
+          </mat-tab>
+          <mat-tab label="Schedule">
+            <app-doctor-schedule [doctor]="doctor"></app-doctor-schedule>
+          </mat-tab>
+        </mat-tab-group>
+        <div class="schedule-appointment">
+          <button mat-raised-button>Schedule Appointment</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</section>

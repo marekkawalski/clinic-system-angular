@@ -1,0 +1,36 @@
+<table
+  *ngIf="examinationDataSource"
+  [dataSource]="examinationDataSource"
+  class="mat-elevation-z8 examinations"
+  mat-table
+>
+  <ng-container
+    *ngFor="let column of examinationTableHelper.allColumnNames"
+    matColumnDef="{{ column }}"
+  >
+    <th *matHeaderCellDef mat-header-cell>
+      {{ column | lastProperty | capitalizeSpaceBetween }}
+    </th>
+
+    <td *matCellDef="let element" mat-cell>
+      {{
+        examinationTableHelper.nestedPropertyAccessor(element, column) | date
+      }}
+    </td>
+  </ng-container>
+
+  <tr
+    *matHeaderRowDef="examinationTableHelper.allColumnNames"
+    mat-header-row
+  ></tr>
+  <tr
+    *matRowDef="let row; columns: examinationTableHelper.allColumnNames"
+    mat-row
+  ></tr>
+</table>
+<app-paginator
+  (load)="loadDoctorExaminations($event)"
+  [data]="pageExaminationResponseData"
+  [requestParams]="examinationRequestParams"
+>
+</app-paginator>

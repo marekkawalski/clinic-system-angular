@@ -3,7 +3,7 @@ import { PageRequestResponseData } from '../models/PageRequestResponseData';
 export class TableHelper {
   private _allColumnNames: string[] = [];
 
-  get allColumnNames(): string[] {
+  public get allColumnNames(): string[] {
     return this._allColumnNames;
   }
 
@@ -30,18 +30,24 @@ export class TableHelper {
       );
   }
 
-  setBaseColumnNames(
+  setBaseColumnNamesFromRequestData(
     requestResponseData: PageRequestResponseData<any>,
     excludeColumns: string[] = [],
   ): void {
     this._baseColumnNames = this.getFlatKeys(
-      requestResponseData.content[0],
+      requestResponseData.content[1],
       excludeColumns,
     );
+    this._allColumnNames = this._baseColumnNames;
+  }
+
+  setBaseColumnNames(columns: string[]): void {
+    this._baseColumnNames = columns;
+    this._allColumnNames = columns;
   }
 
   setAllColumnNames(additionalColumns: string[]): void {
-    this.allColumnNames = [...this._baseColumnNames, ...additionalColumns];
+    this._allColumnNames = [...this._baseColumnNames, ...additionalColumns];
   }
 
   private getFlatKeys(

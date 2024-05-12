@@ -15,7 +15,7 @@ export class PaginatorComponent {
   @Input() requestParams?: PageRequestParams;
   @Output() load: EventEmitter<PageRequestParams> =
     new EventEmitter<PageRequestParams>();
-  pageSizeOptions: number[] = [5, 10, 15, 50, 100, 1000];
+  pageSizeOptions: number[] = [1, 5, 10, 15, 50, 100, 1000];
 
   onPageChange(event: PageEvent): void {
     if (!this.requestParams) return;

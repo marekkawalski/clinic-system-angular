@@ -13,7 +13,11 @@
           <img alt="doctor.name" src="assets/images/female-doctor.jpg" />
         </div>
         <div class="doctor-info">
-          <h3>{{ doctor.name }} {{ doctor.surname }}</h3>
+          <h3>
+            <a [routerLink]="doctor.email"
+              >{{ doctor.name }} {{ doctor.surname }}</a
+            >
+          </h3>
           <p *ngIf="doctor.doctorDetails?.specialization">
             <span class="material-symbols-outlined"> stethoscope_check </span>
             {{ doctor.doctorDetails?.specialization }}
