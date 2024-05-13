@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserPageRequestParams } from '../../../core/models/UserPageRequestParams';
+import { UserPageRequestParams } from '../../../shared/models/UserPageRequestParams';
 import { map, Observable } from 'rxjs';
 import { PageRequestResponseData } from '../../../shared/models/PageRequestResponseData';
 import { HttpParamsHelper } from '../../../shared/helpers/httpParamsHelper';
@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.development';
 import { Doctor } from '../../../core/models/Doctor';
 import { DailySchedule } from '../../../core/models/user/Schedule';
+import { AvailableAppointments } from '../model/AvailableAppointments';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +46,25 @@ export class DoctorService {
           }
           return d;
         }),
+      );
+  }
+
+  getAvailableAppointments(
+    doctorId: string,
+    examinationId: string,
+    date: string,
+  ): Observable<AvailableAppointments[]> {
+    return this.http
+      .get<
+        AvailableAppointments[]
+      >(`${environment.apiUrl}/doctors/${doctorId}/examinations/${examinationId}/available-appointments/date/${date}`)
+      .pipe(
+        map(a =>
+          a.map(aa => {
+            aa.date = new Date(aa.date);
+            return aa;
+          }),
+        ),
       );
   }
 }

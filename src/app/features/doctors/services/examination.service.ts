@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Examination } from '../../../core/models/Examination';
 import { PageRequestResponseData } from '../../../shared/models/PageRequestResponseData';
 import { environment } from '../../../../environments/environment.development';
-import { ExaminationPageRequestParams } from '../../../core/models/ExaminationPageRequestParams';
+import { ExaminationPageRequestParams } from '../../../shared/models/ExaminationPageRequestParams';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,12 @@ export class ExaminationService {
 
   constructor(private readonly http: HttpClient) {
     this.httpParamsHelper = new HttpParamsHelper();
+  }
+
+  getDoctorExaminations(doctorId: any): Observable<Examination[]> {
+    return this.http.get<Examination[]>(
+      `${environment.apiUrl}/doctors/${doctorId}/examinations`,
+    );
   }
 
   getPagedDoctorExaminations(

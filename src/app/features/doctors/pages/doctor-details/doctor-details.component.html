@@ -13,12 +13,14 @@
           <mat-tab label="Examinations">
             <app-examinations [doctor]="doctor"></app-examinations>
           </mat-tab>
-          <mat-tab label="Schedule">
+          <mat-tab label="Doctor Schedule">
             <app-doctor-schedule [doctor]="doctor"></app-doctor-schedule>
           </mat-tab>
         </mat-tab-group>
         <div class="schedule-appointment">
-          <button mat-raised-button>Schedule Appointment</button>
+          <app-schedule-appointment
+            [doctor]="doctor"
+          ></app-schedule-appointment>
         </div>
       </div>
     </div>

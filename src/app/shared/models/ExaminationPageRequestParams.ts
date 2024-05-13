@@ -1,4 +1,4 @@
-import { PageRequestParams } from '../../shared/models/PageRequestParams';
+import { PageRequestParams } from './PageRequestParams';
 
 export interface ExaminationPageRequestParams extends PageRequestParams {
   ['doctor-ids']?: string[];

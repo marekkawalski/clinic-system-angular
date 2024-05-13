@@ -22,7 +22,7 @@ import { TableHelper } from '../../../../shared/helpers/tableHelper';
 import { LastPropertyPipe } from '../../../../shared/pipes/last-property.pipe';
 import { PaginatorComponent } from '../../../../shared/components/paginator/paginator.component';
 import { SnackbarService } from '../../../../shared/services/snackbar.service';
-import { UserPageRequestParams } from '../../../../core/models/UserPageRequestParams';
+import { UserPageRequestParams } from '../../../../shared/models/UserPageRequestParams';
 import { DatePipe } from '../../../../shared/pipes/date.pipe';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';

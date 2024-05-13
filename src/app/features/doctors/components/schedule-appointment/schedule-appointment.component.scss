@@ -1,0 +1,37 @@
+.appointment-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  gap: 1em;
+
+  h3 {
+    font-weight: bold;
+  }
+
+  padding-top: 2em;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: fit-content;
+  }
+
+  .appointments {
+    display: grid;
+    gap: 0.5em;
+    height: 30vh;
+    overflow-x: auto;
+    width: 300px;
+    grid-template-columns: repeat(3, 1fr);
+
+    .appointment {
+      width: fit-content;
+      height: auto;
+    }
+
+  }
+
+
+}

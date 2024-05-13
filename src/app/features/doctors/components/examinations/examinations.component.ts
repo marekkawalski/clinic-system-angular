@@ -23,7 +23,7 @@ import {
 } from '@angular/material/table';
 import { NgForOf, NgIf } from '@angular/common';
 import { PaginatorComponent } from '../../../../shared/components/paginator/paginator.component';
-import { ExaminationPageRequestParams } from '../../../../core/models/ExaminationPageRequestParams';
+import { ExaminationPageRequestParams } from '../../../../shared/models/ExaminationPageRequestParams';
 import { PageRequestResponseData } from '../../../../shared/models/PageRequestResponseData';
 import { Examination } from '../../../../core/models/Examination';
 import { TableHelper } from '../../../../shared/helpers/tableHelper';

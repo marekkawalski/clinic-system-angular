@@ -1,0 +1,12 @@
+<mat-dialog-content>
+  <app-appointment-form
+    [action]="'Schedule Appointment'"
+    [dialogRef]="dialogRef"
+    [formType]="FormType.PopupForm"
+  >
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button type="submit">Save</button>
+    </mat-dialog-actions>
+  </app-appointment-form>
+</mat-dialog-content>

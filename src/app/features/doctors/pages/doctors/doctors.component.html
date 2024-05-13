@@ -35,7 +35,9 @@
           </p>
         </div>
         <div class="schedule-appointment">
-          <button mat-raised-button>Schedule Appointment</button>
+          <a [routerLink]="doctor.email" mat-raised-button
+            >Schedule Appointment</a
+          >
         </div>
       </div>
       <app-paginator

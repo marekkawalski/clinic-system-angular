@@ -5,7 +5,7 @@ import { map, Observable } from 'rxjs';
 import { User } from '../models/user/User';
 import { environment } from '../../../environments/environment.development';
 import { PageRequestResponseData } from '../../shared/models/PageRequestResponseData';
-import { UserPageRequestParams } from '../models/UserPageRequestParams';
+import { UserPageRequestParams } from '../../shared/models/UserPageRequestParams';
 import { DateHelper } from '../../shared/helpers/dateHelper';
 import { HttpParamsHelper } from '../../shared/helpers/httpParamsHelper';
 

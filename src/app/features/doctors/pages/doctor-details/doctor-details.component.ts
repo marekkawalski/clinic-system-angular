@@ -27,6 +27,7 @@ import { PaginatorComponent } from '../../../../shared/components/paginator/pagi
 import { DoctorInfoComponent } from '../../components/doctor-info/doctor-info.component';
 import { ExaminationsComponent } from '../../components/examinations/examinations.component';
 import { DoctorScheduleComponent } from '../../components/doctor-schedule/doctor-schedule.component';
+import { ScheduleAppointmentComponent } from '../../components/schedule-appointment/schedule-appointment.component';
 
 @Component({
   selector: 'app-doctor-details',
@@ -60,6 +61,7 @@ import { DoctorScheduleComponent } from '../../components/doctor-schedule/doctor
     DoctorInfoComponent,
     ExaminationsComponent,
     DoctorScheduleComponent,
+    ScheduleAppointmentComponent,
   ],
   templateUrl: './doctor-details.component.html',
   styleUrl: './doctor-details.component.scss',

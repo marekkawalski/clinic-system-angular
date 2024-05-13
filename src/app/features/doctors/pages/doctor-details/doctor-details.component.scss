@@ -17,9 +17,9 @@ h3 {
     width: 100%;
     display: grid;
     grid-template-areas:
-            'doctor-image name . .'
-            'doctor-image . . .'
-            'doctor-image tab-group tab-group schedule-appointment';
+            'doctor-image name . . . .'
+            'doctor-image . . schedule-appointment schedule-appointment schedule-appointment'
+            'doctor-image tab-group tab-group schedule-appointment schedule-appointment schedule-appointment';
     gap: 2em;
     background-color: #f5f5f5;
 
@@ -51,18 +51,16 @@ h3 {
       grid-area: tab-group;
     }
 
+
     .name {
       grid-area: name;
     }
 
     .schedule-appointment {
       grid-area: schedule-appointment;
-      align-self: center;
+      width: fit-content;
     }
   }
 
-  .schedule, .examinations {
-    margin-top: 2em;
-  }
 
 }
