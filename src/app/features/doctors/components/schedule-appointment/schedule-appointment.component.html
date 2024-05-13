@@ -32,7 +32,7 @@
       *ngFor="let appointment of availableAppointmentDates"
       class="appointment"
     >
-      <button mat-stroked-button>
+      <button (click)="scheduleAppointment()" mat-stroked-button>
         {{ appointment.date | date: 'HH:mm' }}
       </button>
     </div>

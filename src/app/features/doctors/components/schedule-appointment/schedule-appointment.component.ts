@@ -30,6 +30,10 @@ import { Doctor } from '../../../../core/models/Doctor';
 import { MatNativeDateModule } from '@angular/material/core';
 import { format } from 'date-fns';
 import { AvailableAppointments } from '../../model/AvailableAppointments';
+import { AppointmentService } from '../../../../shared/services/appointment.service';
+import { AppointmentStatus } from '../../../../core/enums/AppointmentStatus';
+import { AppointmentToAddOrUpdate } from '../../../../core/models/appointment/AppointmentToAddOrUpdate';
+import { Appointment } from '../../../../core/models/appointment/Appointment';
 
 @Component({
   selector: 'app-schedule-appointment',
@@ -81,6 +85,7 @@ export class ScheduleAppointmentComponent implements OnInit {
     protected readonly router: Router,
     private readonly toast: SnackbarService,
     private readonly examinationService: ExaminationService,
+    private readonly appointmentService: AppointmentService,
   ) {}
 
   get formControl() {
@@ -106,6 +111,36 @@ export class ScheduleAppointmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDoctorExaminations();
+  }
+
+  scheduleAppointment() {
+    if (
+      !this.doctor?.id ||
+      !this.authService.authDataValue?.id ||
+      !this.formControl.date.value ||
+      !this.formControl.examinationId.value
+    )
+      return;
+    const appointment: AppointmentToAddOrUpdate = {
+      date: this.formControl.date.value,
+      status: AppointmentStatus.BOOKED,
+      doctorId: this.doctor?.id,
+      patientId: this.authService.authDataValue.id,
+      examinationId: this.formControl.examinationId.value,
+    };
+    this.appointmentService
+      .createAppointment(appointment)
+      .subscribe((appointment: Appointment) => {
+        if (!appointment) {
+          this.toast.openFailureSnackBar({
+            message: 'Failed to schedule appointment.',
+          });
+          return;
+        }
+        this.toast.openSuccessSnackBar({
+          message: `Appointment scheduled successfully.`,
+        });
+      });
   }
 
   private getDoctorExaminations() {
