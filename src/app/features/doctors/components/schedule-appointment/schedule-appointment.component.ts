@@ -99,21 +99,14 @@ export class ScheduleAppointmentComponent implements OnInit {
       return;
     }
 
-    const appointmentDate = this.formControl.date.value;
-    if (!appointmentDate) return;
-    const formattedDate = format(appointmentDate, 'yyyy-MM-dd') + 'T23:59';
-
-    this.getAvailableAppointments(
-      this.formControl.examinationId.value,
-      formattedDate,
-    );
+    this.refreshAvailableAppointments();
   }
 
   ngOnInit(): void {
     this.getDoctorExaminations();
   }
 
-  scheduleAppointment() {
+  scheduleAppointment(date: any) {
     if (
       !this.doctor?.id ||
       !this.authService.authDataValue?.id ||
@@ -122,7 +115,7 @@ export class ScheduleAppointmentComponent implements OnInit {
     )
       return;
     const appointment: AppointmentToAddOrUpdate = {
-      date: this.formControl.date.value,
+      date: date,
       status: AppointmentStatus.BOOKED,
       doctorId: this.doctor?.id,
       patientId: this.authService.authDataValue.id,
@@ -140,7 +133,19 @@ export class ScheduleAppointmentComponent implements OnInit {
         this.toast.openSuccessSnackBar({
           message: `Appointment scheduled successfully.`,
         });
+        this.refreshAvailableAppointments();
       });
+  }
+
+  private refreshAvailableAppointments() {
+    const appointmentDate = this.formControl.date.value;
+    if (!appointmentDate) return;
+    const formattedDate = format(appointmentDate, 'yyyy-MM-dd') + 'T23:59';
+
+    this.getAvailableAppointments(
+      this.formControl.examinationId.value,
+      formattedDate,
+    );
   }
 
   private getDoctorExaminations() {

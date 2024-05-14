@@ -41,6 +41,7 @@ export class DoctorScheduleComponent implements OnInit {
   scheduleDataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
 
   tableHelper = new TableHelper();
+  protected readonly Date = Date;
 
   constructor() {}
 

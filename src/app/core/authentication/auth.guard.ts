@@ -1,7 +1,6 @@
 import {
   ActivatedRouteSnapshot,
   CanActivateFn,
-  Router,
   RouterStateSnapshot,
 } from '@angular/router';
 import { inject } from '@angular/core';
@@ -15,7 +14,6 @@ export const authGuard: CanActivateFn = (
   state: RouterStateSnapshot,
 ): boolean => {
   const authenticationService: AuthService = inject(AuthService);
-  const router: Router = inject(Router);
   const toast: SnackbarService = inject(SnackbarService);
   const user: User | null = authenticationService.authDataValue;
   const expectedRoles: UserRole[] = route.data['expectedRoles'];

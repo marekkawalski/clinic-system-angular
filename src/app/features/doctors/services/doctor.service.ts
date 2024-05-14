@@ -42,8 +42,24 @@ export class DoctorService {
             d.doctorDetails.schedule.dailySchedules = new Map<
               string,
               DailySchedule
-            >(entries);
+            >(
+              entries.map(([key, value]) => {
+                const startDate = new Date();
+                const endDate = new Date();
+                const [sh, sm] = value.startTime.split(':');
+                const [eh, em] = value.endTime.split(':');
+
+                startDate.setUTCHours(+sh, +sm, 0, 0);
+                endDate.setUTCHours(+eh, +em, 0, 0);
+
+                value.startTime = startDate.toLocaleTimeString();
+                value.endTime = endDate.toLocaleTimeString();
+
+                return [key, value];
+              }),
+            );
           }
+
           return d;
         }),
       );

@@ -39,11 +39,15 @@ export const requestInterceptor: HttpInterceptorFn = (
           console.error('Unauthorized request:', err);
           authService.logout();
         } else {
-          toastService.openFailureSnackBar({ message: 'An error occurred!' });
+          toastService.openFailureSnackBar({
+            message: `${err?.error?.message ?? err?.message}`,
+          });
           console.error('HTTP error:', err);
         }
       } else {
-        toastService.openFailureSnackBar({ message: 'An error occurred!' });
+        toastService.openFailureSnackBar({
+          message: `${err?.error?.message ?? err?.message}`,
+        });
         console.error('An error occurred:', err);
       }
 
