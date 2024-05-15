@@ -27,6 +27,16 @@ export class AppointmentService {
     );
   }
 
+  updateAppointment(
+    appointment: AppointmentToAddOrUpdate,
+    appointmentId: string,
+  ): Observable<Appointment> {
+    return this.http.put<Appointment>(
+      `${environment.apiUrl}/appointments/${appointmentId}`,
+      appointment,
+    );
+  }
+
   getPagedDoctorAppointments(
     appointmentPageRequestParams: AppointmentPageRequestParams,
     doctorId: string,

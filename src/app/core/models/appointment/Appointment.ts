@@ -1,6 +1,7 @@
 import { AppointmentStatus } from '../../enums/AppointmentStatus';
 import { User } from '../user/User';
 import { Examination } from '../Examination';
+import { Medicine } from './Medicine';
 
 export interface Appointment {
   readonly id: string;
@@ -10,4 +11,5 @@ export interface Appointment {
   doctor: User;
   patient: User;
   examination: Examination;
+  medicines?: Medicine[];
 }

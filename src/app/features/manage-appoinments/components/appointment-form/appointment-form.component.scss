@@ -1,0 +1,17 @@
+@use "styles/components/form/form" as *;
+
+.popup-form {
+  width: 100%;
+}
+
+.whole-page-form {
+  width: 80%;
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}

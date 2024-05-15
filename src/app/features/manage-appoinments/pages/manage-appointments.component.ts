@@ -130,8 +130,8 @@ export class ManageAppointmentsComponent implements OnInit, AfterViewInit {
     const dialogRef: MatDialogRef<AppointmentComponent> = this.dialog.open(
       AppointmentComponent,
       {
-        width: '1400px',
-        height: '800px',
+        width: '700px',
+        height: '700px',
         data: {
           appointment: appointment,
         },

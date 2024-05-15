@@ -1,1 +1,70 @@
-<p>appointment-form works!</p>
+<div class="form-card-wrapper">
+  <div [ngClass]="class">
+    <mat-card class="login-card">
+      <mat-card-title>{{ action }}</mat-card-title>
+      <mat-card-content>
+        <form (ngSubmit)="onSubmit()" [formGroup]="appointmentForm">
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status">
+                <mat-option [value]="AppointmentStatus.BOOKED"
+                  >{{ AppointmentStatus.BOOKED }}
+                </mat-option>
+                <mat-option [value]="AppointmentStatus.CANCELLED"
+                  >{{ AppointmentStatus.CANCELLED }}
+                </mat-option>
+                <mat-option [value]="AppointmentStatus.FINISHED"
+                  >{{ AppointmentStatus.FINISHED }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea formControlName="description" matInput></textarea>
+            </mat-form-field>
+            <div formArrayName="medicines">
+              <div
+                *ngFor="let medicine of getMedicines().controls; let i = index"
+                [formGroupName]="i"
+              >
+                <div>Medicine {{ i + 1 }}</div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input formControlName="name" matInput />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Quantity</mat-label>
+                  <input formControlName="quantity" matInput />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Number Of Days</mat-label>
+                  <input formControlName="numberOfDays" matInput />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Dosage</mat-label>
+                  <input formControlName="dosage" matInput />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <ng-container [ngSwitch]="formType">
+            <ng-container *ngSwitchCase="FormType.WholePageForm">
+              <button mat-raised-button type="submit">Submit</button>
+            </ng-container>
+            <ng-container *ngSwitchCase="FormType.PopupForm">
+              <ng-content></ng-content>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <button mat-raised-button type="submit">Submit</button>
+            </ng-container>
+          </ng-container>
+          <button (click)="addMedicine()" mat-raised-button type="button">
+            <mat-icon>add</mat-icon>
+            Add medicine
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
