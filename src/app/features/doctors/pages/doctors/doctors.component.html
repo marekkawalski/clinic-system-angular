@@ -38,6 +38,12 @@
           <a [routerLink]="doctor.email" mat-raised-button
             >Schedule Appointment</a
           >
+          <a
+            *ngIf="authService.checkAccess([UserRole.REGISTRAR])"
+            [routerLink]="'/manage-appointments/' + doctor.id"
+            mat-raised-button
+            >Manage appointments</a
+          >
         </div>
       </div>
       <app-paginator

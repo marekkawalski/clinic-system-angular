@@ -48,6 +48,10 @@ app-paginator {
     .schedule-appointment {
       grid-area: schedule-appointment;
       align-self: center;
+      display: flex;
+      gap: 1em;
+      flex-direction: column;
+      width: fit-content;
     }
   }
 

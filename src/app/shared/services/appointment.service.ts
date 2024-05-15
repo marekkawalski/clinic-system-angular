@@ -59,4 +59,25 @@ export class AppointmentService {
         }),
       );
   }
+
+  getPagedPatientAppointments(
+    params: AppointmentPageRequestParams,
+    userId: string,
+  ) {
+    return this.http
+      .get<PageRequestResponseData<Appointment>>(
+        `${environment.apiUrl}/appointments/patients/${userId}`,
+        {
+          params: this.httpParamsHelper.setupHttpParams(params),
+        },
+      )
+      .pipe(
+        map(response => {
+          response.content.forEach(appointment => {
+            appointment.date = new Date(appointment.date);
+          });
+          return response;
+        }),
+      );
+  }
 }

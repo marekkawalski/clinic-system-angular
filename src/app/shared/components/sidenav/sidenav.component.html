@@ -50,8 +50,26 @@
         Doctors
       </a>
     </mat-nav-list>
+    <mat-nav-list *ngIf="authService.authDataValue">
+      <a
+        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="PathConstants.MY_APPOINTMENTS_PATH"
+        mat-list-item
+        routerLinkActive="active"
+      >
+        My Appointments
+      </a>
+    </mat-nav-list>
 
-    <mat-nav-list *ngIf="authService.checkAccess([UserRole.ADMIN])">
+    <mat-nav-list
+      *ngIf="
+        authService.checkAccess([
+          UserRole.ADMIN,
+          UserRole.REGISTRAR,
+          UserRole.DOCTOR
+        ])
+      "
+    >
       <a
         [routerLinkActiveOptions]="{ exact: true }"
         [routerLink]="PathConstants.MANAGE_USERS_PATH"

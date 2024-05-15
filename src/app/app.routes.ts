@@ -9,6 +9,7 @@ import { UserRole } from './core/enums/UserRole';
 import { DoctorsComponent } from './features/doctors/pages/doctors/doctors.component';
 import { DoctorDetailsComponent } from './features/doctors/pages/doctor-details/doctor-details.component';
 import { ManageAppointmentsComponent } from './features/manage-appoinments/pages/manage-appointments.component';
+import { MyAppointmentsComponent } from './features/my-appointments/pages/my-appointments.component';
 
 export const routes: Routes = [
   { path: PathConstants.HOME_PATH, component: HomepageComponent },
@@ -20,7 +21,12 @@ export const routes: Routes = [
     component: DoctorDetailsComponent,
   },
 
-  //Admin routes
+  //Secured routes
+  {
+    path: PathConstants.MY_APPOINTMENTS_PATH,
+    component: MyAppointmentsComponent,
+    canActivate: [authGuard],
+  },
   {
     path: PathConstants.MANAGE_USERS_PATH,
     component: ManageUsersPageComponent,
