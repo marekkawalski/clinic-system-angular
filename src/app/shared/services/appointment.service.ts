@@ -3,8 +3,10 @@ import { HttpParamsHelper } from '../helpers/httpParamsHelper';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
 import { AppointmentToAddOrUpdate } from '../../core/models/appointment/AppointmentToAddOrUpdate';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Appointment } from '../../core/models/appointment/Appointment';
+import { PageRequestResponseData } from '../models/PageRequestResponseData';
+import { AppointmentPageRequestParams } from '../models/AppointmentPageRequestParams';
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +25,28 @@ export class AppointmentService {
       `${environment.apiUrl}/appointments`,
       appointment,
     );
+  }
+
+  getPagedDoctorAppointments(
+    appointmentPageRequestParams: AppointmentPageRequestParams,
+    doctorId: string,
+  ): Observable<PageRequestResponseData<Appointment>> {
+    return this.http
+      .get<PageRequestResponseData<Appointment>>(
+        `${environment.apiUrl}/appointments/doctors/${doctorId}`,
+        {
+          params: this.httpParamsHelper.setupHttpParams(
+            appointmentPageRequestParams,
+          ),
+        },
+      )
+      .pipe(
+        map(response => {
+          response.content.forEach(appointment => {
+            appointment.date = new Date(appointment.date);
+          });
+          return response;
+        }),
+      );
   }
 }

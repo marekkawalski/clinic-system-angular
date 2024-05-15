@@ -5,11 +5,11 @@
   mat-table
 >
   <ng-container
-    *ngFor="let column of examinationTableHelper.allColumnNames"
+    *ngFor="let column of examinationTableHelper.baseColumnNames; let i = index"
     matColumnDef="{{ column }}"
   >
     <th *matHeaderCellDef mat-header-cell>
-      {{ column | lastProperty | capitalizeSpaceBetween }}
+      {{ examinationTableHelper.baseColumnTitles[i] }}
     </th>
 
     <td *matCellDef="let element" mat-cell>

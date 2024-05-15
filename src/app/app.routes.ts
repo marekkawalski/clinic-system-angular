@@ -8,6 +8,7 @@ import { authGuard } from './core/authentication/auth.guard';
 import { UserRole } from './core/enums/UserRole';
 import { DoctorsComponent } from './features/doctors/pages/doctors/doctors.component';
 import { DoctorDetailsComponent } from './features/doctors/pages/doctor-details/doctor-details.component';
+import { ManageAppointmentsComponent } from './features/manage-appoinments/pages/manage-appointments.component';
 
 export const routes: Routes = [
   { path: PathConstants.HOME_PATH, component: HomepageComponent },
@@ -25,7 +26,19 @@ export const routes: Routes = [
     component: ManageUsersPageComponent,
     canActivate: [authGuard],
     data: {
-      expectedRoles: <UserRole[]>[UserRole.ADMIN],
+      expectedRoles: <UserRole[]>[
+        UserRole.ADMIN,
+        UserRole.DOCTOR,
+        UserRole.REGISTRAR,
+      ],
+    },
+  },
+  {
+    path: PathConstants.MANAGE_APPOINTMENTS_PATH,
+    component: ManageAppointmentsComponent,
+    canActivate: [authGuard],
+    data: {
+      expectedRoles: <UserRole[]>[UserRole.DOCTOR, UserRole.REGISTRAR],
     },
   },
 

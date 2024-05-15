@@ -100,9 +100,47 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
         }
         this.dataSource = new MatTableDataSource(requestResponseData.content);
         this.pageUserResponseData = requestResponseData;
-        this.tableHelper.setBaseColumnNamesFromRequestData(
+        // { "id": "6604a4a884cfb6230d0ee0d5", "name": "Doctoraaaasd", "surname": "Doctor", "email": "doctor@doctor.com", "role": "ROLE_DOCTOR", "phoneNumber": "123456789", "pesel": "12345678901", "address": { "country": "Poland", "city": "West Samuelland", "street": "Tayna Springs", "postalCode": "62495", "houseNumber": "39", "apartmentNumber": "96" }, "doctorDetails": { "specialization": "Gastroenterologistaaa", "education": "Marblewald College", "description": "Officiis eos quia. Dolore qui saepe fugit est et. Mollitia harum earum corporis totam. Aliquam et esse rerum necessitatibus ex.", "schedule": null }, "isEnabled": true, "createdAt": null, "updatedAt": "2024-05-05T20:05:10.391", "lastLogin": "2024-05-15T12:25:31.192" }
+        this.tableHelper.setSpecifiedBaseColumnNamesFromRequestData(
           this.pageUserResponseData,
-          ['description'],
+          [
+            'id',
+            'name',
+            'surname',
+            'email',
+            'role',
+            'phoneNumber',
+            'pesel',
+            'address.country',
+            'address.city',
+            'address.street',
+            'address.postalCode',
+            'address.houseNumber',
+            'address.apartmentNumber',
+            'isEnabled',
+            'createdAt',
+            'updatedAt',
+            'lastLogin',
+          ],
+          {
+            id: 'Id',
+            name: 'Name',
+            surname: 'Surname',
+            email: 'Email',
+            role: 'Role',
+            phoneNumber: 'Phone Number',
+            pesel: 'Pesel',
+            'address.country': 'Country',
+            'address.city': 'City',
+            'address.street': 'Street',
+            'address.postalCode': 'Postal Code',
+            'address.houseNumber': 'House Number',
+            'address.apartmentNumber': 'Apartment Number',
+            isEnabled: 'Is Enabled',
+            createdAt: 'Created At',
+            updatedAt: 'Updated At',
+            lastLogin: 'Last Login',
+          },
         );
         this.tableHelper.setAllColumnNames(['edit']);
       });

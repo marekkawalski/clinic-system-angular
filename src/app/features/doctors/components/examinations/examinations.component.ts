@@ -97,9 +97,15 @@ export class ExaminationsComponent implements OnInit, AfterViewInit {
           this.examinationDataSource = new MatTableDataSource<Examination>(
             requestResponseData.content,
           );
-          this.examinationTableHelper.setBaseColumnNamesFromRequestData(
+          this.examinationTableHelper.setSpecifiedBaseColumnNamesFromRequestData(
             this.pageExaminationResponseData,
-            ['id'],
+            ['name', 'duration', 'price', 'status'],
+            {
+              name: 'Name',
+              duration: 'Duration',
+              price: 'Price',
+              status: 'Status',
+            },
           );
         },
       );

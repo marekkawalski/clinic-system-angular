@@ -61,6 +61,16 @@
         Manage users
       </a>
     </mat-nav-list>
+    <mat-nav-list *ngIf="authService.checkAccess([UserRole.DOCTOR])">
+      <a
+        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="'manage-appointments/' + authService.authDataValue?.id"
+        mat-list-item
+        routerLinkActive="active"
+      >
+        Manage Appointments
+      </a>
+    </mat-nav-list>
   </mat-drawer>
   <div class="sidenav-content">
     <ng-content></ng-content>

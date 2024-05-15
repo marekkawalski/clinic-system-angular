@@ -1,26 +1,11 @@
 <section>
-  <h2>Manage Users</h2>
-  <div class="actions-section">
-    <button
-      (click)="openAddUserDialog()"
-      color="primary"
-      mat-button
-      mat-raised-button
-    >
-      <mat-icon>add</mat-icon>
-      Add user
-    </button>
-    <mat-checkbox
-      (click)="toggleDisabled()"
-      [checked]="showDisabled"
-      color="primary"
-      >Show disabled users
-    </mat-checkbox>
-  </div>
-
-  <div class="table-wrapper">
+  <h2>Manage appointments</h2>
+  <div
+    *ngIf="pageAppointmentResponseData?.content; else noData"
+    class="table-wrapper"
+  >
     <div class="mat-elevation-z8">
-      <table *ngIf="dataSource" [dataSource]="dataSource" mat-table>
+      <table [dataSource]="dataSource" mat-table>
         <ng-container
           *ngFor="let column of tableHelper.baseColumnNames; let i = index"
           [matColumnDef]="column"
@@ -38,7 +23,7 @@
           <th *matHeaderCellDef mat-header-cell>Edit</th>
           <td *matCellDef="let cell" mat-cell>
             <button
-              (click)="openEditUserDialog(cell)"
+              (click)="openEditAppointmentDialog(cell)"
               aria-label="Icon button with edit icon"
               color="primary"
               mat-icon-button
@@ -57,9 +42,15 @@
     </div>
   </div>
   <app-paginator
-    (load)="getPagedUsers($event)"
-    [data]="pageUserResponseData"
+    (load)="getPagedAppointments($event)"
+    [data]="pageAppointmentResponseData"
     [requestParams]="requestParams"
   >
   </app-paginator>
 </section>
+
+<ng-template #noData>
+  <div class="no-data">
+    <p>No appointments found</p>
+  </div>
+</ng-template>

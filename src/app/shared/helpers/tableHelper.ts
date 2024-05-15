@@ -1,6 +1,16 @@
 import { PageRequestResponseData } from '../models/PageRequestResponseData';
 
 export class TableHelper {
+  private _baseColumnTitles: string[] = [];
+
+  get baseColumnTitles(): string[] {
+    return this._baseColumnTitles;
+  }
+
+  set baseColumnTitles(value: string[]) {
+    this._baseColumnTitles = value;
+  }
+
   private _allColumnNames: string[] = [];
 
   public get allColumnNames(): string[] {
@@ -30,17 +40,6 @@ export class TableHelper {
       );
   }
 
-  setBaseColumnNamesFromRequestData(
-    requestResponseData: PageRequestResponseData<any>,
-    excludeColumns: string[] = [],
-  ): void {
-    this._baseColumnNames = this.getFlatKeys(
-      requestResponseData.content[1],
-      excludeColumns,
-    );
-    this._allColumnNames = this._baseColumnNames;
-  }
-
   setBaseColumnNames(columns: string[]): void {
     this._baseColumnNames = columns;
     this._allColumnNames = columns;
@@ -50,30 +49,53 @@ export class TableHelper {
     this._allColumnNames = [...this._baseColumnNames, ...additionalColumns];
   }
 
-  private getFlatKeys(
-    obj: { [key: string]: any },
-    excludeList: string[] = [],
-  ): string[] {
-    return Object.keys(obj).reduce((acc: string[], key: string) => {
-      // If this key is in the exclude list, skip this key
-      if (excludeList.includes(key)) {
-        return acc;
-      }
+  setSpecifiedBaseColumnNamesFromRequestData(
+    requestResponseData: PageRequestResponseData<any>,
+    includeColumns: string[] = [],
+    keyColumnMapping: { [key: string]: string } = {},
+  ): void {
+    const keysAndTitles = this.getSpecifiedKeys(
+      requestResponseData.content[0],
+      includeColumns,
+      keyColumnMapping,
+    );
+    this._baseColumnNames = keysAndTitles.map(item => item.key);
+    this._baseColumnTitles = keysAndTitles.map(item => item.title);
+    this._allColumnNames = this._baseColumnNames;
+  }
 
-      if (
-        typeof obj[key] === 'object' &&
-        obj[key] !== null &&
-        !(obj[key] instanceof Date) &&
-        !Array.isArray(obj[key])
-      ) {
-        const nestedKeys = this.getFlatKeys(obj[key], excludeList).map(
-          nestedKey => `${key}.${nestedKey}`,
-        );
-        acc = [...acc, ...nestedKeys];
-      } else {
-        acc.push(key);
-      }
-      return acc;
-    }, []);
+  private getSpecifiedKeys(
+    obj: { [key: string]: any },
+    includeList: string[] = [],
+    keyColumnMapping: { [key: string]: string } = {},
+    parentKey: string = '',
+  ): Array<{ key: string; title: string }> {
+    return Object.keys(obj).reduce(
+      (acc: Array<{ key: string; title: string }>, key: string) => {
+        const fullKey = [parentKey, key].filter(Boolean).join('.');
+
+        if (includeList.includes(fullKey)) {
+          const columnName = keyColumnMapping[fullKey] || fullKey;
+          acc.push({ key: fullKey, title: columnName });
+        }
+
+        if (
+          typeof obj[key] === 'object' &&
+          obj[key] !== null &&
+          !(obj[key] instanceof Date) &&
+          !Array.isArray(obj[key])
+        ) {
+          const nestedKeys = this.getSpecifiedKeys(
+            obj[key],
+            includeList,
+            keyColumnMapping,
+            fullKey,
+          );
+          acc = [...acc, ...nestedKeys];
+        }
+        return acc;
+      },
+      [],
+    );
   }
 }

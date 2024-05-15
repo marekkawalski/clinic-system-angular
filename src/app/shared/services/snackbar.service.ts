@@ -26,4 +26,11 @@ export class SnackbarService {
       panelClass: ['red-snackbar'],
     });
   }
+
+  openInfoSnackBar(config: SnackbarConfig) {
+    this.snackBar.open(config.message, config?.action ?? 'OK', {
+      duration: config?.duration ?? 3000,
+      panelClass: ['blue-snackbar'],
+    });
+  }
 }
