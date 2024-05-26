@@ -23,13 +23,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { PageRequestResponseData } from '../../../shared/models/PageRequestResponseData';
 import { TableHelper } from '../../../shared/helpers/tableHelper';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Appointment } from '../../../core/models/appointment/Appointment';
 import { PageRequestParams } from '../../../shared/models/PageRequestParams';
 import { AppointmentService } from '../../../shared/services/appointment.service';
 import { AppointmentPageRequestParams } from '../../../shared/models/AppointmentPageRequestParams';
 import { ActivatedRoute } from '@angular/router';
-import { AppointmentComponent } from '../components/appointment/appointment.component';
+import { DialogService } from '../../../shared/components/dialog/dialog.service';
+import { AppointmentFormComponent } from '../components/appointment-form/appointment-form.component';
 
 @Component({
   selector: 'app-manage-appointments',
@@ -72,6 +73,7 @@ export class ManageAppointmentsComponent implements OnInit, AfterViewInit {
     private readonly dialog: MatDialog,
     private readonly appointmentService: AppointmentService,
     private readonly route: ActivatedRoute,
+    private dialogService: DialogService,
   ) {}
 
   ngOnInit(): void {
@@ -127,20 +129,20 @@ export class ManageAppointmentsComponent implements OnInit, AfterViewInit {
   }
 
   openEditAppointmentDialog(appointment: Appointment) {
-    const dialogRef: MatDialogRef<AppointmentComponent> = this.dialog.open(
-      AppointmentComponent,
-      {
-        width: '700px',
-        height: '700px',
-        data: {
-          appointment: appointment,
+    this.dialogService
+      .openDialog(
+        AppointmentFormComponent,
+        { appointment },
+        {
+          title: 'Edit Appointment',
+          width: '700px',
+          height: '700px',
         },
-      },
-    );
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.getPagedAppointments(this.requestParams);
-      }
-    });
+      )
+      .subscribe(result => {
+        if (result) {
+          this.getPagedAppointments(this.requestParams);
+        }
+      });
   }
 }

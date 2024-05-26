@@ -28,6 +28,7 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { Medicine } from '../../../../core/models/appointment/Medicine';
+import { DialogComponentInterface } from '../../../../shared/components/dialog/DialogComponentInterface';
 
 @Component({
   selector: 'app-appointment-form',
@@ -54,7 +55,9 @@ import { Medicine } from '../../../../core/models/appointment/Medicine';
   templateUrl: './appointment-form.component.html',
   styleUrl: './appointment-form.component.scss',
 })
-export class AppointmentFormComponent implements OnInit {
+export class AppointmentFormComponent
+  implements OnInit, DialogComponentInterface
+{
   @Input() appointment?: Appointment;
   @Input() dialogRef?: MatDialogRef<any>;
   @Input() action?: string;
