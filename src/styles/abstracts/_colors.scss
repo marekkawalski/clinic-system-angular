@@ -1,5 +1,8 @@
-$primary: #aa00ff;
-$primary-light: #e1bee7;
+@use '@angular/material' as mat;
+@import "theme";
+
+$primary: mat.get-theme-color($my-theme, primary, 50);
+$primary-light: mat.get-theme-color($my-theme, primary, 80);
 
 $my-white: white;
 $my-black: black;

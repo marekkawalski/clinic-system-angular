@@ -1,11 +1,11 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <div>
     <button
       (click)="drawer.toggle()"
       aria-label="Example icon-button with menu icon"
       class="example-icon"
       mat-icon-button
-      >
+    >
       <mat-icon>menu</mat-icon>
     </button>
     <a [routerLink]="PathConstants.HOME_PATH">Clinic System</a>
@@ -27,7 +27,6 @@
     </div>
   }
 </mat-toolbar>
-
 
 <mat-drawer-container autosize class="container">
   <mat-drawer #drawer class="sidenav" mode="side">

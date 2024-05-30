@@ -13,10 +13,9 @@
 
                 <mat-error>
                   @if (
-                    formControl.basicData.controls.name?.invalid && submitted
-                    ) {
-                    <span
-                      >
+                    formControl.basicData.controls.name.invalid && submitted
+                  ) {
+                    <span>
                       {{ getErrorMessage('basicData', 'name') }}
                     </span>
                   }
@@ -28,11 +27,9 @@
                 <input formControlName="surname" matInput />
                 <mat-error>
                   @if (
-                    formControl.basicData.controls.surname?.invalid &&
-                    submitted
-                    ) {
-                    <span
-                      >
+                    formControl.basicData.controls.surname.invalid && submitted
+                  ) {
+                    <span>
                       {{ getErrorMessage('basicData', 'surname') }}
                     </span>
                   }
@@ -44,10 +41,9 @@
                 <input formControlName="email" matInput />
                 <mat-error>
                   @if (
-                    formControl.basicData.controls.email?.invalid && submitted
-                    ) {
-                    <span
-                      >
+                    formControl.basicData.controls.email.invalid && submitted
+                  ) {
+                    <span>
                       {{ getErrorMessage('basicData', 'email') }}
                     </span>
                   }
@@ -59,11 +55,10 @@
                 <input formControlName="phoneNumber" matInput />
                 <mat-error>
                   @if (
-                    formControl.basicData.controls.phoneNumber?.invalid &&
+                    formControl.basicData.controls.phoneNumber.invalid &&
                     submitted
-                    ) {
-                    <span
-                      >
+                  ) {
+                    <span>
                       {{ getErrorMessage('basicData', 'phoneNumber') }}
                     </span>
                   }
@@ -75,10 +70,9 @@
                 <input formControlName="pesel" matInput />
                 <mat-error>
                   @if (
-                    formControl.basicData.controls.pesel?.invalid && submitted
-                    ) {
-                    <span
-                      >
+                    formControl.basicData.controls.pesel.invalid && submitted
+                  ) {
+                    <span>
                       {{ getErrorMessage('basicData', 'pesel') }}
                     </span>
                   }
@@ -90,11 +84,9 @@
                 <input formControlName="password" matInput type="password" />
                 <mat-error>
                   @if (
-                    formControl.basicData.controls.password?.invalid &&
-                    submitted
-                    ) {
-                    <span
-                      >
+                    formControl.basicData.controls.password.invalid && submitted
+                  ) {
+                    <span>
                       {{ getPasswordErrorMessage() }}
                     </span>
                   }
@@ -107,14 +99,13 @@
                   formControlName="confirmPassword"
                   matInput
                   type="password"
-                  />
+                />
                 <mat-error>
                   @if (
-                    formControl.basicData.controls.confirmPassword?.invalid &&
+                    formControl.basicData.controls.confirmPassword.invalid &&
                     submitted
-                    ) {
-                    <span
-                      >
+                  ) {
+                    <span>
                       {{ getErrorMessage('basicData', 'confirmPassword') }}
                     </span>
                   }
@@ -129,10 +120,9 @@
                 <input formControlName="country" matInput />
                 <mat-error>
                   @if (
-                    formControl.address.controls.country?.invalid && submitted
-                    ) {
-                    <span
-                      >
+                    formControl.address.controls.country.invalid && submitted
+                  ) {
+                    <span>
                       {{ getErrorMessage('address', 'country') }}
                     </span>
                   }
@@ -143,11 +133,8 @@
                 <mat-label>City</mat-label>
                 <input formControlName="city" matInput />
                 <mat-error>
-                  @if (
-                    formControl.address.controls.city?.invalid && submitted
-                    ) {
-                    <span
-                      >
+                  @if (formControl.address.controls.city.invalid && submitted) {
+                    <span>
                       {{ getErrorMessage('address', 'city') }}
                     </span>
                   }
@@ -159,10 +146,9 @@
                 <input formControlName="street" matInput />
                 <mat-error>
                   @if (
-                    formControl.address.controls.street?.invalid && submitted
-                    ) {
-                    <span
-                      >
+                    formControl.address.controls.street.invalid && submitted
+                  ) {
+                    <span>
                       {{ getErrorMessage('address', 'street') }}
                     </span>
                   }
@@ -174,11 +160,9 @@
                 <input formControlName="postalCode" matInput />
                 <mat-error>
                   @if (
-                    formControl.address.controls.postalCode?.invalid &&
-                    submitted
-                    ) {
-                    <span
-                      >
+                    formControl.address.controls.postalCode.invalid && submitted
+                  ) {
+                    <span>
                       {{ getErrorMessage('address', 'postalCode') }}
                     </span>
                   }
@@ -190,11 +174,10 @@
                 <input formControlName="houseNumber" matInput />
                 <mat-error>
                   @if (
-                    formControl.address.controls.houseNumber?.invalid &&
+                    formControl.address.controls.houseNumber.invalid &&
                     submitted
-                    ) {
-                    <span
-                      >
+                  ) {
+                    <span>
                       {{ getErrorMessage('address', 'houseNumber') }}
                     </span>
                   }
@@ -234,10 +217,8 @@
                 @if (
                   formControl.adminManagedData.controls.role.value ===
                   UserRole.DOCTOR
-                  ) {
-                  <ng-container
-                    formGroupName="doctorDetails"
-                    >
+                ) {
+                  <ng-container formGroupName="doctorDetails">
                     <mat-form-field appearance="outline">
                       <mat-label>Specialization</mat-label>
                       <input formControlName="specialization" matInput />

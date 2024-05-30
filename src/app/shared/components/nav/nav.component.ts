@@ -32,8 +32,8 @@ interface NavItem {
     MatToolbar,
     MatIcon,
     AsyncPipe,
-    NavItemComponent
-],
+    NavItemComponent,
+  ],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss',
 })
