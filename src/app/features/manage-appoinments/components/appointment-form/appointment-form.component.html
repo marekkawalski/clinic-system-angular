@@ -24,41 +24,42 @@
               <textarea formControlName="description" matInput></textarea>
             </mat-form-field>
             <div formArrayName="medicines">
-              <div
-                *ngFor="let medicine of getMedicines().controls; let i = index"
-                [formGroupName]="i"
-              >
-                <div>Medicine {{ i + 1 }}</div>
-                <mat-form-field appearance="outline">
-                  <mat-label>Name</mat-label>
-                  <input formControlName="name" matInput />
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                  <mat-label>Quantity</mat-label>
-                  <input formControlName="quantity" matInput />
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                  <mat-label>Number Of Days</mat-label>
-                  <input formControlName="numberOfDays" matInput />
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                  <mat-label>Dosage</mat-label>
-                  <input formControlName="dosage" matInput />
-                </mat-form-field>
-              </div>
+              @for (medicine of getMedicines().controls; track medicine; let i = $index) {
+                <div
+                  [formGroupName]="i"
+                  >
+                  <div>Medicine {{ i + 1 }}</div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input formControlName="name" matInput />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Quantity</mat-label>
+                    <input formControlName="quantity" matInput />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Number Of Days</mat-label>
+                    <input formControlName="numberOfDays" matInput />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Dosage</mat-label>
+                    <input formControlName="dosage" matInput />
+                  </mat-form-field>
+                </div>
+              }
             </div>
           </div>
-          <ng-container [ngSwitch]="formType">
-            <ng-container *ngSwitchCase="FormType.WholePageForm">
+          @switch (formType) {
+            @case (FormType.WholePageForm) {
               <button mat-raised-button type="submit">Submit</button>
-            </ng-container>
-            <ng-container *ngSwitchCase="FormType.PopupForm">
+            }
+            @case (FormType.PopupForm) {
               <ng-content></ng-content>
-            </ng-container>
-            <ng-container *ngSwitchDefault>
+            }
+            @default {
               <button mat-raised-button type="submit">Submit</button>
-            </ng-container>
-          </ng-container>
+            }
+          }
           <button (click)="addMedicine()" mat-raised-button type="button">
             <mat-icon>add</mat-icon>
             Add medicine

@@ -5,17 +5,15 @@
   width: 100%;
   gap: 1em;
 
-  h3 {
-    font-weight: bold;
-  }
 
   padding-top: 2em;
 
   .form {
     display: flex;
+    width: 80%;
     flex-direction: column;
     gap: 1em;
-    width: fit-content;
+    justify-content: center;
   }
 
   .appointments {
@@ -23,7 +21,7 @@
     gap: 0.5em;
     height: 30vh;
     overflow-x: auto;
-    width: 300px;
+    width: 100%;
     grid-template-columns: repeat(3, 1fr);
 
     .appointment {

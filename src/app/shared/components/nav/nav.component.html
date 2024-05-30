@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <div>
     <button
       (click)="drawer.toggle()"
@@ -11,34 +11,34 @@
     <a [routerLink]="PathConstants.HOME_PATH">Clinic System</a>
   </div>
 
-  <div *ngIf="authService.authData | async as authData; else noAuthData">
-    <div class="name-container">
-      Hello, {{ authData.name }} {{ authData.surname }}
+  @if (authService.authData | async; as authData) {
+    <div>
+      <div class="name-container">
+        Hello, {{ authData.name }} {{ authData.surname }}
+      </div>
+      <button (click)="logout()" mat-raised-button>Logout</button>
     </div>
-    <button (click)="logout()" mat-raised-button>Logout</button>
-  </div>
+  } @else {
+    <div>
+      <div class="name-container">Hello,Guest</div>
+      <button [routerLink]="PathConstants.LOGIN_PATH" mat-raised-button>
+        Login
+      </button>
+    </div>
+  }
 </mat-toolbar>
-
-<ng-template #noAuthData>
-  <div>
-    <div class="name-container">Hello,Guest</div>
-    <button [routerLink]="PathConstants.LOGIN_PATH" mat-raised-button>
-      Login
-    </button>
-  </div>
-</ng-template>
 
 <mat-drawer-container autosize class="container">
   <mat-drawer #drawer class="sidenav" mode="side">
     <mat-nav-list>
-      <ng-container *ngFor="let navItem of navItems">
+      @for (navItem of navItems; track navItem) {
         <app-nav-item
           [allowedRoles]="navItem.allowedRoles"
           [listItemPath]="navItem.listItemPath"
           [listItemText]="navItem.listItemText"
           [requireLogin]="navItem.requireLogin"
         ></app-nav-item>
-      </ng-container>
+      }
     </mat-nav-list>
   </mat-drawer>
   <div class="sidenav-content">

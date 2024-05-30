@@ -1,46 +1,54 @@
-<div *ngIf="authService.authDataValue; else login" class="appointment-wrapper">
-  <h3>Schedule an appointment</h3>
-  <form
-    (ngSubmit)="onSubmit()"
-    [formGroup]="scheduleAppointmentForm"
-    class="form"
-  >
-    <mat-form-field>
-      <mat-label>Appointment date</mat-label>
-      <input [matDatepicker]="picker" formControlName="date" matInput />
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Examination</mat-label>
-      <mat-select formControlName="examinationId">
-        <mat-option
-          *ngFor="let examination of doctorExaminations"
-          [value]="examination.id"
-          >{{ examination.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button color="primary" mat-raised-button type="submit">Find</button>
-  </form>
-  <h3 *ngIf="availableAppointmentDates && availableAppointmentDates.length > 0">
-    Available appointments
-  </h3>
-  <div class="appointments">
-    <div
-      *ngFor="let appointment of availableAppointmentDates"
-      class="appointment"
-    >
-      <button
-        (click)="scheduleAppointment(appointment.date)"
-        mat-stroked-button
+@if (authService.authDataValue) {
+  <div class="appointment-wrapper">
+    <h3>Schedule an appointment</h3>
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="scheduleAppointmentForm"
+      class="form"
       >
-        {{ appointment.date | date: 'HH:mm' }}
-      </button>
+      <mat-form-field>
+        <mat-label>Appointment date</mat-label>
+        <input [matDatepicker]="picker" formControlName="date" matInput />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Examination</mat-label>
+        <mat-select formControlName="examinationId">
+          @for (examination of doctorExaminations; track examination) {
+            <mat-option
+              [value]="examination.id"
+              >{{ examination.name }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <button color="primary" mat-raised-button type="submit">Find</button>
+    </form>
+    @if (availableAppointmentDates && availableAppointmentDates.length > 0) {
+      <h3>
+        Available appointments
+      </h3>
+    }
+    <div class="appointments">
+      @for (appointment of availableAppointmentDates; track appointment) {
+        <div
+          class="appointment"
+          >
+          <button
+            (click)="scheduleAppointment(appointment.date)"
+            mat-stroked-button
+            >
+            {{ appointment.date | date: 'HH:mm' }}
+          </button>
+        </div>
+      }
     </div>
   </div>
-</div>
+} @else {
+  <p>You need to login to schedule an appointment</p>
+}
 
 <ng-template #login>
   <p>You need to login to schedule an appointment</p>

@@ -14,14 +14,7 @@ import { Appointment } from '../../../../core/models/appointment/Appointment';
 import { AppointmentStatus } from '../../../../core/enums/AppointmentStatus';
 import { AppointmentToAddOrUpdate } from '../../../../core/models/appointment/AppointmentToAddOrUpdate';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
-import {
-  NgClass,
-  NgForOf,
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
-  NgSwitchDefault,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
@@ -41,17 +34,12 @@ import { DialogComponentInterface } from '../../../../shared/components/dialog/D
     ReactiveFormsModule,
     MatFormField,
     MatInput,
-    NgIf,
     MatSelect,
     MatOption,
     MatLabel,
-    NgForOf,
     MatButton,
-    NgSwitchCase,
-    NgSwitch,
-    NgSwitchDefault,
-    MatIcon,
-  ],
+    MatIcon
+],
   templateUrl: './appointment-form.component.html',
   styleUrl: './appointment-form.component.scss',
 })

@@ -1,20 +1,21 @@
-<table
-  *ngIf="scheduleDataSource"
-  [dataSource]="scheduleDataSource"
-  class="mat-elevation-z8 schedule"
-  mat-table
->
-  <ng-container
-    *ngFor="let column of tableHelper.allColumnNames"
-    matColumnDef="{{ column }}"
-  >
-    <th *matHeaderCellDef mat-header-cell>{{ column }}</th>
-    <td *matCellDef="let element" mat-cell>
-      {{ element.get(column)?.startTime }} -
-      {{ element.get(column)?.endTime }}
-    </td>
-  </ng-container>
-
-  <tr *matHeaderRowDef="tableHelper.allColumnNames" mat-header-row></tr>
-  <tr *matRowDef="let row; columns: tableHelper.allColumnNames" mat-row></tr>
-</table>
+@if (scheduleDataSource) {
+  <table
+    [dataSource]="scheduleDataSource"
+    class="mat-elevation-z8 schedule"
+    mat-table
+    >
+    @for (column of tableHelper.allColumnNames; track column) {
+      <ng-container
+        matColumnDef="{{ column }}"
+        >
+        <th *matHeaderCellDef mat-header-cell>{{ column }}</th>
+        <td *matCellDef="let element" mat-cell>
+          {{ element.get(column)?.startTime }} -
+          {{ element.get(column)?.endTime }}
+        </td>
+      </ng-container>
+    }
+    <tr *matHeaderRowDef="tableHelper.allColumnNames" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: tableHelper.allColumnNames" mat-row></tr>
+  </table>
+}

@@ -16,7 +16,7 @@ import {
   MatTable,
   MatTableDataSource,
 } from '@angular/material/table';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { PaginatorComponent } from '../../../shared/components/paginator/paginator.component';
 import { MatIcon } from '@angular/material/icon';
 import { MatPaginator } from '@angular/material/paginator';
@@ -41,10 +41,8 @@ import { AppointmentFormComponent } from '../components/appointment-form/appoint
     LastPropertyPipe,
     MatButton,
     MatCell,
-    NgIf,
     MatTable,
     MatColumnDef,
-    NgForOf,
     MatHeaderCellDef,
     MatHeaderCell,
     MatCellDef,
@@ -54,8 +52,8 @@ import { AppointmentFormComponent } from '../components/appointment-form/appoint
     MatRow,
     MatHeaderRowDef,
     MatHeaderRow,
-    MatIcon,
-  ],
+    MatIcon
+],
   templateUrl: './manage-appointments.component.html',
   styleUrl: './manage-appointments.component.scss',
 })

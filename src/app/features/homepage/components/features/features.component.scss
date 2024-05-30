@@ -3,26 +3,23 @@
 .features-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 4em;
+  gap: 3em;
 }
 
 h3 {
   font-size: 2rem;
   font-weight: 200;
-  padding-top: 30px;
+  padding-top: 1em;
   word-spacing: 7px;
   text-align: left;
   line-height: normal;
   min-height: 3em;
-
 }
 
 .feature {
   p {
     width: fit-content;
-    padding-top: 2em;
-    font-size: 1.2em;
-    line-height: 1.5em;
+    padding-top: 1em;
   }
 }
 

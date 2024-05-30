@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { NgIf } from '@angular/common';
+
 import { PageRequestParams } from '../../models/PageRequestParams';
 
 @Component({
   selector: 'app-paginator',
   standalone: true,
-  imports: [MatPaginator, NgIf],
+  imports: [MatPaginator],
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss',
 })

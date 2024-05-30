@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatListItem, MatNavList } from '@angular/material/list';
 import { MatToolbar } from '@angular/material/toolbar';
@@ -32,9 +32,7 @@ interface NavItem {
     MatToolbar,
     MatIcon,
     AsyncPipe,
-    NgIf,
     NavItemComponent,
-    NgForOf,
   ],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss',

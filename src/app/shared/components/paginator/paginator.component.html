@@ -1,13 +1,14 @@
-<mat-paginator
-  (page)="onPageChange($event)"
-  *ngIf="data"
-  [length]="data.totalElements"
-  [pageIndex]="data.number"
-  [pageSizeOptions]="pageSizeOptions"
-  [pageSize]="data.size"
-  aria-label="Select page"
-  class="mat-paginator-sticky"
-  color="primary"
-  showFirstLastButtons
->
-</mat-paginator>
+@if (data) {
+  <mat-paginator
+    (page)="onPageChange($event)"
+    [length]="data.totalElements"
+    [pageIndex]="data.number"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageSize]="data.size"
+    aria-label="Select page"
+    class="mat-paginator-sticky"
+    color="primary"
+    showFirstLastButtons
+    >
+  </mat-paginator>
+}

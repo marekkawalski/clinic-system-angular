@@ -6,7 +6,7 @@
       color="primary"
       mat-button
       mat-raised-button
-    >
+      >
       <mat-icon>add</mat-icon>
       Add user
     </button>
@@ -20,46 +20,46 @@
 
   <div class="table-wrapper">
     <div class="mat-elevation-z8">
-      <table *ngIf="dataSource" [dataSource]="dataSource" mat-table>
-        <ng-container
-          *ngFor="let column of tableHelper.baseColumnNames; let i = index"
-          [matColumnDef]="column"
-        >
-          <th *matHeaderCellDef mat-header-cell>
-            {{ tableHelper.baseColumnTitles[i] }}
-          </th>
-
-          <td *matCellDef="let element" mat-cell>
-            {{ tableHelper.nestedPropertyAccessor(element, column) | date }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="edit">
-          <th *matHeaderCellDef mat-header-cell>Edit</th>
-          <td *matCellDef="let cell" mat-cell>
-            <button
-              (click)="openEditUserDialog(cell)"
-              aria-label="Icon button with edit icon"
-              color="primary"
-              mat-icon-button
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr *matHeaderRowDef="tableHelper.allColumnNames" mat-header-row></tr>
-        <tr
-          *matRowDef="let row; columns: tableHelper.allColumnNames"
-          mat-row
-        ></tr>
-      </table>
+      @if (dataSource) {
+        <table [dataSource]="dataSource" mat-table>
+          @for (column of tableHelper.baseColumnNames; track column; let i = $index) {
+            <ng-container
+              [matColumnDef]="column"
+              >
+              <th *matHeaderCellDef mat-header-cell>
+                {{ tableHelper.baseColumnTitles[i] }}
+              </th>
+              <td *matCellDef="let element" mat-cell>
+                {{ tableHelper.nestedPropertyAccessor(element, column) | date }}
+              </td>
+            </ng-container>
+          }
+          <ng-container matColumnDef="edit">
+            <th *matHeaderCellDef mat-header-cell>Edit</th>
+            <td *matCellDef="let cell" mat-cell>
+              <button
+                (click)="openEditUserDialog(cell)"
+                aria-label="Icon button with edit icon"
+                color="primary"
+                mat-icon-button
+                >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr *matHeaderRowDef="tableHelper.allColumnNames" mat-header-row></tr>
+          <tr
+            *matRowDef="let row; columns: tableHelper.allColumnNames"
+            mat-row
+          ></tr>
+        </table>
+      }
     </div>
   </div>
   <app-paginator
     (load)="getPagedUsers($event)"
     [data]="pageUserResponseData"
     [requestParams]="requestParams"
-  >
+    >
   </app-paginator>
 </section>

@@ -14,7 +14,7 @@ import {
   MatTableDataSource,
 } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { PageRequestResponseData } from '../../../../shared/models/PageRequestResponseData';
 import { User } from '../../../../core/models/user/User';
 import { CapitalizeSpaceBetweenPipe } from '../../../../shared/pipes/capitalize-space-between.pipe';
@@ -46,8 +46,6 @@ import { MatCheckbox } from '@angular/material/checkbox';
     MatHeaderRow,
     MatCell,
     MatRow,
-    NgForOf,
-    NgIf,
     CapitalizeSpaceBetweenPipe,
     LastPropertyPipe,
     PaginatorComponent,
@@ -55,8 +53,8 @@ import { MatCheckbox } from '@angular/material/checkbox';
     MatIcon,
     MatIconButton,
     MatButton,
-    MatCheckbox,
-  ],
+    MatCheckbox
+],
   templateUrl: './manage-users-page.component.html',
   styleUrl: './manage-users-page.component.scss',
 })

@@ -1,4 +1,6 @@
 @use "styles/abstracts/colors" as *;
+@use '@angular/material' as mat;
+@use "theme";
 
 .form-card-wrapper {
   width: 100%;
@@ -17,13 +19,13 @@ mat-card {
   text-align: center;
   opacity: 0.93;
   padding: 20px;
-  min-height: 700px;
+  min-height: 600px;
 }
 
 mat-card-title {
-  font-size: 250%;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  font-size: 1.8rem;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 mat-form-field {
@@ -69,9 +71,9 @@ $border-rounded: 6px;
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
     background-image: linear-gradient(
                     to right,
-                    #673ab7 0%,
-                    #7c4dff 50%,
-                    #673ab7 100%
+                    mat.get-theme-color($my-theme, primary, 50) 0%,
+                    mat.get-theme-color($my-theme, primary, 60) 50%,
+                    mat.get-theme-color($my-theme, primary, 70) 100%
     );
     transition: 0.5s;
 

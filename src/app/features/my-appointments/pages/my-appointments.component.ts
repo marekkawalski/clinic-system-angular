@@ -13,7 +13,7 @@ import {
   MatTable,
   MatTableDataSource,
 } from '@angular/material/table';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { PaginatorComponent } from '../../../shared/components/paginator/paginator.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { Appointment } from '../../../core/models/appointment/Appointment';
@@ -40,17 +40,15 @@ import { AppointmentStatus } from '../../../core/enums/AppointmentStatus';
     MatColumnDef,
     MatHeaderCell,
     MatHeaderRow,
-    NgIf,
     MatTable,
-    NgForOf,
     MatHeaderCellDef,
     MatHeaderRowDef,
     MatRowDef,
     PaginatorComponent,
     MatRow,
     MatIcon,
-    MatIconButton,
-  ],
+    MatIconButton
+],
   templateUrl: './my-appointments.component.html',
   styleUrl: './my-appointments.component.scss',
 })

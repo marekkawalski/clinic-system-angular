@@ -1,6 +1,15 @@
+@use '@angular/material' as mat;
 @import "abstracts/colors";
+@import "theme";
 
 /* You can add global styles to this file, and also import other style files */
+
+@include mat.core();
+
+
+html {
+  @include mat.all-component-themes($my-theme);
+}
 
 * {
   margin: 0;
@@ -8,8 +17,7 @@
 }
 
 html {
-  font-weight: 300;
-  font-size: 20px;
+  font-size: 18px;
   text-rendering: optimizeLegibility;
 }
 
@@ -118,7 +126,7 @@ a {
 
 h2 {
   text-transform: capitalize;
-  font-size: 2rem !important;
+  font-size: 2.5rem !important;
   letter-spacing: normal;
   text-align: center;
   padding: 1em;
@@ -131,4 +139,12 @@ h2 {
 .mat-mdc-dialog-content {
   padding: 0 !important;
   margin: 0 !important;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
 }

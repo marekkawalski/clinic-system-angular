@@ -1,0 +1,14 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$my-theme: mat.define-theme((
+        color: (
+                theme-type: light,
+                primary: mat.$azure-palette,
+        ),
+        typography: (
+                brand-family: 'Roboto',
+                bold-weight: 900,
+        ),
+));

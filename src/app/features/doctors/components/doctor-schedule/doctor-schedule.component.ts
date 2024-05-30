@@ -12,7 +12,7 @@ import {
   MatTable,
   MatTableDataSource,
 } from '@angular/material/table';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { Doctor } from '../../../../core/models/Doctor';
 import { TableHelper } from '../../../../shared/helpers/tableHelper';
 
@@ -21,7 +21,6 @@ import { TableHelper } from '../../../../shared/helpers/tableHelper';
   standalone: true,
   imports: [
     MatCell,
-    NgForOf,
     MatColumnDef,
     MatHeaderCell,
     MatHeaderRowDef,
@@ -29,10 +28,9 @@ import { TableHelper } from '../../../../shared/helpers/tableHelper';
     MatRowDef,
     MatRow,
     MatTable,
-    NgIf,
     MatHeaderCellDef,
-    MatCellDef,
-  ],
+    MatCellDef
+],
   templateUrl: './doctor-schedule.component.html',
   styleUrl: './doctor-schedule.component.scss',
 })

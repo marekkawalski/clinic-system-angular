@@ -4,12 +4,12 @@ import { MatListItem, MatNavList } from '@angular/material/list';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../../core/authentication/auth.service';
 import { UserRole } from '../../../../core/enums/UserRole';
-import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-nav-item',
   standalone: true,
-  imports: [MatNavList, RouterLinkActive, RouterLink, MatListItem, NgIf],
+  imports: [MatNavList, RouterLinkActive, RouterLink, MatListItem],
   templateUrl: './nav-item.component.html',
   styleUrl: './nav-item.component.scss',
 })

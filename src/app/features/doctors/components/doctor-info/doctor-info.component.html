@@ -1,64 +1,72 @@
-<div *ngIf="doctor" class="doctor-info">
-  <div class="basic-info">
-    <p *ngIf="doctor.doctorDetails?.specialization">
-      <span class="header">
-        <span class="material-symbols-outlined"> stethoscope_check </span>
-        <strong>Specialization:</strong>
-      </span>
-      <span>
-        {{ doctor.doctorDetails?.specialization }}
-      </span>
-    </p>
-    <p *ngIf="doctor.doctorDetails?.education">
-      <span class="header">
-        <mat-icon>school</mat-icon>
-        <strong>Education:</strong>
-      </span>
-      <span> {{ doctor.doctorDetails?.education }} </span>
-    </p>
-    <p>
-      <span class="header">
-        <mat-icon>language</mat-icon>
-        <strong>Languages:</strong>
-      </span>
-      English, Spanish
-    </p>
-    <p>
-      <span class="header">
-        <span class="material-symbols-outlined"> history_edu </span>
-        <strong>Experience:</strong>
-      </span>
-      10 years of experience
-    </p>
+@if (doctor) {
+  <div class="doctor-info">
+    <div class="basic-info">
+      @if (doctor.doctorDetails?.specialization) {
+        <p>
+          <span class="header">
+            <span class="material-symbols-outlined"> stethoscope_check </span>
+            <strong>Specialization:</strong>
+          </span>
+          <span>
+            {{ doctor.doctorDetails?.specialization }}
+          </span>
+        </p>
+      }
+      @if (doctor.doctorDetails?.education) {
+        <p>
+          <span class="header">
+            <mat-icon>school</mat-icon>
+            <strong>Education:</strong>
+          </span>
+          <span> {{ doctor.doctorDetails?.education }} </span>
+        </p>
+      }
+      <p>
+        <span class="header">
+          <mat-icon>language</mat-icon>
+          <strong>Languages:</strong>
+        </span>
+        English, Spanish
+      </p>
+      <p>
+        <span class="header">
+          <span class="material-symbols-outlined"> history_edu </span>
+          <strong>Experience:</strong>
+        </span>
+        10 years of experience
+      </p>
+    </div>
+    <div class="contact-info">
+      <p>
+        <span class="header">
+          <mat-icon>place</mat-icon>
+          <strong>Location:</strong>
+        </span>
+        <span> Wijttenbachstraat 36, 1093 JC Amsterdam </span>
+      </p>
+      <p>
+        <span class="header">
+          <mat-icon>email</mat-icon>
+          <strong>Email:</strong>
+        </span>
+        {{ doctor.email }}
+      </p>
+      <p>
+        <span class="header">
+          <mat-icon>phone</mat-icon>
+          <strong>Phone:</strong>
+        </span>
+        {{ doctor.phoneNumber }}
+      </p>
+    </div>
+    @if (doctor.doctorDetails?.description) {
+      <p class="description">
+        <span class="header">
+          <mat-icon>description</mat-icon>
+          <strong>About me:</strong>
+        </span>
+        {{ doctor.doctorDetails?.description }}
+      </p>
+    }
   </div>
-  <div class="contact-info">
-    <p>
-      <span class="header">
-        <mat-icon>place</mat-icon>
-        <strong>Location:</strong>
-      </span>
-      <span> Wijttenbachstraat 36, 1093 JC Amsterdam </span>
-    </p>
-    <p>
-      <span class="header">
-        <mat-icon>email</mat-icon>
-        <strong>Email:</strong>
-      </span>
-      {{ doctor.email }}
-    </p>
-    <p>
-      <span class="header">
-        <mat-icon>phone</mat-icon>
-        <strong>Phone:</strong>
-      </span>
-      {{ doctor.phoneNumber }}
-    </p>
-  </div>
-  <p *ngIf="doctor.doctorDetails?.description" class="description">
-    <span class="header">
-      <mat-icon>description</mat-icon>
-      <strong>About me:</strong>
-    </span>
-    {{ doctor.doctorDetails?.description }}
-  </p>
-</div>
+}

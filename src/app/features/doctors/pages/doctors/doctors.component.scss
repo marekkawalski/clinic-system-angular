@@ -1,5 +1,5 @@
 h3 {
-  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 app-paginator {
@@ -17,7 +17,7 @@ app-paginator {
 
   .doctor {
     padding: 2em;
-    width: 70%;
+    width: 80%;
     display: grid;
     grid-template-areas: 'doctor-image doctor-info doctor-info doctor-info schedule-appointment';
     gap: 2em;

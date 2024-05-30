@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { AsyncPipe, JsonPipe, NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Doctor } from '../../../../core/models/Doctor';
@@ -35,8 +35,6 @@ import { ScheduleAppointmentComponent } from '../../components/schedule-appointm
   imports: [
     MatButton,
     MatIcon,
-    NgForOf,
-    NgIf,
     RouterLink,
     AsyncPipe,
     FooterComponent,
@@ -61,8 +59,8 @@ import { ScheduleAppointmentComponent } from '../../components/schedule-appointm
     DoctorInfoComponent,
     ExaminationsComponent,
     DoctorScheduleComponent,
-    ScheduleAppointmentComponent,
-  ],
+    ScheduleAppointmentComponent
+],
   templateUrl: './doctor-details.component.html',
   styleUrl: './doctor-details.component.scss',
 })
