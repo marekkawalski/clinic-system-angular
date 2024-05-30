@@ -9,7 +9,7 @@ import {
   MatCardTitle,
 } from '@angular/material/card';
 import { MatAnchor, MatButton } from '@angular/material/button';
-import { AsyncPipe, NgForOf, NgIf, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { UserPageRequestParams } from '../../../../shared/models/UserPageRequestParams';
 import { DoctorService } from '../../services/doctor.service';
 import { MatIcon } from '@angular/material/icon';
@@ -34,15 +34,13 @@ import { MatNavList } from '@angular/material/list';
     NgOptimizedImage,
     MatCardTitle,
     MatCardSubtitle,
-    NgIf,
     AsyncPipe,
-    NgForOf,
     MatIcon,
     PaginatorComponent,
     RouterLink,
     MatAnchor,
-    MatNavList,
-  ],
+    MatNavList
+],
   templateUrl: './doctors.component.html',
   styleUrl: './doctors.component.scss',
 })

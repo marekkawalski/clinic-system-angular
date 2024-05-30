@@ -10,7 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { SnackbarService } from '../../../../shared/services/snackbar.service';
 import { MatButton } from '@angular/material/button';
-import { DatePipe, JsonPipe, NgForOf, NgIf } from '@angular/common';
+import { DatePipe, JsonPipe } from '@angular/common';
 import {
   MatFormField,
   MatFormFieldModule,
@@ -42,7 +42,6 @@ import { Appointment } from '../../../../core/models/appointment/Appointment';
     FormsModule,
     ReactiveFormsModule,
     MatButton,
-    NgForOf,
     MatFormField,
     MatDatepickerInput,
     MatDatepickerToggle,
@@ -51,14 +50,13 @@ import { Appointment } from '../../../../core/models/appointment/Appointment';
     MatOption,
     MatSelect,
     MatLabel,
-    NgIf,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     JsonPipe,
-    DatePipe,
-  ],
+    DatePipe
+],
   templateUrl: './schedule-appointment.component.html',
   styleUrl: './schedule-appointment.component.scss',
 })

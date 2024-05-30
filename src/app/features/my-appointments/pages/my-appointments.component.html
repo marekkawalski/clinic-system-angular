@@ -1,56 +1,54 @@
 <section>
   <h2>My appointments</h2>
-  <div
-    *ngIf="pageAppointmentResponseData?.content; else noData"
-    class="table-wrapper"
-  >
-    <div class="mat-elevation-z8">
-      <table [dataSource]="dataSource" mat-table>
-        <ng-container
-          *ngFor="let column of tableHelper.baseColumnNames; let i = index"
-          [matColumnDef]="column"
-        >
-          <th *matHeaderCellDef mat-header-cell>
-            {{ tableHelper.baseColumnTitles[i] }}
-          </th>
-
-          <td *matCellDef="let element" mat-cell>
-            {{ tableHelper.nestedPropertyAccessor(element, column) | date }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="cancel">
-          <th *matHeaderCellDef mat-header-cell>Cancel</th>
-          <td *matCellDef="let cell" mat-cell>
-            <button
-              (click)="cancelAppointment(cell)"
-              aria-label="Icon button with edit icon"
-              color="primary"
-              mat-icon-button
-            >
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr *matHeaderRowDef="tableHelper.allColumnNames" mat-header-row></tr>
-        <tr
-          *matRowDef="let row; columns: tableHelper.allColumnNames"
-          mat-row
-        ></tr>
-      </table>
+  @if (pageAppointmentResponseData?.content) {
+    <div
+      class="table-wrapper"
+      >
+      <div class="mat-elevation-z8">
+        <table [dataSource]="dataSource" mat-table>
+          @for (column of tableHelper.baseColumnNames; track column; let i = $index) {
+            <ng-container
+              [matColumnDef]="column"
+              >
+              <th *matHeaderCellDef mat-header-cell>
+                {{ tableHelper.baseColumnTitles[i] }}
+              </th>
+              <td *matCellDef="let element" mat-cell>
+                {{ tableHelper.nestedPropertyAccessor(element, column) | date }}
+              </td>
+            </ng-container>
+          }
+          <ng-container matColumnDef="cancel">
+            <th *matHeaderCellDef mat-header-cell>Cancel</th>
+            <td *matCellDef="let cell" mat-cell>
+              <button
+                (click)="cancelAppointment(cell)"
+                aria-label="Icon button with edit icon"
+                color="primary"
+                mat-icon-button
+                >
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr *matHeaderRowDef="tableHelper.allColumnNames" mat-header-row></tr>
+          <tr
+            *matRowDef="let row; columns: tableHelper.allColumnNames"
+            mat-row
+          ></tr>
+        </table>
+      </div>
     </div>
-  </div>
+  } @else {
+    <div class="no-data">
+      <p>No appointments found</p>
+    </div>
+  }
   <app-paginator
     (load)="getPagedAppointments($event)"
     [data]="pageAppointmentResponseData"
     [requestParams]="requestParams"
-  >
+    >
   </app-paginator>
 </section>
 
-<ng-template #noData>
-  <div class="no-data">
-    <p>No appointments found</p>
-  </div>
-</ng-template>

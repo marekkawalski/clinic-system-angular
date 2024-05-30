@@ -12,14 +12,7 @@ import { MatInput } from '@angular/material/input';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
-import {
-  NgClass,
-  NgForOf,
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
-  NgSwitchDefault,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import { PathConstants } from '../../../core/constants/path.constants';
 import { AuthService } from '../../../core/authentication/auth.service';
 import { RegistrationService } from '../../../core/authentication/registration.service';
@@ -47,13 +40,8 @@ import { FormType } from '../../enums/FormType';
     MatCardContent,
     MatCardTitle,
     MatCard,
-    NgIf,
-    NgForOf,
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
-    NgClass,
-  ],
+    NgClass
+],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.scss',
 })

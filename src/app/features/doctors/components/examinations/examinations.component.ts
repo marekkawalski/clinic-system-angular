@@ -21,7 +21,7 @@ import {
   MatTable,
   MatTableDataSource,
 } from '@angular/material/table';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { PaginatorComponent } from '../../../../shared/components/paginator/paginator.component';
 import { ExaminationPageRequestParams } from '../../../../shared/models/ExaminationPageRequestParams';
 import { PageRequestResponseData } from '../../../../shared/models/PageRequestResponseData';
@@ -42,7 +42,6 @@ import { Doctor } from '../../../../core/models/Doctor';
     MatCell,
     MatCellDef,
     MatHeaderRowDef,
-    NgIf,
     PaginatorComponent,
     MatRowDef,
     MatRow,
@@ -50,9 +49,8 @@ import { Doctor } from '../../../../core/models/Doctor';
     MatHeaderCell,
     MatHeaderCellDef,
     MatColumnDef,
-    MatTable,
-    NgForOf,
-  ],
+    MatTable
+],
   templateUrl: './examinations.component.html',
   styleUrl: './examinations.component.scss',
 })

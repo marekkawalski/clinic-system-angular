@@ -1,57 +1,66 @@
 <section>
   <h2>Meet our doctors</h2>
-  <ng-container *ngIf="doctors | async as doctors">
+  @if (doctors | async; as doctors) {
     <div class="doctors">
       <app-paginator
         (load)="getPagedDoctors($event)"
         [data]="doctors"
         [requestParams]="userRequestParams"
-      >
+        >
       </app-paginator>
-      <div *ngFor="let doctor of doctors.content" class="doctor">
-        <div class="doctor-image">
-          <img alt="doctor.name" src="assets/images/female-doctor.webp" />
-        </div>
-        <div class="doctor-info">
-          <h3>
-            <a [routerLink]="doctor.email"
-              >{{ doctor.name }} {{ doctor.surname }}</a
-            >
-          </h3>
-          <p *ngIf="doctor.doctorDetails?.specialization">
-            <span class="material-symbols-outlined"> stethoscope_check </span>
-            {{ doctor.doctorDetails?.specialization }}
-          </p>
-          <p>
-            <mat-icon>place</mat-icon>
-            Wijttenbachstraat 36, 1093 JC Amsterdam
-          </p>
-          <p *ngIf="doctor.doctorDetails?.education">
-            <mat-icon>school</mat-icon>
-            {{ doctor.doctorDetails?.education }}
-          </p>
-          <p *ngIf="doctor.doctorDetails?.description" class="description">
-            {{ doctor.doctorDetails?.description }}
-          </p>
-        </div>
-        <div class="schedule-appointment">
-          <a [routerLink]="doctor.email" mat-raised-button
-            >Schedule Appointment</a
-          >
-          <a
-            *ngIf="authService.checkAccess([UserRole.REGISTRAR])"
-            [routerLink]="'/manage-appointments/' + doctor.id"
-            mat-raised-button
-            >Manage appointments</a
-          >
-        </div>
-      </div>
-      <app-paginator
-        (load)="getPagedDoctors($event)"
-        [data]="doctors"
-        [requestParams]="userRequestParams"
-      >
-      </app-paginator>
-    </div>
-  </ng-container>
-</section>
+      @for (doctor of doctors.content; track doctor) {
+        <div class="doctor">
+          <div class="doctor-image">
+            <img alt="doctor.name" src="assets/images/female-doctor.webp" />
+          </div>
+          <div class="doctor-info">
+            <h3>
+              <a [routerLink]="doctor.email"
+                >{{ doctor.name }} {{ doctor.surname }}</a
+                >
+              </h3>
+              @if (doctor.doctorDetails?.specialization) {
+                <p>
+                  <span class="material-symbols-outlined"> stethoscope_check </span>
+                  {{ doctor.doctorDetails?.specialization }}
+                </p>
+              }
+              <p>
+                <mat-icon>place</mat-icon>
+                Wijttenbachstraat 36, 1093 JC Amsterdam
+              </p>
+              @if (doctor.doctorDetails?.education) {
+                <p>
+                  <mat-icon>school</mat-icon>
+                  {{ doctor.doctorDetails?.education }}
+                </p>
+              }
+              @if (doctor.doctorDetails?.description) {
+                <p class="description">
+                  {{ doctor.doctorDetails?.description }}
+                </p>
+              }
+            </div>
+            <div class="schedule-appointment">
+              <a [routerLink]="doctor.email" mat-raised-button
+                >Schedule Appointment</a
+                >
+                @if (authService.checkAccess([UserRole.REGISTRAR])) {
+                  <a
+                    [routerLink]="'/manage-appointments/' + doctor.id"
+                    mat-raised-button
+                    >Manage appointments</a
+                    >
+                  }
+                </div>
+              </div>
+            }
+            <app-paginator
+              (load)="getPagedDoctors($event)"
+              [data]="doctors"
+              [requestParams]="userRequestParams"
+              >
+            </app-paginator>
+          </div>
+        }
+      </section>

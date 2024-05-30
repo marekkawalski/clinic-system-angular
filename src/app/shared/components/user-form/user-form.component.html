@@ -12,13 +12,14 @@
                 <input formControlName="name" matInput />
 
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.basicData.controls.name?.invalid && submitted
-                    "
-                  >
-                    {{ getErrorMessage('basicData', 'name') }}
-                  </span>
+                  @if (
+                    formControl.basicData.controls.name?.invalid && submitted
+                    ) {
+                    <span
+                      >
+                      {{ getErrorMessage('basicData', 'name') }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
 
@@ -26,14 +27,15 @@
                 <mat-label>Surname</mat-label>
                 <input formControlName="surname" matInput />
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.basicData.controls.surname?.invalid &&
-                      submitted
-                    "
-                  >
-                    {{ getErrorMessage('basicData', 'surname') }}
-                  </span>
+                  @if (
+                    formControl.basicData.controls.surname?.invalid &&
+                    submitted
+                    ) {
+                    <span
+                      >
+                      {{ getErrorMessage('basicData', 'surname') }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
 
@@ -41,13 +43,14 @@
                 <mat-label>Email</mat-label>
                 <input formControlName="email" matInput />
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.basicData.controls.email?.invalid && submitted
-                    "
-                  >
-                    {{ getErrorMessage('basicData', 'email') }}
-                  </span>
+                  @if (
+                    formControl.basicData.controls.email?.invalid && submitted
+                    ) {
+                    <span
+                      >
+                      {{ getErrorMessage('basicData', 'email') }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
 
@@ -55,14 +58,15 @@
                 <mat-label>Phone</mat-label>
                 <input formControlName="phoneNumber" matInput />
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.basicData.controls.phoneNumber?.invalid &&
-                      submitted
-                    "
-                  >
-                    {{ getErrorMessage('basicData', 'phoneNumber') }}
-                  </span>
+                  @if (
+                    formControl.basicData.controls.phoneNumber?.invalid &&
+                    submitted
+                    ) {
+                    <span
+                      >
+                      {{ getErrorMessage('basicData', 'phoneNumber') }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
 
@@ -70,13 +74,14 @@
                 <mat-label>PESEL</mat-label>
                 <input formControlName="pesel" matInput />
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.basicData.controls.pesel?.invalid && submitted
-                    "
-                  >
-                    {{ getErrorMessage('basicData', 'pesel') }}
-                  </span>
+                  @if (
+                    formControl.basicData.controls.pesel?.invalid && submitted
+                    ) {
+                    <span
+                      >
+                      {{ getErrorMessage('basicData', 'pesel') }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
 
@@ -84,14 +89,15 @@
                 <mat-label>Password</mat-label>
                 <input formControlName="password" matInput type="password" />
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.basicData.controls.password?.invalid &&
-                      submitted
-                    "
-                  >
-                    {{ getPasswordErrorMessage() }}
-                  </span>
+                  @if (
+                    formControl.basicData.controls.password?.invalid &&
+                    submitted
+                    ) {
+                    <span
+                      >
+                      {{ getPasswordErrorMessage() }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
 
@@ -101,16 +107,17 @@
                   formControlName="confirmPassword"
                   matInput
                   type="password"
-                />
+                  />
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.basicData.controls.confirmPassword?.invalid &&
-                      submitted
-                    "
-                  >
-                    {{ getErrorMessage('basicData', 'confirmPassword') }}
-                  </span>
+                  @if (
+                    formControl.basicData.controls.confirmPassword?.invalid &&
+                    submitted
+                    ) {
+                    <span
+                      >
+                      {{ getErrorMessage('basicData', 'confirmPassword') }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
             </div>
@@ -121,13 +128,14 @@
                 <mat-label>Country</mat-label>
                 <input formControlName="country" matInput />
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.address.controls.country?.invalid && submitted
-                    "
-                  >
-                    {{ getErrorMessage('address', 'country') }}
-                  </span>
+                  @if (
+                    formControl.address.controls.country?.invalid && submitted
+                    ) {
+                    <span
+                      >
+                      {{ getErrorMessage('address', 'country') }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
 
@@ -135,13 +143,14 @@
                 <mat-label>City</mat-label>
                 <input formControlName="city" matInput />
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.address.controls.city?.invalid && submitted
-                    "
-                  >
-                    {{ getErrorMessage('address', 'city') }}
-                  </span>
+                  @if (
+                    formControl.address.controls.city?.invalid && submitted
+                    ) {
+                    <span
+                      >
+                      {{ getErrorMessage('address', 'city') }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
 
@@ -149,13 +158,14 @@
                 <mat-label>Street</mat-label>
                 <input formControlName="street" matInput />
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.address.controls.street?.invalid && submitted
-                    "
-                  >
-                    {{ getErrorMessage('address', 'street') }}
-                  </span>
+                  @if (
+                    formControl.address.controls.street?.invalid && submitted
+                    ) {
+                    <span
+                      >
+                      {{ getErrorMessage('address', 'street') }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
 
@@ -163,14 +173,15 @@
                 <mat-label>Postal Code</mat-label>
                 <input formControlName="postalCode" matInput />
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.address.controls.postalCode?.invalid &&
-                      submitted
-                    "
-                  >
-                    {{ getErrorMessage('address', 'postalCode') }}
-                  </span>
+                  @if (
+                    formControl.address.controls.postalCode?.invalid &&
+                    submitted
+                    ) {
+                    <span
+                      >
+                      {{ getErrorMessage('address', 'postalCode') }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
 
@@ -178,14 +189,15 @@
                 <mat-label>House Number</mat-label>
                 <input formControlName="houseNumber" matInput />
                 <mat-error>
-                  <span
-                    *ngIf="
-                      formControl.address.controls.houseNumber?.invalid &&
-                      submitted
-                    "
-                  >
-                    {{ getErrorMessage('address', 'houseNumber') }}
-                  </span>
+                  @if (
+                    formControl.address.controls.houseNumber?.invalid &&
+                    submitted
+                    ) {
+                    <span
+                      >
+                      {{ getErrorMessage('address', 'houseNumber') }}
+                    </span>
+                  }
                 </mat-error>
               </mat-form-field>
 
@@ -195,65 +207,66 @@
               </mat-form-field>
             </div>
 
-            <div *ngIf="!router.url.includes(PathConstants.REGISTER_PATH)">
-              <!-- Admin Managed Data -->
-              <ng-container formGroupName="adminManagedData">
-                <mat-checkbox formControlName="enabled">Enabled</mat-checkbox>
-
-                <mat-form-field appearance="outline">
-                  <mat-label>Role</mat-label>
-                  <mat-select formControlName="role">
-                    <mat-option [value]="UserRole.PATIENT"
-                      >{{ UserRole.PATIENT }}
-                    </mat-option>
-                    <mat-option [value]="UserRole.DOCTOR"
-                      >{{ UserRole.DOCTOR }}
-                    </mat-option>
-                    <mat-option [value]="UserRole.ADMIN"
-                      >{{ UserRole.ADMIN }}
-                    </mat-option>
-                    <mat-option [value]="UserRole.REGISTRAR"
-                      >{{ UserRole.REGISTRAR }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </ng-container>
-
-              <!-- Doctor Managed Data -->
-              <ng-container
-                *ngIf="
+            @if (!router.url.includes(PathConstants.REGISTER_PATH)) {
+              <div>
+                <!-- Admin Managed Data -->
+                <ng-container formGroupName="adminManagedData">
+                  <mat-checkbox formControlName="enabled">Enabled</mat-checkbox>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="role">
+                      <mat-option [value]="UserRole.PATIENT"
+                        >{{ UserRole.PATIENT }}
+                      </mat-option>
+                      <mat-option [value]="UserRole.DOCTOR"
+                        >{{ UserRole.DOCTOR }}
+                      </mat-option>
+                      <mat-option [value]="UserRole.ADMIN"
+                        >{{ UserRole.ADMIN }}
+                      </mat-option>
+                      <mat-option [value]="UserRole.REGISTRAR"
+                        >{{ UserRole.REGISTRAR }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </ng-container>
+                <!-- Doctor Managed Data -->
+                @if (
                   formControl.adminManagedData.controls.role.value ===
                   UserRole.DOCTOR
-                "
-                formGroupName="doctorDetails"
-              >
-                <mat-form-field appearance="outline">
-                  <mat-label>Specialization</mat-label>
-                  <input formControlName="specialization" matInput />
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                  <mat-label>Education</mat-label>
-                  <input formControlName="education" matInput />
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                  <mat-label>Description</mat-label>
-                  <input formControlName="description" matInput />
-                </mat-form-field>
-              </ng-container>
-            </div>
+                  ) {
+                  <ng-container
+                    formGroupName="doctorDetails"
+                    >
+                    <mat-form-field appearance="outline">
+                      <mat-label>Specialization</mat-label>
+                      <input formControlName="specialization" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Education</mat-label>
+                      <input formControlName="education" matInput />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Description</mat-label>
+                      <input formControlName="description" matInput />
+                    </mat-form-field>
+                  </ng-container>
+                }
+              </div>
+            }
           </div>
 
-          <ng-container [ngSwitch]="formType">
-            <ng-container *ngSwitchCase="FormType.WholePageForm">
+          @switch (formType) {
+            @case (FormType.WholePageForm) {
               <button mat-raised-button type="submit">Submit</button>
-            </ng-container>
-            <ng-container *ngSwitchCase="FormType.PopupForm">
+            }
+            @case (FormType.PopupForm) {
               <ng-content></ng-content>
-            </ng-container>
-            <ng-container *ngSwitchDefault>
+            }
+            @default {
               <button mat-raised-button type="submit">Submit</button>
-            </ng-container>
-          </ng-container>
+            }
+          }
         </form>
       </mat-card-content>
     </mat-card>
