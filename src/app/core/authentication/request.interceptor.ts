@@ -1,4 +1,9 @@
-import { HttpErrorResponse, HttpEvent, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpInterceptorFn,
+  HttpRequest,
+} from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from './auth.service';
 import { catchError, Observable, throwError } from 'rxjs';
@@ -13,16 +18,15 @@ export const requestInterceptor: HttpInterceptorFn = (
   const router: Router = inject(Router);
   const toastService: SnackbarService = inject(SnackbarService);
 
-  if (!authService.authDataValue) {
-    return next(req);
+  let authReq = req;
+  if (authService.authDataValue) {
+    const token = `Basic ${window.btoa(authService.authDataValue.email + ':' + authService.authDataValue.password)}`;
+    authReq = req.clone({
+      setHeaders: {
+        Authorization: token,
+      },
+    });
   }
-
-  const token = `Basic ${window.btoa(authService.authDataValue.email + ':' + authService.authDataValue.password)}`;
-  const authReq = req.clone({
-    setHeaders: {
-      Authorization: token,
-    },
-  });
   return next(authReq).pipe(
     catchError((err: any) => {
       if (err instanceof HttpErrorResponse) {
