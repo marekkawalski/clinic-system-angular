@@ -3,20 +3,27 @@
     <div class="doctors">
       <div class="doctor">
         <div class="doctor-image">
-          <img alt="doctor.name" src="assets/images/female-doctor.webp" />
+          <img
+            [alt]="doctor.name"
+            ngSrc="assets/images/female-doctor.webp"
+            height="6303"
+            width="4202"
+          />
         </div>
         <h3 class="name">{{ doctor.name }} {{ doctor.surname }}</h3>
-        <mat-tab-group class="tab-group">
-          <mat-tab label="Info">
-            <app-doctor-info [doctor]="doctor"></app-doctor-info>
-          </mat-tab>
-          <mat-tab label="Examinations">
-            <app-examinations [doctor]="doctor"></app-examinations>
-          </mat-tab>
-          <mat-tab label="Doctor Schedule">
-            <app-doctor-schedule [doctor]="doctor"></app-doctor-schedule>
-          </mat-tab>
-        </mat-tab-group>
+        <div class="tab-group-wrapper">
+          <mat-tab-group class="tab-group">
+            <mat-tab label="Info">
+              <app-doctor-info [doctor]="doctor"></app-doctor-info>
+            </mat-tab>
+            <mat-tab label="Examinations">
+              <app-examinations [doctor]="doctor"></app-examinations>
+            </mat-tab>
+            <mat-tab label="Doctor Schedule">
+              <app-doctor-schedule [doctor]="doctor"></app-doctor-schedule>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
         <div class="schedule-appointment">
           <app-schedule-appointment
             [doctor]="doctor"
