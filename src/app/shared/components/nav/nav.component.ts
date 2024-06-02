@@ -4,12 +4,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatListItem, MatNavList } from '@angular/material/list';
-import { MatToolbar } from '@angular/material/toolbar';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 import { AuthService } from '../../../core/authentication/auth.service';
 import { PathConstants } from '../../../core/constants/path.constants';
 import { UserRole } from '../../../core/enums/UserRole';
 import { NavItemComponent } from './nav-item/nav-item.component';
+import { MatLine } from '@angular/material/core';
 
 interface NavItem {
   listItemText: string;
@@ -33,6 +34,8 @@ interface NavItem {
     MatIcon,
     AsyncPipe,
     NavItemComponent,
+    MatToolbarModule,
+    MatLine,
   ],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss',

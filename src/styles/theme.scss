@@ -1,14 +1,6 @@
 @use '@angular/material' as mat;
+@use 'm3-theme' as *;
 
 @include mat.core();
 
-$my-theme: mat.define-theme((
-        color: (
-                theme-type: light,
-                primary: mat.$azure-palette,
-        ),
-        typography: (
-                brand-family: 'Roboto',
-                bold-weight: 900,
-        ),
-));
+$my-theme: $light-theme;

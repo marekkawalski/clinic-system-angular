@@ -6,7 +6,7 @@
       class="example-icon"
       mat-icon-button
     >
-      <mat-icon>menu</mat-icon>
+      <mat-icon style="color: #fff">menu</mat-icon>
     </button>
     <a [routerLink]="PathConstants.HOME_PATH">Clinic System</a>
   </div>
@@ -16,12 +16,18 @@
       <div class="name-container">
         Hello, {{ authData.name }} {{ authData.surname }}
       </div>
-      <button (click)="logout()" mat-raised-button>Logout</button>
+      <button (click)="logout()" mat-raised-button color="secondary">
+        Logout
+      </button>
     </div>
   } @else {
     <div>
       <div class="name-container">Hello,Guest</div>
-      <button [routerLink]="PathConstants.LOGIN_PATH" mat-raised-button>
+      <button
+        [routerLink]="PathConstants.LOGIN_PATH"
+        mat-raised-button
+        color="secondary"
+      >
         Login
       </button>
     </div>
