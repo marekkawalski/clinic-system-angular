@@ -82,7 +82,7 @@ export class ScheduleAppointmentComponent implements OnInit {
     )
       return;
     const appointment: AppointmentToAddOrUpdate = {
-      date: this.selectedDate.toISOString(),
+      date: date,
       status: AppointmentStatus.BOOKED,
       doctorId: this.doctor?.id,
       patientId: this.authService.authDataValue.id,
@@ -104,12 +104,15 @@ export class ScheduleAppointmentComponent implements OnInit {
       });
   }
 
-  private refreshAvailableAppointments() {
-    const appointmentDate = this.selectedDate;
-    if (!appointmentDate) return;
-    const formattedDate = format(appointmentDate, 'yyyy-MM-dd') + 'T23:59';
+  private formatDate(date: Date): string {
+    return format(date, 'yyyy-MM-dd') + 'T23:59';
+  }
 
-    this.getAvailableAppointments(this.selectedExaminationId, formattedDate);
+  private refreshAvailableAppointments() {
+    const appointmentDate: Date | undefined = this.selectedDate;
+    if (!appointmentDate) return;
+
+    this.getAvailableAppointments(this.selectedExaminationId, appointmentDate);
   }
 
   private getDoctorExaminations() {
@@ -130,11 +133,15 @@ export class ScheduleAppointmentComponent implements OnInit {
       });
   }
 
-  private getAvailableAppointments(examinationId?: string, date?: string) {
+  private getAvailableAppointments(examinationId?: string, date?: Date) {
     if (!this.doctor?.id || !examinationId || !date) return;
 
     this.doctorService
-      .getAvailableAppointments(this.doctor.id, examinationId, date)
+      .getAvailableAppointments(
+        this.doctor.id,
+        examinationId,
+        this.formatDate(date),
+      )
       .subscribe((dates: AvailableAppointments[]) => {
         if (!dates) {
           this.toast.openFailureSnackBar({

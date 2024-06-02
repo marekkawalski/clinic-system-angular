@@ -133,7 +133,7 @@ export class MyAppointmentsComponent implements OnInit, AfterViewInit {
     this.appointmentService
       .updateAppointment(
         {
-          date: appointment.date.toISOString(),
+          date: appointment.date,
           description: appointment.description,
           doctorId: appointment.doctor.id,
           examinationId: appointment.examination.id,

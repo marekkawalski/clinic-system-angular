@@ -62,9 +62,6 @@ export class AppointmentFormComponent
 
   class?: string;
   appointmentForm = this.formBuilder.group({
-    date: this.formBuilder.nonNullable.control(<string | undefined>undefined, {
-      validators: [Validators.required],
-    }),
     status: this.formBuilder.nonNullable.control(
       <AppointmentStatus | undefined>undefined,
       {
@@ -119,7 +116,6 @@ export class AppointmentFormComponent
       return;
     }
     this.appointmentForm.patchValue({
-      date: this.data.date.toISOString(),
       status: this.data.status,
       description: this.data.description,
     });
@@ -130,16 +126,12 @@ export class AppointmentFormComponent
   }
 
   private updateAppointment() {
-    if (
-      !this.data?.id ||
-      !this.appointmentForm.value.date ||
-      !this.appointmentForm.value.status
-    ) {
+    if (!this.data?.id || !this.appointmentForm.value.status) {
       return;
     }
 
     const appointmentToUpdate: AppointmentToAddOrUpdate = {
-      date: this.appointmentForm.value.date,
+      date: this.data.date,
       description: this.appointmentForm.value.description ?? '',
       doctorId: this.data.doctor.id,
       examinationId: this.data.examination.id,

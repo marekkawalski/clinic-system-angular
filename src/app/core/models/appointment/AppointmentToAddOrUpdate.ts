@@ -2,7 +2,7 @@ import { AppointmentStatus } from '../../enums/AppointmentStatus';
 import { Medicine } from './Medicine';
 
 export interface AppointmentToAddOrUpdate {
-  date: string;
+  date: Date;
   status: AppointmentStatus;
   description?: string;
   doctorId: string;
