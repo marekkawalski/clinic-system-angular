@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormType } from '../../../../shared/enums/FormType';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AppointmentService } from '../../../../shared/services/appointment.service';
@@ -21,7 +21,14 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { Medicine } from '../../../../core/models/appointment/Medicine';
-import { DialogComponentInterface } from '../../../../shared/components/dialog/DialogComponentInterface';
+import { BaseDialogData } from '../../../../shared/components/dialog/models/baseDialogData';
+
+export interface AppointmentFormInput {
+  appointment: Appointment;
+  dialogRef: MatDialogRef<any>;
+  action?: string;
+  formType?: FormType;
+}
 
 @Component({
   selector: 'app-appointment-form',
@@ -38,18 +45,21 @@ import { DialogComponentInterface } from '../../../../shared/components/dialog/D
     MatOption,
     MatLabel,
     MatButton,
-    MatIcon
-],
+    MatIcon,
+  ],
   templateUrl: './appointment-form.component.html',
   styleUrl: './appointment-form.component.scss',
 })
 export class AppointmentFormComponent
-  implements OnInit, DialogComponentInterface
+  implements OnInit, BaseDialogData<Appointment>
 {
-  @Input() appointment?: Appointment;
-  @Input() dialogRef?: MatDialogRef<any>;
-  @Input() action?: string;
-  @Input() formType?: FormType = FormType.PopupForm;
+  @ViewChild('form') form!: HTMLFormElement;
+  @Input({ required: true }) data?: AppointmentFormInput['appointment'];
+  @Input({ required: true }) dialogRef?: AppointmentFormInput['dialogRef'];
+  @Input({ required: false }) action?: AppointmentFormInput['action'] =
+    'Edit appointment';
+  @Input() formType: AppointmentFormInput['formType'] = FormType.PopupForm;
+
   class?: string;
   appointmentForm = this.formBuilder.group({
     date: this.formBuilder.nonNullable.control(<string | undefined>undefined, {
@@ -74,13 +84,8 @@ export class AppointmentFormComponent
     protected readonly router: Router,
   ) {}
 
-  get formControl() {
-    return this.appointmentForm.controls;
-  }
-
   ngOnInit(): void {
     this.initFormData();
-    this.establishCssClass();
   }
 
   onSubmit() {
@@ -110,23 +115,23 @@ export class AppointmentFormComponent
   }
 
   private initFormData() {
-    if (!this.appointment) {
+    if (!this.data) {
       return;
     }
     this.appointmentForm.patchValue({
-      date: this.appointment.date.toISOString(),
-      status: this.appointment.status,
-      description: this.appointment.description,
+      date: this.data.date.toISOString(),
+      status: this.data.status,
+      description: this.data.description,
     });
 
-    for (const medicine of this.appointment?.medicines ?? []) {
+    for (const medicine of this.data?.medicines ?? []) {
       this.addMedicine(medicine);
     }
   }
 
   private updateAppointment() {
     if (
-      !this.appointment?.id ||
+      !this.data?.id ||
       !this.appointmentForm.value.date ||
       !this.appointmentForm.value.status
     ) {
@@ -136,9 +141,9 @@ export class AppointmentFormComponent
     const appointmentToUpdate: AppointmentToAddOrUpdate = {
       date: this.appointmentForm.value.date,
       description: this.appointmentForm.value.description ?? '',
-      doctorId: this.appointment.doctor.id,
-      examinationId: this.appointment.examination.id,
-      patientId: this.appointment.patient.id,
+      doctorId: this.data.doctor.id,
+      examinationId: this.data.examination.id,
+      patientId: this.data.patient.id,
       status: this.appointmentForm.value.status,
     };
     if (this.appointmentForm.value.medicines) {
@@ -146,7 +151,7 @@ export class AppointmentFormComponent
         .medicines as Medicine[];
     }
     this.appointmentService
-      .updateAppointment(appointmentToUpdate, this.appointment.id)
+      .updateAppointment(appointmentToUpdate, this.data.id)
       .subscribe(appointment => {
         if (!appointment) {
           this.toast.openFailureSnackBar({
@@ -158,13 +163,5 @@ export class AppointmentFormComponent
           message: 'Appointment updated successfully.',
         });
       });
-  }
-
-  private establishCssClass(): void {
-    if (this.formType === FormType.WholePageForm) {
-      this.class = 'whole-page-form';
-    } else if (this.formType === FormType.PopupForm) {
-      this.class = 'popup-form';
-    }
   }
 }

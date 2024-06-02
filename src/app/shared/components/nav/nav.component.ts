@@ -62,7 +62,7 @@ export class NavComponent {
     },
     {
       listItemText: 'Manage Appointments',
-      listItemPath: `manage-appointments/' + ${this.authService.authDataValue?.id}`,
+      listItemPath: `manage-appointments/${this.authService.authDataValue?.id}`,
       requireLogin: true,
       allowedRoles: [UserRole.DOCTOR],
     },

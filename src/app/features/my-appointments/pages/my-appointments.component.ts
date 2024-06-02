@@ -47,8 +47,8 @@ import { AppointmentStatus } from '../../../core/enums/AppointmentStatus';
     PaginatorComponent,
     MatRow,
     MatIcon,
-    MatIconButton
-],
+    MatIconButton,
+  ],
   templateUrl: './my-appointments.component.html',
   styleUrl: './my-appointments.component.scss',
 })
@@ -85,8 +85,12 @@ export class MyAppointmentsComponent implements OnInit, AfterViewInit {
     this.appointmentService
       .getPagedPatientAppointments(params, userId)
       .subscribe(
-        (requestResponseData: PageRequestResponseData<Appointment>) => {
-          if (!requestResponseData) {
+        (requestResponseData?: PageRequestResponseData<Appointment>) => {
+          if (
+            !requestResponseData ||
+            !requestResponseData.content ||
+            requestResponseData.content.length === 0
+          ) {
             this.toast.openInfoSnackBar({
               message: 'No appointments found.',
             });

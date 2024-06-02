@@ -11,35 +11,41 @@ import {
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
-  MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
-import { DialogComponentInterface } from './DialogComponentInterface';
+import { FormDialogComponent } from './models/formDialogComponent';
+import { DialogData } from './models/dialogData';
 
 @Component({
   selector: 'app-dialog',
-  templateUrl: `./dialog.component.html`,
+  templateUrl: './dialog.component.html',
   standalone: true,
-  imports: [MatDialogActions, MatButton, MatDialogContent, MatDialogTitle],
+  imports: [MatButton, MatDialogContent, MatDialogActions],
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent<T, TComponent extends FormDialogComponent<T>>
+  implements OnInit
+{
   @ViewChild('container', { read: ViewContainerRef, static: true })
-  container?: ViewContainerRef;
+  container!: ViewContainerRef;
+
+  private componentRef?: ComponentRef<TComponent>;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private viewContainerRef: ViewContainerRef,
+    public dialogRef: MatDialogRef<DialogComponent<T, TComponent>>,
+    @Inject(MAT_DIALOG_DATA)
+    public dialogComponentData: DialogData<T, TComponent>,
   ) {}
 
   ngOnInit() {
-    if (!this.container) {
-      return;
+    try {
+      this.componentRef = this.container.createComponent(
+        this.dialogComponentData.component,
+      );
+      this.componentRef.instance.data = this.dialogComponentData.data;
+      this.componentRef.instance.dialogRef = this.dialogRef;
+    } catch (error) {
+      console.error('Error creating component:', error);
     }
-    const componentRef: ComponentRef<DialogComponentInterface> =
-      this.container.createComponent(this.data.component);
-    componentRef.instance.data = this.data.data;
-    componentRef.instance.dialogRef = this.dialogRef;
   }
 
   onCancel(): void {
@@ -47,12 +53,16 @@ export class DialogComponent implements OnInit {
   }
 
   onSave(): void {
-    const formRef =
-      this.viewContainerRef.element.nativeElement.querySelector('form');
-    if (formRef) {
-      formRef.dispatchEvent(
-        new Event('submit', { cancelable: true, bubbles: true }),
-      );
+    if (this.componentRef && this.componentRef.instance) {
+      const form =
+        this.componentRef.location.nativeElement.querySelector('form');
+      if (form) {
+        form.dispatchEvent(
+          new Event('submit', { cancelable: true, bubbles: true }),
+        );
+      } else {
+        console.error('Form not found in component instance');
+      }
     }
   }
 }

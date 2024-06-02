@@ -1,6 +1,6 @@
 import { MatDialogRef } from '@angular/material/dialog';
 
-export interface DialogComponentInterface {
-  data?: any;
+export interface BaseDialogData<T> {
+  data?: T;
   dialogRef?: MatDialogRef<any>;
 }

@@ -52,7 +52,7 @@ export class AppointmentService {
       )
       .pipe(
         map(response => {
-          response.content.forEach(appointment => {
+          response?.content.forEach(appointment => {
             appointment.date = new Date(appointment.date);
           });
           return response;
@@ -73,7 +73,7 @@ export class AppointmentService {
       )
       .pipe(
         map(response => {
-          response.content.forEach(appointment => {
+          response?.content?.forEach(appointment => {
             appointment.date = new Date(appointment.date);
           });
           return response;

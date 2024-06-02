@@ -52,8 +52,8 @@ import { AppointmentFormComponent } from '../components/appointment-form/appoint
     MatRow,
     MatHeaderRowDef,
     MatHeaderRow,
-    MatIcon
-],
+    MatIcon,
+  ],
   templateUrl: './manage-appointments.component.html',
   styleUrl: './manage-appointments.component.scss',
 })
@@ -89,11 +89,16 @@ export class ManageAppointmentsComponent implements OnInit, AfterViewInit {
     if (!this.doctorId) {
       return;
     }
+    console.log('doctorId: ', this.doctorId);
     this.appointmentService
       .getPagedDoctorAppointments(params, this.doctorId)
       .subscribe(
         (requestResponseData: PageRequestResponseData<Appointment>) => {
-          if (!requestResponseData) {
+          if (
+            !requestResponseData ||
+            !requestResponseData.content ||
+            requestResponseData.content.length === 0
+          ) {
             this.toast.openInfoSnackBar({
               message: 'No appointments found.',
             });
@@ -128,11 +133,10 @@ export class ManageAppointmentsComponent implements OnInit, AfterViewInit {
 
   openEditAppointmentDialog(appointment: Appointment) {
     this.dialogService
-      .openDialog(
+      .openDialog<Appointment, AppointmentFormComponent>(
         AppointmentFormComponent,
-        { appointment },
+        appointment,
         {
-          title: 'Edit Appointment',
           width: '700px',
           height: '700px',
         },

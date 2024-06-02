@@ -1,9 +1,16 @@
 <div class="form-card-wrapper">
-  <div [ngClass]="class">
-    <mat-card class="login-card">
+  <div
+    [ngClass]="
+      formType === FormType.PopupForm ? 'popup-form' : 'whole-page-form'
+    "
+  >
+    <mat-card
+      [ngClass]="formType === FormType.PopupForm ? 'no-border-card' : ''"
+      class="login-card"
+    >
       <mat-card-title>{{ action }}</mat-card-title>
       <mat-card-content>
-        <form (ngSubmit)="onSubmit()" [formGroup]="appointmentForm">
+        <form #form (ngSubmit)="onSubmit()" [formGroup]="appointmentForm">
           <div class="form-grid">
             <mat-form-field appearance="outline">
               <mat-label>Status</mat-label>
@@ -24,10 +31,12 @@
               <textarea formControlName="description" matInput></textarea>
             </mat-form-field>
             <div formArrayName="medicines">
-              @for (medicine of getMedicines().controls; track medicine; let i = $index) {
-                <div
-                  [formGroupName]="i"
-                  >
+              @for (
+                medicine of getMedicines().controls;
+                track medicine;
+                let i = $index
+              ) {
+                <div [formGroupName]="i">
                   <div>Medicine {{ i + 1 }}</div>
                   <mat-form-field appearance="outline">
                     <mat-label>Name</mat-label>
@@ -49,16 +58,8 @@
               }
             </div>
           </div>
-          @switch (formType) {
-            @case (FormType.WholePageForm) {
-              <button mat-raised-button type="submit">Submit</button>
-            }
-            @case (FormType.PopupForm) {
-              <ng-content></ng-content>
-            }
-            @default {
-              <button mat-raised-button type="submit">Submit</button>
-            }
+          @if (formType === FormType.WholePageForm) {
+            <button mat-raised-button type="submit">Submit</button>
           }
           <button (click)="addMedicine()" mat-raised-button type="button">
             <mat-icon>add</mat-icon>
