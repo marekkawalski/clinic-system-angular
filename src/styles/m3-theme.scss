@@ -142,5 +142,10 @@ $light-theme: mat.define-theme((
                 tertiary: $_tertiary,
         ),
         typography: (
+                brand-family: 'Roboto',
+                plain-family: 'Roboto',
+                regular-weight: 400,
+                medium-weight: 400,
+                bold-weight: 500,
         ),
 ));

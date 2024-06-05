@@ -9,6 +9,9 @@
 
 html {
   @include mat.all-component-themes($my-theme);
+  font-size: 18px;
+  text-rendering: optimizeLegibility;
+  font-family: Roboto, sans-serif;
 }
 
 * {
@@ -16,10 +19,6 @@ html {
   padding: 0;
 }
 
-html {
-  font-size: 18px;
-  text-rendering: optimizeLegibility;
-}
 
 /* Box sizing rules */
 *,
@@ -145,6 +144,6 @@ html, body {
   height: 100%;
 }
 
-body {
-  margin: 0;
+h2, h3 {
+  font-weight: 400;
 }

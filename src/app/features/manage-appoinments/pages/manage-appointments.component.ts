@@ -29,7 +29,7 @@ import { PageRequestParams } from '../../../shared/models/PageRequestParams';
 import { AppointmentService } from '../../../shared/services/appointment.service';
 import { AppointmentPageRequestParams } from '../../../shared/models/AppointmentPageRequestParams';
 import { ActivatedRoute } from '@angular/router';
-import { DialogService } from '../../../shared/components/dialog/dialog.service';
+import { DialogService } from '../../../shared/dialog/dialog.service';
 import { AppointmentFormComponent } from '../components/appointment-form/appointment-form.component';
 
 @Component({

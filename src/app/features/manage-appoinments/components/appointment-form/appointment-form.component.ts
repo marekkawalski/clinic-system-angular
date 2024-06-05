@@ -21,7 +21,7 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { Medicine } from '../../../../core/models/appointment/Medicine';
-import { BaseDialogData } from '../../../../shared/components/dialog/models/baseDialogData';
+import { BaseDialogData } from '../../../../shared/dialog/models/baseDialogData';
 
 export interface AppointmentFormInput {
   appointment: Appointment;
