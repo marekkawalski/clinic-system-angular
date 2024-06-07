@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   MatCard,
   MatCardActions,
@@ -20,6 +20,10 @@ import { PathConstants } from '../../../../core/constants/path.constants';
 import { UserRole } from '../../../../core/enums/UserRole';
 import { AuthService } from '../../../../core/authentication/auth.service';
 import { MatNavList } from '@angular/material/list';
+import { SpinnerService } from '../../../../shared/spinner/spinner.service';
+import { Observable } from 'rxjs';
+import { Doctor } from '../../../../core/models/Doctor';
+import { PageRequestResponseData } from '../../../../shared/models/PageRequestResponseData';
 
 @Component({
   selector: 'app-doctors',
@@ -39,23 +43,34 @@ import { MatNavList } from '@angular/material/list';
     PaginatorComponent,
     RouterLink,
     MatAnchor,
-    MatNavList
-],
+    MatNavList,
+  ],
   templateUrl: './doctors.component.html',
   styleUrl: './doctors.component.scss',
 })
-export class DoctorsComponent {
+export class DoctorsComponent implements OnInit {
   userRequestParams: UserPageRequestParams = {};
-  doctors = this.doctorService.getPagedDoctors(this.userRequestParams);
+  doctors$?: Observable<PageRequestResponseData<Doctor>>;
   protected readonly PathConstants = PathConstants;
   protected readonly UserRole = UserRole;
 
   constructor(
     protected readonly doctorService: DoctorService,
     protected readonly authService: AuthService,
+    protected readonly spinnerService: SpinnerService,
   ) {}
 
+  ngOnInit(): void {
+    this.loadDoctors(this.userRequestParams);
+  }
+
   getPagedDoctors($event: PageRequestParams) {
-    this.doctors = this.doctorService.getPagedDoctors($event);
+    this.loadDoctors($event);
+  }
+
+  private loadDoctors(params: PageRequestParams) {
+    this.spinnerService.show();
+    this.doctors$ = this.doctorService.getPagedDoctors(params);
+    this.doctors$.subscribe(() => this.spinnerService.hide());
   }
 }
