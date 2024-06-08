@@ -13,6 +13,7 @@
                 <mat-label>email</mat-label>
                 <input
                   formControlName="email"
+                  id="email-input"
                   matInput
                   placeholder="email"
                   type="text"
@@ -25,7 +26,9 @@
                 <mat-label>password</mat-label>
                 <mat-hint align="end" id="forget-password">
                   <button
-                    (click)="this.router.navigate([PathConstants.FORGOT_PASSWORD_PATH])"
+                    (click)="
+                      this.router.navigate([PathConstants.FORGOT_PASSWORD_PATH])
+                    "
                     type="button"
                   >
                     Forgot password?
@@ -34,6 +37,7 @@
                 <input
                   [type]="hide ? 'password' : 'text'"
                   formControlName="password"
+                  id="password-input"
                   matInput
                   placeholder="Password"
                 />
@@ -46,7 +50,7 @@
                   type="button"
                 >
                   <mat-icon
-                  >{{ hide ? 'visibility_off' : 'visibility' }}
+                    >{{ hide ? 'visibility_off' : 'visibility' }}
                   </mat-icon>
                 </button>
               </mat-form-field>
@@ -54,7 +58,9 @@
 
             <div class="container">
               <div class="button-container">
-                <button class="button" type="submit">Login</button>
+                <button class="button" id="submit-btn" type="submit">
+                  Login
+                </button>
               </div>
             </div>
             <div class="sign-up">

@@ -17,6 +17,7 @@ import { MatInput } from '@angular/material/input';
 import { MatIconButton } from '@angular/material/button';
 import { PathConstants } from '../../../../core/constants/path.constants';
 import { SnackbarService } from '../../../../shared/services/snackbar.service';
+import { SpinnerService } from '../../../../shared/spinner/spinner.service';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +35,6 @@ import { SnackbarService } from '../../../../shared/services/snackbar.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-  loading = false;
   submitted = false;
   error = '';
   hide = true;
@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
     private readonly _router: Router,
     private readonly authenticationService: AuthService,
     protected readonly snackBarService: SnackbarService,
+    private readonly spinnerService: SpinnerService,
   ) {}
 
   get formControl() {
@@ -66,7 +67,7 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm?.invalid) return;
 
-    this.loading = true;
+    this.spinnerService.show();
     this.authenticationService
       .login(
         this.formControl?.['email'].value,
@@ -80,11 +81,12 @@ export class LoginComponent implements OnInit {
             this.snackBarService.openSuccessSnackBar({
               message: 'Login successful',
             });
+            this.spinnerService.hide();
           });
         },
         error: error => {
           this.error = error;
-          this.loading = false;
+          this.spinnerService.hide();
           console.log(error);
         },
       });
