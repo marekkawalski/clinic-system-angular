@@ -40,8 +40,8 @@ import { FormType } from '../../enums/FormType';
     MatCardContent,
     MatCardTitle,
     MatCard,
-    NgClass
-],
+    NgClass,
+  ],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.scss',
 })
@@ -219,21 +219,12 @@ export class UserFormComponent implements OnInit {
 
     if (!this.userId) {
       this.registrationService.register(user).subscribe((user: User) => {
-        this.loading = false;
-        this.toast.openSuccessSnackBar({
-          message: `User ${user.name} ${user.surname} has been registered`,
-        });
+        this.handleUserResponse(user);
       });
     } else {
       this.userService.updateUser(user, this.userId).subscribe((user: User) => {
-        this.loading = false;
-        this.toast.openSuccessSnackBar({
-          message: `User ${user.name} ${user.surname} has been updated`,
-        });
+        this.handleUserResponse(user);
       });
-    }
-    if (this.formType === FormType.PopupForm) {
-      this.dialogRef?.close(true);
     }
   }
 
@@ -275,6 +266,16 @@ export class UserFormComponent implements OnInit {
       .find(v => v);
 
     return foundError ? foundError.message : null;
+  }
+
+  private handleUserResponse(user: User): void {
+    this.loading = false;
+    this.toast.openSuccessSnackBar({
+      message: `User ${user.name} ${user.surname} has been ${this.userId ? 'updated' : 'registered'}`,
+    });
+    if (this.formType === FormType.PopupForm) {
+      this.dialogRef?.close(true);
+    }
   }
 
   private establishCssClass(): void {

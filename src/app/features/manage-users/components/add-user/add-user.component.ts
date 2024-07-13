@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import {
   MatDialogActions,
@@ -21,6 +21,7 @@ import { FormType } from '../../../../shared/enums/FormType';
   ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class AddUserComponent {
   protected readonly FormType = FormType;

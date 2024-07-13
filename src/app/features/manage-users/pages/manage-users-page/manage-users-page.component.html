@@ -4,9 +4,10 @@
     <button
       (click)="openAddUserDialog()"
       color="primary"
+      id="add-user-button"
       mat-button
       mat-raised-button
-      >
+    >
       <mat-icon>add</mat-icon>
       Add user
     </button>
@@ -22,10 +23,12 @@
     <div class="mat-elevation-z8">
       @if (dataSource) {
         <table [dataSource]="dataSource" mat-table>
-          @for (column of tableHelper.baseColumnNames; track column; let i = $index) {
-            <ng-container
-              [matColumnDef]="column"
-              >
+          @for (
+            column of tableHelper.baseColumnNames;
+            track column;
+            let i = $index
+          ) {
+            <ng-container [matColumnDef]="column">
               <th *matHeaderCellDef mat-header-cell>
                 {{ tableHelper.baseColumnTitles[i] }}
               </th>
@@ -42,7 +45,7 @@
                 aria-label="Icon button with edit icon"
                 color="primary"
                 mat-icon-button
-                >
+              >
                 <mat-icon>edit</mat-icon>
               </button>
             </td>
@@ -60,6 +63,6 @@
     (load)="getPagedUsers($event)"
     [data]="pageUserResponseData"
     [requestParams]="requestParams"
-    >
+  >
   </app-paginator>
 </section>
