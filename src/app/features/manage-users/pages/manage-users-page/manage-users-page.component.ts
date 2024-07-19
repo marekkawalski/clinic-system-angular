@@ -30,6 +30,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EditUserComponent } from '../../components/edit-user/edit-user.component';
 import { AddUserComponent } from '../../components/add-user/add-user.component';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { SpinnerService } from '@app/shared/spinner/spinner.service';
 
 @Component({
   selector: 'app-manage-users-page',
@@ -70,6 +71,7 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
     private readonly userService: UserService,
     private readonly toast: SnackbarService,
     private readonly dialog: MatDialog,
+    private readonly spinnerService: SpinnerService,
   ) {}
 
   ngOnInit(): void {
@@ -87,6 +89,7 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
   }
 
   getPagedUsers(params: UserPageRequestParams) {
+    this.spinnerService.show();
     this.userService
       .getPagedUsers(params)
       .subscribe((requestResponseData: PageRequestResponseData<User>) => {
@@ -139,7 +142,8 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
             lastLogin: 'Last Login',
           },
         );
-        this.tableHelper.setAllColumnNames(['edit']);
+        this.tableHelper.setAllColumnNames(['edit', 'delete']);
+        this.spinnerService.hide();
       });
   }
 
@@ -181,5 +185,13 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
     localStorage.setItem('show-disabled', String(this.showDisabled));
     this.requestParams['show-disabled'] = this.showDisabled;
     this.getPagedUsers(this.requestParams);
+  }
+
+  deleteUser(user: User) {
+    this.spinnerService.show();
+    this.userService.deleteUser(user.id).subscribe(() => {
+      this.getPagedUsers(this.requestParams);
+      this.spinnerService.hide();
+    });
   }
 }

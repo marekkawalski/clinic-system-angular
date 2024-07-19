@@ -51,6 +51,20 @@
               </button>
             </td>
           </ng-container>
+          <ng-container matColumnDef="delete">
+            <th *matHeaderCellDef mat-header-cell>Delete</th>
+            <td *matCellDef="let cell" mat-cell>
+              <button
+                (click)="deleteUser(cell)"
+                aria-label="Icon button with delete icon"
+                color="warn"
+                mat-icon-button
+                class="delete-user-button"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
           <tr *matHeaderRowDef="tableHelper.allColumnNames" mat-header-row></tr>
           <tr
             *matRowDef="let row; columns: tableHelper.allColumnNames"
