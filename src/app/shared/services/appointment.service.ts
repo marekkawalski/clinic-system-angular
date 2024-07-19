@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpParamsHelper } from '../helpers/httpParamsHelper';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.development';
-import { AppointmentToAddOrUpdate } from '../../core/models/appointment/AppointmentToAddOrUpdate';
+import { environment } from '@environments/environment.development';
+import { AppointmentToAddOrUpdate } from '@app/core/models/appointment/AppointmentToAddOrUpdate';
 import { map, Observable } from 'rxjs';
-import { Appointment } from '../../core/models/appointment/Appointment';
+import { Appointment } from '@app/core/models/appointment/Appointment';
 import { PageRequestResponseData } from '../models/PageRequestResponseData';
 import { AppointmentPageRequestParams } from '../models/AppointmentPageRequestParams';
 

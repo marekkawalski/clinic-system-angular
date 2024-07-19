@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatAnchor, MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import { PathConstants } from '../../../../core/constants/path.constants';
+import { PathConstants } from '@app/core/constants/path.constants';
 
 @Component({
   selector: 'app-hero',

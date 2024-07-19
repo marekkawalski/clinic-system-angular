@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { PathConstants } from '../../../../core/constants/path.constants';
+import { PathConstants } from '@app/core/constants/path.constants';
 import { MatListItem, MatNavList } from '@angular/material/list';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../../../../core/authentication/auth.service';
-import { UserRole } from '../../../../core/enums/UserRole';
-
+import { AuthService } from '@app/core/authentication/auth.service';
+import { UserRole } from '@app/core/enums/UserRole';
 
 @Component({
   selector: 'app-nav-item',

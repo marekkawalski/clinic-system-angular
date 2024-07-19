@@ -5,9 +5,9 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { CapitalizeSpaceBetweenPipe } from '../../../../shared/pipes/capitalize-space-between.pipe';
-import { DatePipe } from '../../../../shared/pipes/date.pipe';
-import { LastPropertyPipe } from '../../../../shared/pipes/last-property.pipe';
+import { CapitalizeSpaceBetweenPipe } from '@app/shared/pipes/capitalize-space-between.pipe';
+import { DatePipe } from '@app/shared/pipes/date.pipe';
+import { LastPropertyPipe } from '@app/shared/pipes/last-property.pipe';
 import {
   MatCell,
   MatCellDef,
@@ -22,15 +22,15 @@ import {
   MatTableDataSource,
 } from '@angular/material/table';
 
-import { PaginatorComponent } from '../../../../shared/components/paginator/paginator.component';
-import { ExaminationPageRequestParams } from '../../../../shared/models/ExaminationPageRequestParams';
-import { PageRequestResponseData } from '../../../../shared/models/PageRequestResponseData';
-import { Examination } from '../../../../core/models/Examination';
-import { TableHelper } from '../../../../shared/helpers/tableHelper';
+import { PaginatorComponent } from '@app/shared/components/paginator/paginator.component';
+import { ExaminationPageRequestParams } from '@app/shared/models/ExaminationPageRequestParams';
+import { PageRequestResponseData } from '@app/shared/models/PageRequestResponseData';
+import { Examination } from '@app/core/models/Examination';
+import { TableHelper } from '@app/shared/helpers/tableHelper';
 import { ExaminationService } from '../../services/examination.service';
-import { SnackbarService } from '../../../../shared/services/snackbar.service';
+import { SnackbarService } from '@app/shared/services/snackbar.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { Doctor } from '../../../../core/models/Doctor';
+import { Doctor } from '@app/core/models/Doctor';
 
 @Component({
   selector: 'app-examinations',
@@ -49,8 +49,8 @@ import { Doctor } from '../../../../core/models/Doctor';
     MatHeaderCell,
     MatHeaderCellDef,
     MatColumnDef,
-    MatTable
-],
+    MatTable,
+  ],
   templateUrl: './examinations.component.html',
   styleUrl: './examinations.component.scss',
 })

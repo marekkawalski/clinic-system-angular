@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '@environments/environment.development';
 import { User } from '../models/user/User';
 import { AuthData } from '../models/AuthData';
 import { PathConstants } from '../constants/path.constants';

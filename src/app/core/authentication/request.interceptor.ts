@@ -8,7 +8,7 @@ import { inject } from '@angular/core';
 import { AuthService } from './auth.service';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { SnackbarService } from '../../shared/services/snackbar.service';
+import { SnackbarService } from '@app/shared/services/snackbar.service';
 
 export const requestInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,

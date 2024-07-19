@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { UserPageRequestParams } from '../../../shared/models/UserPageRequestParams';
+import { UserPageRequestParams } from '@app/shared/models/UserPageRequestParams';
 import { map, Observable } from 'rxjs';
-import { PageRequestResponseData } from '../../../shared/models/PageRequestResponseData';
-import { HttpParamsHelper } from '../../../shared/helpers/httpParamsHelper';
+import { PageRequestResponseData } from '@app/shared/models/PageRequestResponseData';
+import { HttpParamsHelper } from '@app/shared/helpers/httpParamsHelper';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment.development';
-import { Doctor } from '../../../core/models/Doctor';
-import { DailySchedule } from '../../../core/models/user/Schedule';
+import { environment } from '@environments/environment.development';
+import { Doctor } from '@app/core/models/Doctor';
+import { DailySchedule } from '@app/core/models/user/Schedule';
 import { AvailableAppointments } from '../model/AvailableAppointments';
 
 @Injectable({

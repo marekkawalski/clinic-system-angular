@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserRole } from '../../../core/enums/UserRole';
+import { UserRole } from '@app/core/enums/UserRole';
 import { Registration_Validation_Messages } from './validation/validation-messages';
 import { UserFormValidationConstants } from './validation/user-form-validation.constants';
 import { Router } from '@angular/router';
@@ -13,17 +13,18 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
 import { NgClass } from '@angular/common';
-import { PathConstants } from '../../../core/constants/path.constants';
-import { AuthService } from '../../../core/authentication/auth.service';
-import { RegistrationService } from '../../../core/authentication/registration.service';
-import { Address } from '../../../core/models/Address';
-import { DoctorDetails } from '../../../core/models/DoctorDetails';
-import { User } from '../../../core/models/user/User';
-import { UserToAddOrUpdate } from '../../../core/models/user/UserToAddOrUpdate';
-import { UserService } from '../../../core/services/user.service';
+import { PathConstants } from '@app/core/constants/path.constants';
+import { AuthService } from '@app/core/authentication/auth.service';
+import { RegistrationService } from '@app/core/authentication/registration.service';
+import { Address } from '@app/core/models/Address';
+import { DoctorDetails } from '@app/core/models/DoctorDetails';
+import { User } from '@app/core/models/user/User';
+import { UserToAddOrUpdate } from '@app/core/models/user/UserToAddOrUpdate';
+import { UserService } from '@app/core/services/user.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormType } from '../../enums/FormType';
+import { SpinnerService } from '../../spinner/spinner.service';
 
 @Component({
   selector: 'app-user-form',
@@ -50,7 +51,6 @@ export class UserFormComponent implements OnInit {
   @Input() dialogRef?: MatDialogRef<any>;
   @Input() action: string = 'Register';
   @Input() formType?: FormType = FormType.WholePageForm;
-
   registrationValidationMessages = Registration_Validation_Messages;
 
   registrationForm = this.formBuilder.group(
@@ -134,7 +134,6 @@ export class UserFormComponent implements OnInit {
     },
   );
   submitted: boolean = false;
-  loading: boolean = false;
   class?: string;
   protected readonly PathConstants = PathConstants;
   protected readonly UserRole = UserRole;
@@ -147,6 +146,7 @@ export class UserFormComponent implements OnInit {
     protected readonly registrationService: RegistrationService,
     protected readonly userService: UserService,
     private readonly toast: SnackbarService,
+    private readonly spinnerService: SpinnerService,
   ) {}
 
   get formControl() {
@@ -170,7 +170,7 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
+    this.spinnerService.show();
 
     const address: Address = {
       country: this.formControl.address.controls.country.value,
@@ -219,10 +219,12 @@ export class UserFormComponent implements OnInit {
 
     if (!this.userId) {
       this.registrationService.register(user).subscribe((user: User) => {
+        this.spinnerService.hide();
         this.handleUserResponse(user);
       });
     } else {
       this.userService.updateUser(user, this.userId).subscribe((user: User) => {
+        this.spinnerService.hide();
         this.handleUserResponse(user);
       });
     }
@@ -269,7 +271,6 @@ export class UserFormComponent implements OnInit {
   }
 
   private handleUserResponse(user: User): void {
-    this.loading = false;
     this.toast.openSuccessSnackBar({
       message: `User ${user.name} ${user.surname} has been ${this.userId ? 'updated' : 'registered'}`,
     });
@@ -289,39 +290,45 @@ export class UserFormComponent implements OnInit {
   private initFormData() {
     if (!this.userId) return;
 
-    this.userService.getUserById(this.userId).subscribe((user: User) => {
-      if (!user) {
-        this.toast.openFailureSnackBar({ message: 'User not found' });
-        return;
-      }
+    this.spinnerService.show();
+    this.userService
+      .getUserById(this.userId)
+      .subscribe((user: User) => {
+        if (!user) {
+          this.toast.openFailureSnackBar({ message: 'User not found' });
+          return;
+        }
 
-      this.registrationForm.patchValue({
-        adminManagedData: {
-          role: user.role,
-          enabled: user.isEnabled,
-        },
-        address: {
-          country: user.address.country,
-          city: user.address.city,
-          street: user.address.street,
-          postalCode: user.address.postalCode,
-          houseNumber: user.address.houseNumber,
-          apartmentNumber: user.address.apartmentNumber,
-        },
-        basicData: {
-          name: user.name,
-          surname: user.surname,
-          email: user.email,
-          phoneNumber: user.phoneNumber,
-          pesel: user.pesel,
-        },
-        doctorDetails: {
-          specialization: user.doctorDetails?.specialization,
-          education: user.doctorDetails?.education,
-          description: user.doctorDetails?.description,
-        },
+        this.registrationForm.patchValue({
+          adminManagedData: {
+            role: user.role,
+            enabled: user.isEnabled,
+          },
+          address: {
+            country: user.address.country,
+            city: user.address.city,
+            street: user.address.street,
+            postalCode: user.address.postalCode,
+            houseNumber: user.address.houseNumber,
+            apartmentNumber: user.address.apartmentNumber,
+          },
+          basicData: {
+            name: user.name,
+            surname: user.surname,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            pesel: user.pesel,
+          },
+          doctorDetails: {
+            specialization: user.doctorDetails?.specialization,
+            education: user.doctorDetails?.education,
+            description: user.doctorDetails?.description,
+          },
+        });
+      })
+      .add(() => {
+        this.spinnerService.hide();
       });
-    });
   }
 
   private initValidators() {

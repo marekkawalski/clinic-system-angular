@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpParamsHelper } from '../../../shared/helpers/httpParamsHelper';
+import { HttpParamsHelper } from '@app/shared/helpers/httpParamsHelper';
 import { Observable } from 'rxjs';
-import { Examination } from '../../../core/models/Examination';
-import { PageRequestResponseData } from '../../../shared/models/PageRequestResponseData';
-import { environment } from '../../../../environments/environment.development';
-import { ExaminationPageRequestParams } from '../../../shared/models/ExaminationPageRequestParams';
+import { Examination } from '@app/core/models/Examination';
+import { PageRequestResponseData } from '@app/shared/models/PageRequestResponseData';
+import { environment } from '@environments/environment.development';
+import { ExaminationPageRequestParams } from '@app/shared/models/ExaminationPageRequestParams';
 
 @Injectable({
   providedIn: 'root',

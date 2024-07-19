@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { MatIcon } from '@angular/material/icon';
-import { Doctor } from '../../../../core/models/Doctor';
+import { Doctor } from '@app/core/models/Doctor';
 
 @Component({
   selector: 'app-doctor-info',

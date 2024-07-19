@@ -6,9 +6,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatListItem, MatNavList } from '@angular/material/list';
 import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
-import { AuthService } from '../../../core/authentication/auth.service';
-import { PathConstants } from '../../../core/constants/path.constants';
-import { UserRole } from '../../../core/enums/UserRole';
+import { AuthService } from '@app/core/authentication/auth.service';
+import { PathConstants } from '@app/core/constants/path.constants';
+import { UserRole } from '@app/core/enums/UserRole';
 import { NavItemComponent } from './nav-item/nav-item.component';
 import { MatLine } from '@angular/material/core';
 

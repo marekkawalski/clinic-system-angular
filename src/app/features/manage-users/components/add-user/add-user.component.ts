@@ -6,8 +6,8 @@ import {
   MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { UserFormComponent } from '../../../../shared/components/user-form/user-form.component';
-import { FormType } from '../../../../shared/enums/FormType';
+import { UserFormComponent } from '@app/shared/components/user-form/user-form.component';
+import { FormType } from '@app/shared/enums/FormType';
 
 @Component({
   selector: 'app-add-user',

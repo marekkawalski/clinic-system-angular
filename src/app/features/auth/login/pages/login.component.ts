@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../../core/authentication/auth.service';
+import { AuthService } from '@app/core/authentication/auth.service';
 import { first } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,9 +15,9 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { MatInput } from '@angular/material/input';
 import { MatIconButton } from '@angular/material/button';
-import { PathConstants } from '../../../../core/constants/path.constants';
-import { SnackbarService } from '../../../../shared/services/snackbar.service';
-import { SpinnerService } from '../../../../shared/spinner/spinner.service';
+import { PathConstants } from '@app/core/constants/path.constants';
+import { SnackbarService } from '@app/shared/services/snackbar.service';
+import { SpinnerService } from '@app/shared/spinner/spinner.service';
 
 @Component({
   selector: 'app-login',

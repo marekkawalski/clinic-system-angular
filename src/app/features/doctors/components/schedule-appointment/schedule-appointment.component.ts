@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DoctorService } from '../../services/doctor.service';
-import { AuthService } from '../../../../core/authentication/auth.service';
+import { AuthService } from '@app/core/authentication/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SnackbarService } from '../../../../shared/services/snackbar.service';
+import { SnackbarService } from '@app/shared/services/snackbar.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -13,14 +13,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
 import { format } from 'date-fns';
-import { Examination } from '../../../../core/models/Examination';
+import { Examination } from '@app/core/models/Examination';
 import { ExaminationService } from '../../services/examination.service';
 import { AvailableAppointments } from '../../model/AvailableAppointments';
-import { AppointmentService } from '../../../../shared/services/appointment.service';
-import { AppointmentStatus } from '../../../../core/enums/AppointmentStatus';
-import { AppointmentToAddOrUpdate } from '../../../../core/models/appointment/AppointmentToAddOrUpdate';
-import { Appointment } from '../../../../core/models/appointment/Appointment';
-import { Doctor } from '../../../../core/models/Doctor';
+import { AppointmentService } from '@app/shared/services/appointment.service';
+import { AppointmentStatus } from '@app/core/enums/AppointmentStatus';
+import { AppointmentToAddOrUpdate } from '@app/core/models/appointment/AppointmentToAddOrUpdate';
+import { Appointment } from '@app/core/models/appointment/Appointment';
+import { Doctor } from '@app/core/models/Doctor';
 
 @Component({
   selector: 'app-schedule-appointment',

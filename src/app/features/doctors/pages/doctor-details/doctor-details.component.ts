@@ -4,9 +4,9 @@ import { MatIcon } from '@angular/material/icon';
 import { AsyncPipe, JsonPipe, NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Doctor } from '../../../../core/models/Doctor';
+import { Doctor } from '@app/core/models/Doctor';
 import { DoctorService } from '../../services/doctor.service';
-import { FooterComponent } from '../../../../shared/components/footer/footer.component';
+import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import {
   MatCell,
@@ -20,10 +20,10 @@ import {
   MatRowDef,
   MatTable,
 } from '@angular/material/table';
-import { CapitalizeSpaceBetweenPipe } from '../../../../shared/pipes/capitalize-space-between.pipe';
-import { DatePipe } from '../../../../shared/pipes/date.pipe';
-import { LastPropertyPipe } from '../../../../shared/pipes/last-property.pipe';
-import { PaginatorComponent } from '../../../../shared/components/paginator/paginator.component';
+import { CapitalizeSpaceBetweenPipe } from '@app/shared/pipes/capitalize-space-between.pipe';
+import { DatePipe } from '@app/shared/pipes/date.pipe';
+import { LastPropertyPipe } from '@app/shared/pipes/last-property.pipe';
+import { PaginatorComponent } from '@app/shared/components/paginator/paginator.component';
 import { DoctorInfoComponent } from '../../components/doctor-info/doctor-info.component';
 import { ExaminationsComponent } from '../../components/examinations/examinations.component';
 import { DoctorScheduleComponent } from '../../components/doctor-schedule/doctor-schedule.component';

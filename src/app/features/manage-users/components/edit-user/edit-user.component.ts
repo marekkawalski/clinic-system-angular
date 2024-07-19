@@ -1,5 +1,5 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
-import { User } from '../../../../core/models/user/User';
+import { User } from '@app/core/models/user/User';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -8,10 +8,10 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { UserFormComponent } from '../../../../shared/components/user-form/user-form.component';
+import { UserFormComponent } from '@app/shared/components/user-form/user-form.component';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
-import { FormType } from '../../../../shared/enums/FormType';
+import { FormType } from '@app/shared/enums/FormType';
 
 @Component({
   selector: 'app-edit-user',

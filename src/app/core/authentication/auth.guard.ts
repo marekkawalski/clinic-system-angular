@@ -6,7 +6,7 @@ import {
 import { inject } from '@angular/core';
 import { AuthService } from './auth.service';
 import { UserRole } from '../enums/UserRole';
-import { SnackbarService } from '../../shared/services/snackbar.service';
+import { SnackbarService } from '@app/shared/services/snackbar.service';
 import { User } from '../models/user/User';
 
 export const authGuard: CanActivateFn = (

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../../../../core/services/user.service';
+import { UserService } from '@app/core/services/user.service';
 import {
   MatCell,
   MatCellDef,
@@ -15,15 +15,15 @@ import {
 } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
-import { PageRequestResponseData } from '../../../../shared/models/PageRequestResponseData';
-import { User } from '../../../../core/models/user/User';
-import { CapitalizeSpaceBetweenPipe } from '../../../../shared/pipes/capitalize-space-between.pipe';
-import { TableHelper } from '../../../../shared/helpers/tableHelper';
-import { LastPropertyPipe } from '../../../../shared/pipes/last-property.pipe';
-import { PaginatorComponent } from '../../../../shared/components/paginator/paginator.component';
-import { SnackbarService } from '../../../../shared/services/snackbar.service';
-import { UserPageRequestParams } from '../../../../shared/models/UserPageRequestParams';
-import { DatePipe } from '../../../../shared/pipes/date.pipe';
+import { PageRequestResponseData } from '@app/shared/models/PageRequestResponseData';
+import { User } from '@app/core/models/user/User';
+import { CapitalizeSpaceBetweenPipe } from '@app/shared/pipes/capitalize-space-between.pipe';
+import { TableHelper } from '@app/shared/helpers/tableHelper';
+import { LastPropertyPipe } from '@app/shared/pipes/last-property.pipe';
+import { PaginatorComponent } from '@app/shared/components/paginator/paginator.component';
+import { SnackbarService } from '@app/shared/services/snackbar.service';
+import { UserPageRequestParams } from '@app/shared/models/UserPageRequestParams';
+import { DatePipe } from '@app/shared/pipes/date.pipe';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -53,8 +53,8 @@ import { MatCheckbox } from '@angular/material/checkbox';
     MatIcon,
     MatIconButton,
     MatButton,
-    MatCheckbox
-],
+    MatCheckbox,
+  ],
   templateUrl: './manage-users-page.component.html',
   styleUrl: './manage-users-page.component.scss',
 })

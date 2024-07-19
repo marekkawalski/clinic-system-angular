@@ -1,18 +1,18 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormType } from '../../../../shared/enums/FormType';
+import { FormType } from '@app/shared/enums/FormType';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AppointmentService } from '../../../../shared/services/appointment.service';
+import { AppointmentService } from '@app/shared/services/appointment.service';
 import {
   FormArray,
   FormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SnackbarService } from '../../../../shared/services/snackbar.service';
+import { SnackbarService } from '@app/shared/services/snackbar.service';
 import { Router } from '@angular/router';
-import { Appointment } from '../../../../core/models/appointment/Appointment';
-import { AppointmentStatus } from '../../../../core/enums/AppointmentStatus';
-import { AppointmentToAddOrUpdate } from '../../../../core/models/appointment/AppointmentToAddOrUpdate';
+import { Appointment } from '@app/core/models/appointment/Appointment';
+import { AppointmentStatus } from '@app/core/enums/AppointmentStatus';
+import { AppointmentToAddOrUpdate } from '@app/core/models/appointment/AppointmentToAddOrUpdate';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
 import { NgClass } from '@angular/common';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -20,8 +20,8 @@ import { MatInput } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { Medicine } from '../../../../core/models/appointment/Medicine';
-import { BaseDialogData } from '../../../../shared/dialog/models/baseDialogData';
+import { Medicine } from '@app/core/models/appointment/Medicine';
+import { BaseDialogData } from '@app/shared/dialog/models/baseDialogData';
 
 export interface AppointmentFormInput {
   appointment: Appointment;

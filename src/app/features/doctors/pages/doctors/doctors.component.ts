@@ -10,20 +10,20 @@ import {
 } from '@angular/material/card';
 import { MatAnchor, MatButton } from '@angular/material/button';
 import { AsyncPipe, NgOptimizedImage } from '@angular/common';
-import { UserPageRequestParams } from '../../../../shared/models/UserPageRequestParams';
+import { UserPageRequestParams } from '@app/shared/models/UserPageRequestParams';
 import { DoctorService } from '../../services/doctor.service';
 import { MatIcon } from '@angular/material/icon';
-import { PaginatorComponent } from '../../../../shared/components/paginator/paginator.component';
-import { PageRequestParams } from '../../../../shared/models/PageRequestParams';
+import { PaginatorComponent } from '@app/shared/components/paginator/paginator.component';
+import { PageRequestParams } from '@app/shared/models/PageRequestParams';
 import { RouterLink } from '@angular/router';
-import { PathConstants } from '../../../../core/constants/path.constants';
-import { UserRole } from '../../../../core/enums/UserRole';
-import { AuthService } from '../../../../core/authentication/auth.service';
+import { PathConstants } from '@app/core/constants/path.constants';
+import { UserRole } from '@app/core/enums/UserRole';
+import { AuthService } from '@app/core/authentication/auth.service';
 import { MatNavList } from '@angular/material/list';
-import { SpinnerService } from '../../../../shared/spinner/spinner.service';
+import { SpinnerService } from '@app/shared/spinner/spinner.service';
 import { Observable } from 'rxjs';
-import { Doctor } from '../../../../core/models/Doctor';
-import { PageRequestResponseData } from '../../../../shared/models/PageRequestResponseData';
+import { Doctor } from '@app/core/models/Doctor';
+import { PageRequestResponseData } from '@app/shared/models/PageRequestResponseData';
 
 @Component({
   selector: 'app-doctors',

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormType } from '../../../../shared/enums/FormType';
+import { FormType } from '@app/shared/enums/FormType';
 import { MatButton } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
@@ -8,9 +8,9 @@ import {
   MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { UserFormComponent } from '../../../../shared/components/user-form/user-form.component';
+import { UserFormComponent } from '@app/shared/components/user-form/user-form.component';
 import { AppointmentFormComponent } from '../appointment-form/appointment-form.component';
-import { Appointment } from '../../../../core/models/appointment/Appointment';
+import { Appointment } from '@app/core/models/appointment/Appointment';
 
 @Component({
   selector: 'app-appointment',

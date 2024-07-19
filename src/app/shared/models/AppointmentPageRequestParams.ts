@@ -1,5 +1,5 @@
 import { PageRequestParams } from './PageRequestParams';
-import { AppointmentStatus } from '../../core/enums/AppointmentStatus';
+import { AppointmentStatus } from '@app/core/enums/AppointmentStatus';
 
 export interface AppointmentPageRequestParams extends PageRequestParams {
   ['status']?: AppointmentStatus;

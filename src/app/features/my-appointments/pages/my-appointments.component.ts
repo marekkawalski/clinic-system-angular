@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { DatePipe } from '../../../shared/pipes/date.pipe';
+import { DatePipe } from '@app/shared/pipes/date.pipe';
 import {
   MatCell,
   MatCellDef,
@@ -14,21 +14,21 @@ import {
   MatTableDataSource,
 } from '@angular/material/table';
 
-import { PaginatorComponent } from '../../../shared/components/paginator/paginator.component';
+import { PaginatorComponent } from '@app/shared/components/paginator/paginator.component';
 import { MatPaginator } from '@angular/material/paginator';
-import { Appointment } from '../../../core/models/appointment/Appointment';
-import { PageRequestResponseData } from '../../../shared/models/PageRequestResponseData';
-import { TableHelper } from '../../../shared/helpers/tableHelper';
-import { PageRequestParams } from '../../../shared/models/PageRequestParams';
-import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { Appointment } from '@app/core/models/appointment/Appointment';
+import { PageRequestResponseData } from '@app/shared/models/PageRequestResponseData';
+import { TableHelper } from '@app/shared/helpers/tableHelper';
+import { PageRequestParams } from '@app/shared/models/PageRequestParams';
+import { SnackbarService } from '@app/shared/services/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AppointmentService } from '../../../shared/services/appointment.service';
+import { AppointmentService } from '@app/shared/services/appointment.service';
 import { ActivatedRoute } from '@angular/router';
-import { AppointmentPageRequestParams } from '../../../shared/models/AppointmentPageRequestParams';
-import { AuthService } from '../../../core/authentication/auth.service';
+import { AppointmentPageRequestParams } from '@app/shared/models/AppointmentPageRequestParams';
+import { AuthService } from '@app/core/authentication/auth.service';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
-import { AppointmentStatus } from '../../../core/enums/AppointmentStatus';
+import { AppointmentStatus } from '@app/core/enums/AppointmentStatus';
 
 @Component({
   selector: 'app-my-appointments',

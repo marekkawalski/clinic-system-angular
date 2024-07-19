@@ -64,6 +64,10 @@
           },
           "configurations": {
             "production": {
+              "aot": true,
+              "optimization": true,
+              "outputHashing": "all",
+              "namedChunks": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.development.ts",
@@ -81,8 +85,7 @@
                   "maximumWarning": "2kb",
                   "maximumError": "10kb"
                 }
-              ],
-              "outputHashing": "all"
+              ]
             },
             "development": {
               "optimization": false,
@@ -97,6 +100,15 @@
             }
           },
           "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -127,7 +139,15 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets/",
+                "ignore": [
+                  "**/*.txt"
+                ]
+              }
             ],
             "styles": [
               "src/styles/styles.scss"
@@ -139,6 +159,6 @@
     }
   },
   "cli": {
-    "analytics": "bf7cdcff-090f-4b6e-995c-9db03883ce5e"
+    "analytics": false
   }
 }

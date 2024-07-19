@@ -13,8 +13,8 @@ import {
   MatTableDataSource,
 } from '@angular/material/table';
 
-import { Doctor } from '../../../../core/models/Doctor';
-import { TableHelper } from '../../../../shared/helpers/tableHelper';
+import { Doctor } from '@app/core/models/Doctor';
+import { TableHelper } from '@app/shared/helpers/tableHelper';
 
 @Component({
   selector: 'app-doctor-schedule',
@@ -29,8 +29,8 @@ import { TableHelper } from '../../../../shared/helpers/tableHelper';
     MatRow,
     MatTable,
     MatHeaderCellDef,
-    MatCellDef
-],
+    MatCellDef,
+  ],
   templateUrl: './doctor-schedule.component.html',
   styleUrl: './doctor-schedule.component.scss',
 })

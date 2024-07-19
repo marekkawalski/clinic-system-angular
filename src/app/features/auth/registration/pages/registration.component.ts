@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatCard } from '@angular/material/card';
-import { UserFormComponent } from '../../../../shared/components/user-form/user-form.component';
+import { UserFormComponent } from '@app/shared/components/user-form/user-form.component';
 
 @Component({
   selector: 'app-registration',
