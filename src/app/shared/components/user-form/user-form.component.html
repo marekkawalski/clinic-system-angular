@@ -3,7 +3,12 @@
     <mat-card class="login-card">
       <mat-card-title>{{ action }}</mat-card-title>
       <mat-card-content>
-        <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
+        <form
+          #myForm="ngForm"
+          (ngSubmit)="onSubmit()"
+          [formGroup]="registrationForm"
+          id="userForm"
+        >
           <div class="form-grid">
             <!-- Basic Data -->
             <div formGroupName="basicData">
