@@ -72,6 +72,7 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
     private readonly toast: SnackbarService,
     private readonly dialog: MatDialog,
     private readonly spinnerService: SpinnerService,
+    private readonly snackBarService: SnackbarService,
   ) {}
 
   ngOnInit(): void {
@@ -190,6 +191,9 @@ export class ManageUsersPageComponent implements OnInit, AfterViewInit {
   deleteUser(user: User) {
     this.spinnerService.show();
     this.userService.deleteUser(user.id).subscribe(() => {
+      this.snackBarService.openSuccessSnackBar({
+        message: `User ${user.name} ${user.surname} has been deleted`,
+      });
       this.getPagedUsers(this.requestParams);
       this.spinnerService.hide();
     });
