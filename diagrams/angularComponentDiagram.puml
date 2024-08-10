@@ -1,0 +1,286 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 180
+skinparam maxMessageSize 180
+
+skinparam class {
+    AttributeFontSize 25
+    FontSize 25
+
+}
+
+skinparam package {
+    AttributeFontSize 30
+    FontSize 30
+
+}
+' Set page size to A4 vertical with margins
+skinparam page {
+    size A4
+    orientation portrait
+    margin 10
+}
+
+' Use vertical layout for overall structure
+top to bottom direction
+
+package features {
+    ' First column
+    package homepage {
+        package components {
+            package feature_section {
+                class FeatureSectionComponent
+            }
+            package hero_section {
+                class HeroSectionComponent
+            }
+        }
+        package pages {
+            class HomeComponent
+        }
+    }
+
+    package auth {
+        package login {
+            package pages {
+                class LoginComponent
+            }
+        }
+        package registration {
+            package pages {
+                class RegistrationComponent
+            }
+        }
+    }
+
+    package doctors {
+        package components {
+            package doctor_info {
+                class DoctorInfoComponent
+            }
+            package doctor_schedule {
+                class DoctorScheduleComponent
+            }
+            package examinations {
+                class ExaminationComponent
+            }
+            package schedule_appointment {
+                class ScheduleAppointmentComponent
+            }
+        }
+        package services {
+            class DoctorService
+            class ExaminationService
+        }
+        package model {
+            class AvailableAppointments
+        }
+        package pages {
+            package doctor_details {
+                class DoctorDetailsComponent
+            }
+            package doctors {
+                class DoctorsComponent
+            }
+        }
+    }
+
+    ' Hidden line to create space for second column and align homepage with manage_appointments
+    homepage -[hidden]right-> manage_appointments
+
+    ' Second column
+    package manage_appointments {
+        package components {
+            class AppointmentFormComponent
+        }
+        package pages {
+            class ManageAppointmentsComponent
+        }
+    }
+
+    package manage_users {
+        package components {
+            package add_user {
+                class AddUserComponent
+            }
+            package edit_user {
+                class EditUserComponent
+            }
+        }
+        package pages {
+            class ManageUsersComponent
+        }
+    }
+
+    package my_appointments {
+        package pages {
+            class MyAppointmentsComponent
+        }
+    }
+
+    ' Align columns
+    homepage -[hidden]down-> auth
+    auth -[hidden]down-> doctors
+
+    manage_appointments -[hidden]down-> manage_users
+    manage_users -[hidden]down-> my_appointments
+}
+
+package app {
+    class AppComponent
+}
+
+class Router
+
+package core {
+    left to right direction
+
+    package authentication {
+        class AuthGuard
+        class AuthService
+        class RegistrationService
+        class RequestInterceptor
+    }
+
+    package constants {
+        class AppConstants
+        class PathConstants
+    }
+
+    package enums {
+        enum AppointmentStatus
+        enum ExaminationStatus
+        enum UserRole
+    }
+
+    package services {
+        class UserService
+    }
+
+    package models {
+        package appointment {
+            class Appointment
+            class AppointmentToAddOrUpdate
+            class Medicine
+        }
+        package user {
+            class Address
+            class AuthData
+            class Doctor
+            class DoctorDetails
+            class Examination
+        }
+    }
+
+    authentication -[hidden]-> constants
+    authentication -[hidden]-> enums
+    authentication -[hidden]-> services
+    authentication -[hidden]-> models
+    constants -[hidden]-> enums
+    constants -[hidden]-> services
+    constants -[hidden]-> models
+    enums -[hidden]-> services
+    enums -[hidden]-> models
+    services -[hidden]-> models
+}
+
+package shared {
+    left to right direction
+
+    package components {
+        package footer {
+            class FooterComponent
+        }
+        package nav {
+            class NavComponent
+            class NavItemComponent
+        }
+        package paginator {
+            class PaginatorComponent
+        }
+        package user_form {
+            class UserFormComponent
+        }
+    }
+
+    package dialog {
+        class DialogComponent
+        class DialogService
+    }
+
+    package enums {
+        class FormType
+    }
+
+    package helpers {
+        class DateHelper
+        class HttpParamsHelper
+        class TableHelper
+    }
+
+    package models {
+        class AppointmentPageRequestParams
+        class ExaminationPageRequestParams
+        class PageRequestParams
+        class PageRequestResponseData
+        class UserPageRequestParams
+    }
+
+    package pipes {
+        class CapitalizeSpaceBetweenPipe
+        class DatePipe
+        class LastPropertyPipe
+    }
+
+    package services {
+        class AppointmentService
+        class SnackbarService
+    }
+
+    package spinner {
+        class SpinnerComponent
+        class SpinnerService
+    }
+
+    components -[hidden]-> dialog
+    components -[hidden]-> enums
+    components -[hidden]-> helpers
+    components -[hidden]-> models
+    components -[hidden]-> pipes
+    components -[hidden]-> services
+    components -[hidden]-> spinner
+    dialog -[hidden]-> enums
+    dialog -[hidden]-> helpers
+    dialog -[hidden]-> models
+    dialog -[hidden]-> pipes
+    dialog -[hidden]-> services
+    dialog -[hidden]-> spinner
+    enums -[hidden]-> helpers
+    enums -[hidden]-> models
+    enums -[hidden]-> pipes
+    enums -[hidden]-> services
+    enums -[hidden]-> spinner
+    helpers -[hidden]-> models
+    helpers -[hidden]-> pipes
+    helpers -[hidden]-> services
+    helpers -[hidden]-> spinner
+    models -[hidden]-> pipes
+    models -[hidden]-> services
+    models -[hidden]-> spinner
+    pipes -[hidden]-> services
+    pipes -[hidden]-> spinner
+    services -[hidden]-> spinner
+}
+AppComponent --> Router : uses
+
+NavComponent --> NavItemComponent
+
+Router --> features : routes
+
+features --> core
+features --> shared : uses
+
+features -[hidden]down-> app
+app -[hidden]down-> core
+
+@enduml

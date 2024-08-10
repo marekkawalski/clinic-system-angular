@@ -18,11 +18,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "4200"
-        prometheus.io/path: "/metrics"
-
       labels:
         app: clinic-system-angular
     spec:
