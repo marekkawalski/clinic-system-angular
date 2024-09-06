@@ -1,6 +1,7 @@
 FROM node:20-slim AS build
 WORKDIR /usr/src/app
 COPY package*.json ./
+COPY .husky .husky
 RUN npm install
 COPY . .
 RUN npm run build
