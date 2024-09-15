@@ -1,27 +1,90 @@
-# ClinicSystemAngular
+# Clinic System Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+This project is a frontend for an application designed to manage a small medical
+clinic. It is built using Angular and Angular Material. The project can be run
+locally or deployed to a Kubernetes cluster. The system can be used as a
+frontend for the following backend project:
+[Clinic System](https://github.com/marekkawalski/clinic-system).
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<!-- TOC -->
 
-## Code scaffolding
+- [Clinic System Angular](#clinic-system-angular)
+  - [Table of Contents](#table-of-contents)
+  - [Running project locally](#running-project-locally)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Running the Project](#running-the-project)
+  - [Deployment to Kubernetes](#deployment-to-kubernetes) _
+  [Prerequisites](#prerequisites-1) _ [Setup](#setup-1) \*
+  [Running the Project](#running-the-project-1)
+  <!-- TOC -->
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Clone the repository and navigate to the project directory
 
-## Build
+```bash
+git clone https://github.com/marekkawalski/clinic-system-angular.git &&
+cd clinic-system-angular
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Running project locally
 
-## Running unit tests
+### Prerequisites
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Node.js 20.x or higher
+- npm
+- Angular CLI 18.x or higher
 
-## Running end-to-end tests
+### Setup
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Install the dependencies
 
-## Further help
+```bash
+npm i
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Running the Project
+
+1. Run the following command to start the application:
+
+```bash
+ng serve
+```
+
+2. Open the browser and navigate to `http://localhost:4200/`
+3. The application should be running
+
+## Deployment to Kubernetes
+
+### Prerequisites
+
+- Docker deamon, example:
+  [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- Kubernetes cluster, example: Docker Desktop Kubernetes, Minikube
+
+### Setup
+
+1. Add angular app host to the hosts file
+
+```bash
+sudo echo '127.0.0.1       angular.clinic.system.com'
+>> ~/etc/hosts
+```
+
+2. Build the Docker image
+
+```bash
+docker build . -t clinic-system-angular:0.0.3
+```
+
+3. Deploy the image to the Kubernetes cluster
+
+```bash
+kubectl apply -f k8s/deployment.yaml
+```
+
+### Running the Project
+
+1. Open the browser and navigate to `http://angular.clinic.system.com/`
+2. The application should be running
