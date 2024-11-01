@@ -1,0 +1,74 @@
+flowchart TB
+    %% Main App Module at the Top
+    App[App Module]
+
+    %% Core Module - Core functionality and utilities
+    App --> Core_Module
+    subgraph Core_Module [Core Module]
+        direction TB
+        Auth[Authentication Logic]
+        UserManagement[User Management Logic]
+        Config[Global Configurations]
+    end
+
+    %% Shared Module - Reusable UI components and utilities
+    Core_Module --> Shared_Module
+    subgraph Shared_Module [Shared Module]
+        direction TB
+        NavComponent[Navigation Component]
+        FooterComponent[Footer Component]
+        DialogComponent[Dialog Component]
+        SpinnerUtility[Spinner Utility]
+        NotificationUtility[Notification Utility]
+    end
+
+    %% Feature Modules - Feature-specific components and logic
+    Shared_Module --> Features_Module
+    subgraph Features_Module [Features Module]
+        direction TB
+
+        %% First Row
+        subgraph  
+            direction LR
+            AuthFeature[Auth Feature]
+            UserManagementFeature[User Management]
+        end
+
+        %% Second Row
+        subgraph  
+            direction LR
+            AppointmentFeature[Appointment Management]
+            DoctorFeature[Doctor Management]
+        end
+
+        %% Auth Feature
+        subgraph AuthFeature [Auth Feature]
+            direction LR
+            LoginPage[Login Page]
+            RegistrationPage[Registration Page]
+            AuthLogic[Auth Logic - Hook/Service/Composable]
+        end
+
+        %% User Management Feature
+        subgraph UserManagementFeature [User Management]
+            direction LR
+            UserPage[User Page]
+            UserListComponent[User List Component]
+            UserLogic[User Logic - Hook/Service/Composable]
+        end
+
+        %% Appointment Management Feature
+        subgraph AppointmentFeature [Appointment Management]
+            direction LR
+            AppointmentPage[Appointment Page]
+            AppointmentLogic[Appointment Logic - Hook/Service/Composable]
+        end
+
+        %% Doctor Management Feature
+        subgraph DoctorFeature [Doctor Management]
+            direction LR
+            DoctorPage[Doctor Page]
+            DoctorListComponent[Doctor List Component]
+            DoctorLogic[Doctor Logic - Hook/Service/Composable]
+        end
+    end
